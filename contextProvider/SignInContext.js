@@ -11,7 +11,7 @@ const SignInProvider = ({ children }) => {
   const [currentUserID, setCurrentUserID] = useState(false);
   const [amendClinicHoursModal, setAmendClinicHoursModal] = useState(false);
   const [editClinicHoursModal, setEditClinicHoursModal] = useState(false);
-  const [editHolidaysModal, setEditHolidaysModal] = useState(true);
+  const [editHolidaysModal, setEditHolidaysModal] = useState(false);
 
   return (
     <SignInContext.Provider

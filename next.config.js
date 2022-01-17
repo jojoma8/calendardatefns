@@ -10,4 +10,7 @@ module.exports = {
     REACT_APP_MEASUREMENT_ID: process.env.REACT_APP_MEASUREMENT_ID,
     REACT_APP_ADMIN_ID: process.env.REACT_APP_ADMIN_ID,
   },
+  images: {
+    domains: ["nxtgeneclinic.com.ph"],
+  },
 };
