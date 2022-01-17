@@ -147,7 +147,7 @@ function Header() {
       {/* Left */}
       <div className="flex items-center">
         <Image
-          src="	https://nxtgeneclinic.com.ph/wp-content/uploads/2021/08/NXTgen-logo-horizontal-1536x540.png"
+          src="https://nxtgeneclinic.com.ph/wp-content/uploads/2021/08/NXTgen-logo-horizontal-1536x540.png"
           width={150}
           height={60}
           layout="fixed"
