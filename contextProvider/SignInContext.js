@@ -7,6 +7,7 @@ const SignInProvider = ({ children }) => {
   const [signInModal, setSignInModal] = useState(false);
   const [signUpModal, setSignUpModal] = useState(false);
   const [userDetailsModal, setUserDetailsModal] = useState(false);
+  const [specialistDetailsModal, setSpecialistDetailsModal] = useState(false);
   const [forgotPasswordModal, setForgotPasswordModal] = useState(false);
   const [currentUserID, setCurrentUserID] = useState(false);
   const [amendClinicHoursModal, setAmendClinicHoursModal] = useState(false);
@@ -22,6 +23,8 @@ const SignInProvider = ({ children }) => {
         setSignUpModal,
         userDetailsModal,
         setUserDetailsModal,
+        specialistDetailsModal,
+        setSpecialistDetailsModal,
         forgotPasswordModal,
         setForgotPasswordModal,
         currentUserID,

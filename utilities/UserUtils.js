@@ -52,7 +52,7 @@ export const handleEdit = async (id, title, codeSnippet, description) => {
   updateDoc(docRef, payload);
 };
 
-export const handleUserEdit = async (name, uid, role) => {
+export const handleUserEdit = async (name, uid, role, field, speciality) => {
   //   const auth = getAuth();
   //   const currentUser = useAuth();
   // const name = prompt("Enter color name");
@@ -63,6 +63,8 @@ export const handleUserEdit = async (name, uid, role) => {
   const payload = {
     name: name,
     role: role,
+    field: field,
+    speciality: speciality,
     timestamp: serverTimestamp(),
   };
 
@@ -85,7 +87,7 @@ export const handleHolidayUpdate = async (yyyy_uid, date) => {
 };
 
 export const handleClinicHoursEdit = async (uid, schedule) => {
-  const docRef = doc(db, "users", uid);
+  const docRef = doc(db, "specialists", uid);
   const payload = {
     schedule: schedule,
   };
@@ -127,6 +129,26 @@ export const handleStoreNewUser = async () => {
     // console.log(docSnap.data());
   } else {
     setDoc(collectionRef, payload);
+  }
+};
+
+export const handleSpecialistEdit = async (name, uid, field, speciality) => {
+  const docRef = doc(db, "specialists", uid);
+
+  const payload = {
+    name: name,
+    uid: uid,
+    field: field,
+    speciality: speciality,
+    timestamp: serverTimestamp(),
+  };
+
+  const docSnap = await getDoc(docRef);
+  console.log("test: " + uid);
+  if (docSnap.exists()) {
+    updateDoc(docRef, payload);
+  } else {
+    setDoc(docRef, payload);
   }
 };
 

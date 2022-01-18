@@ -24,14 +24,7 @@ import ClinicHoursSummary from "./ClinicHoursSummary";
 
 function EditClinicHoursModal() {
   const { format, set } = require("date-fns");
-  // const currentUser = useAuth();
-  // const workHoursList = [
-  //   "1:00 AM",
-  //   "1:30 AM",
-  //   "2:00 AM",
-  //   "4:00 AM",
-  //   "10:00 AM",
-  // ];
+
   const {
     signInModal,
     setSignInModal,
@@ -46,7 +39,7 @@ function EditClinicHoursModal() {
     editClinicHoursModal,
     setEditClinicHoursModal,
   } = useSignInContext();
-  // const { clinicHours, setClinicHours } = useSignInContext();
+
   const {
     selectedDate,
     setSelectedDate,
@@ -199,7 +192,7 @@ function EditClinicHoursModal() {
         onClick={(e) => e.stopPropagation()}
       >
         <section>
-          <h3 className="font-bold text-2xl">Edit Clinic Hours</h3>
+          <h3 className="headerText text-3xl">Edit Clinic Hours</h3>
           {/* <p className="text-gray-600 pt-2">Choose sign in method</p> */}
         </section>
         <section className="mt-5">
@@ -263,9 +256,7 @@ function EditClinicHoursModal() {
             </div>
 
             <button
-              className="bg-blue-600 hover:bg-blue-700 text-white
-                font-bold py-2 
-                rounded shadow-lg hover:shadow-xl transition duration-200"
+              className="mt-5 btn"
               onClick={() => {
                 handleClinicHoursEdit(currentUser.uid, clinicHours);
               }}

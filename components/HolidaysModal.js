@@ -276,7 +276,7 @@ function HolidaysModal() {
         onClick={(e) => e.stopPropagation()}
       >
         <section>
-          <h3 className="font-bold text-2xl">Holiday Details</h3>
+          <h3 className="headerText text-3xl">Holiday Details</h3>
           {/* <p className="text-gray-600 pt-2">Choose sign in method</p> */}
         </section>
         <section className="mt-2">
@@ -355,7 +355,7 @@ function HolidaysModal() {
                   Remove Date
                 </button>
               </div>
-              <div className="flex">
+              <div className="flex mt-5 ">
                 <div>Duration:</div>
                 <div>
                   <div>Whole day</div>
@@ -364,10 +364,7 @@ function HolidaysModal() {
               </div>
             </div>
             <button
-              className="bg-blue-600 hover:bg-blue-700 text-white
-                            font-bold py-2 
-                            rounded shadow-lg hover:shadow-xl 
-                            transition duration-200 mt-2"
+              className="mt-5 btn"
               onClick={() => {
                 createObj();
               }}

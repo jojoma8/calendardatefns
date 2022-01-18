@@ -12,6 +12,8 @@ import UserDetailsModal from "../components/UserDetailsModal";
 import { useSelectedDateContext } from "../contextProvider/SelectedDateContext";
 import { useSignInContext } from "../contextProvider/SignInContext";
 import HolidaysModal from "../components/HolidaysModal";
+import OurDoctors from "../components/OurDoctors";
+import SpecialistDetailsModal from "../components/SpecialistDetailsModal";
 
 export default function Home() {
   const { selectedDate } = useSelectedDateContext();
@@ -26,6 +28,8 @@ export default function Home() {
     setCurrentUserID,
     userDetailsModal,
     setUserDetailsModal,
+    specialistDetailsModal,
+    setSpecialistDetailsModal,
     amendClinicHoursModal,
     setAmendClinicHoursModal,
     editClinicHoursModal,
@@ -45,17 +49,14 @@ export default function Home() {
       {signInModal && <SignInModal />}
       {signUpModal && <SignUpModal />}
       {userDetailsModal && <UserDetailsModal />}
+      {specialistDetailsModal && <SpecialistDetailsModal />}
       {amendClinicHoursModal && <AmendClinicHoursModal />}
       {editClinicHoursModal && <EditClinicHoursModal />}
       {editHolidaysModal && <HolidaysModal />}
       <Header />
       <main>
-        <Calendar />
-        <div>
-          <div>Appointments available during:</div>
-          <div>{format(selectedDate, "dd-MMMM-yyyy")}</div>
-          {/* <div>{hoursList}</div> */}
-        </div>
+        {/* <Calendar /> */}
+        <OurDoctors />
       </main>
     </div>
   );

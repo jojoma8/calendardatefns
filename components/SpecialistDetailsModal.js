@@ -8,7 +8,7 @@ import {
   updateUserName,
   useAuth,
 } from "../firebase";
-import { handleUserEdit } from "../utilities/UserUtils";
+import { handleSpecialistEdit, handleUserEdit } from "../utilities/UserUtils";
 // import { SignInContext } from "../utilities/Context";
 import {
   collection,
@@ -32,7 +32,7 @@ import {
   NextThirtyMinutes,
 } from "../utilities/TimeCalculations";
 
-function UserDetailsModal() {
+function SpecialistDetailsModal() {
   const [loading, setLoading] = useState(false);
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -40,7 +40,8 @@ function UserDetailsModal() {
   const userRoleRef = useRef();
   const specialistFieldRef = useRef();
   const userSpecialityRef = useRef();
-  const { userDetailsModal, setUserDetailsModal } = useSignInContext();
+  const { specialistDetailsModal, setSpecialistDetailsModal } =
+    useSignInContext();
   const currentUser = useAuth();
   const {
     userName,
@@ -52,86 +53,23 @@ function UserDetailsModal() {
     userSpeciality,
     setUserSpeciality,
   } = useEditUserDetailsContext();
-  const {
-    startOfMonth,
-    startOfWeek,
-    endOfMonth,
-    endOfWeek,
-    addDays,
-    addMonths,
-    startOfDay,
-    format,
-    isSameMonth,
-    isSameDay,
-    isToday,
-    isPast,
-    getMonth,
-    compareAsc,
-    startOfToday,
-    startOfHour,
-    endOfDay,
-    addHours,
-    addMinutes,
-    isSameHour,
-    isSameMinute,
-    startOfMinute,
-    getDay,
-  } = require("date-fns");
-  //   useEffect(async () => {
-  //     const getUserDetails = async (userName) => {
-  //       // const auth = await getAuth();
-  //       // const docRef = doc(db, "users");
-  //       const docRef = doc(db, "users", currentUser?.uid);
-  //       const docSnap = await getDoc(docRef);
-  //       if (docSnap.exists()) {
-  //         //   console.log("Document data:", docSnap.data().role);
-  //         setUserName(docSnap.data().name);
-  //         setUserRole(docSnap.data().role);
-  //       } else {
-  //         console.log("No such document!");
-  //       }
-  //       console.log(userRole);
-  //       // onSnapshot(doc(db, "users", currentUser.uid));
-  //     };
-  //   }, []);
 
-  //   useEffect(() => {
-  //   const getUserDetails = async (userName) => {
-  //     const docRef = doc(db, "users", currentUser?.uid);
-  //     const docSnap = await getDoc(docRef).data();
-
-  //     // setUserName(docSnap.name);
-  //     // setUserRole(docSnap.role);
-  //     if (docSnap.exists()) {
-  //       console.log("Document data:", docSnap.data().role);
-  //       setUserName(docSnap.data().name);
-  //       setUserRole(docSnap.data().role);
-  //     } else {
-  //       console.log("No such document!");
-  //     }
-  //     console.log(currentUser?.uid);
-  //     // onSnapshot(doc(db, "users", currentUser.uid));
-  //   };
-  //   }, []);
-
-  async function handleChangeUserDetails() {
+  async function handleChangeSpecialistDetails() {
     setLoading(true);
     try {
-      await updateUserName(displayNameRef.current.value);
-      await handleUserEdit(
+      //   await updateUserName(displayNameRef.current.value);
+      await handleSpecialistEdit(
         displayNameRef.current.value,
         currentUser?.uid,
-        userRoleRef.current.value,
+        // userRoleRef.current.value,
         specialistFieldRef.current.value,
         userSpecialityRef.current.value
       );
-      //   console.log(userRole);
     } catch {
       alert("Error");
     }
     setLoading(false);
-    setUserDetailsModal(false);
-    // console.log(currentUser.displayName);
+    setSpecialistDetailsModal(false);
   }
 
   return (
@@ -139,7 +77,7 @@ function UserDetailsModal() {
       className="flex fixed pb-60 md:px-0 bg-gray-200 min-h-screen items-center 
     justify-center z-50 bg-opacity-70 w-screen"
       onClick={() => {
-        setUserDetailsModal(false);
+        setSpecialistDetailsModal(false);
       }}
     >
       <div
@@ -147,17 +85,15 @@ function UserDetailsModal() {
         onClick={(e) => e.stopPropagation()}
       >
         <section>
-          <h3 className="headerText text-3xl">User Details</h3>
-          {/* <p className="text-gray-600 pt-2">Choose sign in method</p> */}
+          <h3 className="headerText text-3xl">Specialists Details</h3>
         </section>
         <section className="mt-5">
           <div className="flex flex-col w-96">
             <div className="mb-5">
-              <div className="headerText text-lg">User Name</div>
+              <div className="headerText text-lg">Specialist Name</div>
               <input
                 ref={displayNameRef}
                 className=" p-3 rounded bg-gray-100 min-w-full"
-                // placeholder="User Name"
                 defaultValue={currentUser?.displayName}
               />
             </div>
@@ -165,14 +101,14 @@ function UserDetailsModal() {
               <div className="headerText text-lg">Email: </div>
               <div className="pl-2 flex items-center">{currentUser?.email}</div>
             </div>
-            <div className="mb-5 ">
-              <div className="headerText text-lg">User Role</div>
+            {/* <div className="mb-5 ">
+              <div className="headerText text-lg">Specialist Role</div>
               <input
                 ref={userRoleRef}
                 className=" p-3 rounded bg-gray-100 min-w-full"
                 defaultValue={userRole}
               />
-            </div>
+            </div> */}
             <div className="mb-5 ">
               <div className="headerText text-lg">Specialist Field</div>
               <input
@@ -192,7 +128,7 @@ function UserDetailsModal() {
             <button
               className="btn"
               onClick={() => {
-                handleChangeUserDetails();
+                handleChangeSpecialistDetails();
               }}
             >
               Update Details
@@ -204,4 +140,4 @@ function UserDetailsModal() {
   );
 }
 
-export default UserDetailsModal;
+export default SpecialistDetailsModal;

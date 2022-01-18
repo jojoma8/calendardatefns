@@ -21,7 +21,7 @@ import {
   DocumentAddIcon,
   BookOpenIcon,
 } from "@heroicons/react/outline";
-import { FaBeer } from "react-icons/fa";
+import { FaBeer, FaNotesMedical } from "react-icons/fa";
 import { GiPalmTree } from "react-icons/gi";
 
 import HeaderIcon from "./HeaderIcon";
@@ -52,12 +52,16 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 import { useEditUserDetailsContext } from "../contextProvider/EditUserDetailsContext";
+import GetUserDetails from "./GetUserDetails";
+import { useSelectedDateContext } from "../contextProvider/SelectedDateContext";
 
 function Header() {
   const currentUser = useAuth();
   const {
     userDetailsModal,
     setUserDetailsModal,
+    specialistDetailsModal,
+    setSpecialistDetailsModal,
     editClinicHoursModal,
     setEditClinicHoursModal,
     editHolidaysModal,
@@ -116,25 +120,66 @@ function Header() {
   //       // setPostData(filteredSearchData);
   //     }
   //   };
-  const { userName, setUserName, userRole, setUserRole } =
-    useEditUserDetailsContext();
+  const {
+    userName,
+    setUserName,
+    userRole,
+    setUserRole,
+    specialistField,
+    setSpecialistField,
+    userSpeciality,
+    setUserSpeciality,
+  } = useEditUserDetailsContext();
+
+  const {
+    selectedDate,
+    setSelectedDate,
+    hoursList,
+    setHoursList,
+    weekDaySelected,
+    setWeekdaySelected,
+    clinicHours,
+    setClinicHours,
+  } = useSelectedDateContext();
 
   const getUserDetails = async (userName) => {
     const docRef = doc(db, "users", currentUser?.uid);
     const docSnap = await getDoc(docRef);
-    // console.log(docSnap.data());
-    // setUserName(docSnap.name);
-    // setUserRole(docSnap.role);
     if (docSnap.exists()) {
-      //   console.log("Document data:", docSnap.data().role);
       setUserName(docSnap.data().name);
       setUserRole(docSnap.data().role);
+      // setSpecialistField(docSnap.data().field);
+      // setUserSpeciality(docSnap.data().speciality);
     } else {
       console.log("No such document!");
     }
-    // console.log(currentUser?.uid);
-    // onSnapshot(doc(db, "users", currentUser.uid));
+    // GetUserDetails(currentUser?.uid);
     setUserDetailsModal(true);
+  };
+
+  const getSpecialistDetails = async (userName) => {
+    const docRef = doc(db, "specialists", currentUser?.uid);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      setUserName(docSnap.data().name);
+      setSpecialistField(docSnap.data().field);
+      setUserSpeciality(docSnap.data().speciality);
+    } else {
+      console.log("No such document!");
+    }
+    // GetUserDetails(currentUser?.uid);
+    setSpecialistDetailsModal(true);
+  };
+
+  const getClinicHours = async () => {
+    const docRef = doc(db, "specialists", currentUser?.uid);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      setClinicHours(docSnap.data().schedule);
+    } else {
+      console.log("No such document!");
+    }
+    setEditClinicHoursModal(true);
   };
 
   return (
@@ -184,11 +229,11 @@ function Header() {
               <HeaderIcon Icon={DocumentAddIcon} />
             </div>
           )} */}
-          <Link href="/python_blog">
+          {/* <Link href="/python_blog">
             <a>
               <HeaderIcon Icon={BookOpenIcon} />
             </a>
-          </Link>
+          </Link> */}
 
           {currentUser && (
             // <div onClick={() => setUserDetailsModal(true)}>
@@ -196,13 +241,15 @@ function Header() {
               <HeaderIcon Icon={UserIcon} />
             </div>
           )}
-          <div onClick={() => setEditClinicHoursModal(true)}>
+          <div onClick={() => getClinicHours()}>
             {currentUser && <HeaderIcon Icon={TableIcon} />}
           </div>
           <div onClick={() => setEditHolidaysModal(true)}>
-            {currentUser && <HeaderIcon Icon={GiPalmTree} width={6} />}
+            {currentUser && <HeaderIcon Icon={GiPalmTree} width={7} />}
           </div>
-          {currentUser && <HeaderIcon Icon={UserGroupIcon} />}
+          <div onClick={() => getSpecialistDetails()}>
+            {currentUser && <HeaderIcon Icon={FaNotesMedical} />}
+          </div>
         </div>
       </div>
       {/* Right */}

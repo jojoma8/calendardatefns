@@ -7,6 +7,8 @@ export const useEditUserDetailsContext = () =>
 const EditUserDetailsProvider = ({ children }) => {
   const [userName, setUserName] = useState("");
   const [userRole, setUserRole] = useState("");
+  const [specialistField, setSpecialistField] = useState("");
+  const [userSpeciality, setUserSpeciality] = useState("");
 
   return (
     <EditUserDetailsContext.Provider
@@ -15,6 +17,10 @@ const EditUserDetailsProvider = ({ children }) => {
         setUserName,
         userRole,
         setUserRole,
+        specialistField,
+        setSpecialistField,
+        userSpeciality,
+        setUserSpeciality,
       }}
     >
       {children}
