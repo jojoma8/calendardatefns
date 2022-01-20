@@ -101,10 +101,10 @@ function EditClinicHoursModal() {
       const filteredList = clinicHours[weekDaySelected].filter(
         (item) => item !== date
       );
-      const data = prev;
+      const newData = prev;
       // newState[weekDaySelected] = filteredList;
-      data[weekDaySelected] = filteredList;
-      return { ...data };
+      newData[weekDaySelected] = filteredList;
+      return { ...newData };
     });
     // console.log("modified obj:" + data[weekDaySelected]);
   };
