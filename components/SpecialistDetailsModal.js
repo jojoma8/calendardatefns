@@ -52,6 +52,8 @@ function SpecialistDetailsModal() {
     setSpecialistField,
     userSpeciality,
     setUserSpeciality,
+    allSpecialistsDetails,
+    setAllSpecialistsDetails,
   } = useEditUserDetailsContext();
 
   async function handleChangeSpecialistDetails() {

@@ -16,7 +16,7 @@ const SelectedDateProvider = ({ children }) => {
     Sat: [],
     Sun: [],
   });
-  const [weekDaySelected, setWeekdaySelected] = useState("Wed");
+  const [weekDaySelected, setWeekdaySelected] = useState("Thu");
   const [holidaysData, setHolidaysData] = useState(["Loading data"]);
 
   return (

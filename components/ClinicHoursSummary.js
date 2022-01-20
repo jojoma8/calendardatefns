@@ -4,17 +4,17 @@ import {
   HourRangeGenerator,
 } from "../utilities/TimeCalculations";
 
-function ClinicHoursSummary({ day }) {
-  const {
-    selectedDate,
-    setSelectedDate,
-    hoursList,
-    setHoursList,
-    weekDaySelected,
-    setWeekdaySelected,
-    clinicHours,
-    setClinicHours,
-  } = useSelectedDateContext();
+function ClinicHoursSummary({ day, schedule }) {
+  // const {
+  //   selectedDate,
+  //   setSelectedDate,
+  //   hoursList,
+  //   setHoursList,
+  //   weekDaySelected,
+  //   setWeekdaySelected,
+  //   clinicHours,
+  //   setClinicHours,
+  // } = useSelectedDateContext();
 
   function handleClinicHoursSummary(list) {
     const sortedList = list.sort();
@@ -27,11 +27,15 @@ function ClinicHoursSummary({ day }) {
   }
 
   return (
-    <div className="flex border border-solid border-stone-400">
+    <div
+      className="flex border border-solid border-stone-400 
+    text-sm font-semibold"
+    >
       <div className="ml-2 w-10">{day}</div>
-      <div className="ml-2">
+      <div className="ml-1 mr-2">
         {/* {workHoursRange(workHoursList[0], workHoursList[0])} */}
-        {HourRangeGenerator(handleClinicHoursSummary(clinicHours[day]))}
+        {/* {HourRangeGenerator(handleClinicHoursSummary(clinicHours[day]))} */}
+        {HourRangeGenerator(handleClinicHoursSummary(schedule[day]))}
       </div>
     </div>
   );

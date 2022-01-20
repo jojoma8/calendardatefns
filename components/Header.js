@@ -157,7 +157,7 @@ function Header() {
     setUserDetailsModal(true);
   };
 
-  const getSpecialistDetails = async (userName) => {
+  const getSpecialistDetails = async () => {
     const docRef = doc(db, "specialists", currentUser?.uid);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
@@ -174,11 +174,13 @@ function Header() {
   const getClinicHours = async () => {
     const docRef = doc(db, "specialists", currentUser?.uid);
     const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      setClinicHours(docSnap.data().schedule);
-    } else {
-      console.log("No such document!");
-    }
+    // console.log("check: " + !docSnap.data().schedule === "null");
+    // console.log("uid: " + currentUser?.uid);
+    // if (!docSnap.data().schedule === "null") {
+    setClinicHours(docSnap.data().schedule);
+    // } else {
+    // console.log("No such document!");
+    // }
     setEditClinicHoursModal(true);
   };
 
@@ -190,6 +192,7 @@ function Header() {
       {/* <h1 className="text-orange-500 font-extrabold text-2xl">NextGen</h1> */}
 
       {/* Left */}
+      <div className="hidden">{clinicHours[0]}</div>
       <div className="flex items-center">
         <Image
           src="https://nxtgeneclinic.com.ph/wp-content/uploads/2021/08/NXTgen-logo-horizontal-1536x540.png"

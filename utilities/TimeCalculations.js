@@ -120,21 +120,21 @@ export function GenerateHoursList(start = new Date()) {
   };
 }
 
-export const hourColor = (data) => {
-  const {
-    selectedDate,
-    setSelectedDate,
-    hoursList,
-    setHoursList,
-    clinicHours,
-    setClinicHours,
-    weekDaySelected,
-    setWeekdaySelected,
-  } = useSelectedDateContext();
-  // if (clinicHours[weekDaySelected].includes(data)) {
-  //   return "bg-orange-400";
-  // }
-};
+// export const hourColor = (data) => {
+//   const {
+//     selectedDate,
+//     setSelectedDate,
+//     hoursList,
+//     setHoursList,
+//     clinicHours,
+//     setClinicHours,
+//     weekDaySelected,
+//     setWeekdaySelected,
+//   } = useSelectedDateContext();
+//   // if (clinicHours[weekDaySelected].includes(data)) {
+//   //   return "bg-orange-400";
+//   // }
+// };
 
 export const selectedWeekDay = (day) => {
   const { weekDaySelected, setWeekDaySelected } = useSelectedDateContext();

@@ -9,6 +9,13 @@ const EditUserDetailsProvider = ({ children }) => {
   const [userRole, setUserRole] = useState("");
   const [specialistField, setSpecialistField] = useState("");
   const [userSpeciality, setUserSpeciality] = useState("");
+  const [allSpecialistsDetails, setAllSpecialistsDetails] = useState([
+    {
+      name: "loading",
+      id: "initiate",
+      field: "nothing",
+    },
+  ]);
 
   return (
     <EditUserDetailsContext.Provider
@@ -21,6 +28,8 @@ const EditUserDetailsProvider = ({ children }) => {
         setSpecialistField,
         userSpeciality,
         setUserSpeciality,
+        allSpecialistsDetails,
+        setAllSpecialistsDetails,
       }}
     >
       {children}

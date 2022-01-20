@@ -11,7 +11,6 @@ import {
   ConvertToDate,
   ConvertToTime,
   GenerateHoursList,
-  hourColor,
   HourListReader,
   HourRangeGenerator,
   NextThirtyMinutes,
@@ -209,13 +208,13 @@ function EditClinicHoursModal() {
               <div className="text-lg font-bold m-5">Clinic Hours</div>
               <div className="m-5">
                 <div className="">
-                  <ClinicHoursSummary day={"Mon"} />
-                  <ClinicHoursSummary day={"Tue"} />
-                  <ClinicHoursSummary day={"Wed"} />
-                  <ClinicHoursSummary day={"Thu"} />
-                  <ClinicHoursSummary day={"Fri"} />
-                  <ClinicHoursSummary day={"Sat"} />
-                  <ClinicHoursSummary day={"Sun"} />
+                  <ClinicHoursSummary day={"Mon"} schedule={clinicHours} />
+                  <ClinicHoursSummary day={"Tue"} schedule={clinicHours} />
+                  <ClinicHoursSummary day={"Wed"} schedule={clinicHours} />
+                  <ClinicHoursSummary day={"Thu"} schedule={clinicHours} />
+                  <ClinicHoursSummary day={"Fri"} schedule={clinicHours} />
+                  <ClinicHoursSummary day={"Sat"} schedule={clinicHours} />
+                  <ClinicHoursSummary day={"Sun"} schedule={clinicHours} />
                 </div>
               </div>
             </div>
@@ -240,13 +239,13 @@ function EditClinicHoursModal() {
                       cursor="pointer"
                       onClick={() => {
                         handleUpdateClinicHoursList(day.toUTCString());
-                        // addHourToList(format(day, "hh:mm a"));
-                        // addHourToList(day.toUTCString(), weekDaySelected);
+
+                        // console.log(day.toUTCString());
                       }}
                       className={`h-10 w-25 m-0.5 flex items-center justify-center
                     border border-blue-200 
-                    ${hourColor(day.toUTCString())}
-                     `}
+                         ${hourColor(day.toUTCString())}
+                      `}
                     >
                       {format(day, "hh:mm a")}
                     </div>
