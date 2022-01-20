@@ -89,76 +89,25 @@ function EditClinicHoursModal() {
     setClinicHours(() => {
       return data;
     });
-    // setClinicHoursList(() => {
-    //   return data[weekDaySelected];
-    // });
     setClinicHoursList((oldArray) => [...oldArray, date]);
-    // setClinicHoursList({ date: { ...date, Thu: date } });
-    // clinicHours[weekDaySelected].set((p) => p + date);
-    // setClinicHoursList(data);
     console.log("clinicHours Thu:" + clinicHours[weekDaySelected]);
     console.log("clinicHoursList Thu:" + clinicHoursList);
   };
 
   const removeHourToList = (date, day) => {
     console.log("remove was ran");
-    const data = clinicHours;
-    // console.log("original data:" + data.Wed);
-    const filteredList = clinicHours[weekDaySelected].filter(
-      (item) => item !== date
-    );
-    // console.log("modified list:" + filteredList);
-    data[weekDaySelected] = filteredList;
-    setClinicHours(() => {
-      return data;
+    setClinicHours((prev) => {
+      const data = clinicHours;
+      const filteredList = clinicHours[weekDaySelected].filter(
+        (item) => item !== date
+      );
+      const data = prev;
+      // newState[weekDaySelected] = filteredList;
+      data[weekDaySelected] = filteredList;
+      return { ...data };
     });
-    console.log("modified obj:" + data[weekDaySelected]);
+    // console.log("modified obj:" + data[weekDaySelected]);
   };
-  // if (!clinicHoursList.includes(date)) {
-  //   console.log("add to list ran");
-  //   setClinicHoursList((oldArray) => [...oldArray, date]);
-  // }
-  // if (clinicHoursList.includes(date)) {
-  //   console.log("remove list ran");
-  //   const filteredList = clinicHoursList.filter((item) => item !== date);
-  //   // console.log("filteredList: " + filteredList);
-  //   setClinicHoursList(filteredList);
-  // }
-
-  // const [temp, setTemp] = useState();
-  // const data = clinicHours;
-  // setData(temp);
-  // const data = clinicHours;
-  // const dayList = clinicHours[weekDaySelected];
-  // console.log("dayList: " + dayList);
-  // if (!data[day].includes(date)) {
-  //   console.log("add to list ran");
-  // setClinicHours((oldArray) => [...oldArray, date]);
-  // const data = clinicHours;
-  // setClinicHours(data.day((oldArray) => [...oldArray, date]));
-  // data[day].push(date);
-  // setClinicHours(data);
-  // }
-  // if (data[day].includes(date)) {
-  //   console.log("remove list ran");
-  //   const filteredList = clinicHours[weekDaySelected].filter(
-  //     (item) => item !== date
-  //   );
-  //   setClinicHours(filteredList);
-  //   console.log("filteredList: " + filteredList);
-  // }
-  // data["Wed"].push(date);
-  // setClinicHours(data);
-  // console.log("clinicHoursList: " + clinicHoursList);
-  // console.log("clinicHours: " + clinicHours.Wed);
-  // };
-
-  // console.log("clinicHours outside fx: " + clinicHours.Wed);
-  // console.log(ConvertToTime(test));
-  // handleClinicHoursSummary(clinicHours.Tue);
-
-  // const testList = [new Date()];
-  // console.log("testList: " + testList);
 
   function handleClinicHoursSummary(list) {
     const sortedList = list.sort();
@@ -169,14 +118,6 @@ function EditClinicHoursModal() {
     // console.log("newList: " + newList);
     return newList;
   }
-  // const clinicHoursListTest = handleClinicHoursSummary(clinicHours.Wed);
-  // console.log("test: " + clinicHoursListTest);
-  // HourRangeGenerator(clinicHoursListTest);
-  // const anotherArray = hoursList.map(function (e) {
-  //   return ConvertToTime(e);
-  // });
-
-  // console.log("another: " + anotherArray);
 
   return (
     <div
@@ -220,6 +161,7 @@ function EditClinicHoursModal() {
             </div>
             {/* THIS SECTION JUST TO REFRESH THE STATE */}
             <div className="hidden">{clinicHoursList}</div>
+            <div className="hidden">{clinicHours["Sat"]}</div>
             {/* THIS SECTION JUST TO REFRESH THE STATE */}
             <div className="flex">
               <WeekdayButtons day={"Mon"} />
