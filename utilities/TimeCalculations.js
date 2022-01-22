@@ -145,3 +145,22 @@ export const selectedWeekDay = (day) => {
     return "bg-orange-400";
   }
 };
+
+// Change date to today but keep same time
+export const convertToToday = (input) => {
+  const today = new Date().toDateString();
+  const inputTime = new Date(input).toTimeString();
+  const combine = today + " " + inputTime;
+  return new Date(combine).toUTCString();
+};
+
+export const updateDates = (obj) => {
+  Object.keys(obj).forEach((key) => {
+    const newList = obj[key].map((item) => {
+      return convertToToday(item);
+    });
+    obj[key] = newList;
+    // console.log("new: " + newList[2]);
+  });
+  // console.log(obj["Mon"][0]);
+};

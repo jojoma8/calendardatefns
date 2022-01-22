@@ -10,11 +10,13 @@ import WeekdayButtons from "./WeekdayButtons";
 import {
   ConvertToDate,
   ConvertToTime,
+  convertToToday,
   GenerateHoursList,
   HourListReader,
   HourRangeGenerator,
   NextThirtyMinutes,
   selectedWeekDay,
+  updateDates,
 } from "../utilities/TimeCalculations";
 import { useSignInContext } from "../contextProvider/SignInContext";
 import { useSelectedDateContext } from "../contextProvider/SelectedDateContext";
@@ -63,6 +65,11 @@ function EditClinicHoursModal() {
   //   Sun: [],
   // });
   const [clinicHoursList, setClinicHoursList] = useState([]);
+
+  // useEffect(() => {
+  const hours = clinicHours;
+  // console.log("hours ran: " + clinicHours);
+  updateDates(hours);
 
   // console.log("weekdaySelected: " + weekDaySelected);
   const hourColor = (data) => {

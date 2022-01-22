@@ -140,6 +140,8 @@ function Header() {
     setWeekdaySelected,
     clinicHours,
     setClinicHours,
+    holidaysData,
+    setHolidaysData,
   } = useSelectedDateContext();
 
   const getUserDetails = async (userName) => {
@@ -182,6 +184,14 @@ function Header() {
     // console.log("No such document!");
     // }
     setEditClinicHoursModal(true);
+  };
+
+  const getHolidayDates = async () => {
+    // const docRef = doc(db, "holidays", currentUser?.uid);
+    const docRef = doc(db, "holidays", currentUser?.uid);
+    const docSnap = await getDoc(docRef);
+    setHolidaysData(docSnap.data().date);
+    setEditHolidaysModal(true);
   };
 
   return (
@@ -247,7 +257,7 @@ function Header() {
           <div onClick={() => getClinicHours()}>
             {currentUser && <HeaderIcon Icon={TableIcon} />}
           </div>
-          <div onClick={() => setEditHolidaysModal(true)}>
+          <div onClick={() => getHolidayDates()}>
             {currentUser && <HeaderIcon Icon={GiPalmTree} width={7} />}
           </div>
           <div onClick={() => getSpecialistDetails()}>

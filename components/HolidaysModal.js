@@ -231,22 +231,34 @@ function HolidaysModal() {
   // };
 
   const fetchHolidayData = async () => {
-    const test = await currentUser?.uid;
-    // console.log(test);
     if (currentUser) {
-      onSnapshot(doc(db, "holidays", test), (doc) => {
-        console.log("currentData: " + doc.data().date);
-        setHolidayDatesList(doc.data().date);
+      // if (docRef.exists) {
+      // console.log("this ran");
+      onSnapshot(doc(db, "holidays", currentUser?.uid), (doc) => {
+        console.log("currentData: " + doc.data());
+        if (!doc.data() === undefined) {
+          setHolidayDatesList(doc.data().date);
+          // console.log("this ran");
+        }
       });
+      // }
     }
   };
+
+  // console.log("holidays:  " + holidaysData);
+  // const getHolidayDates = async () => {
+  //   const docRef =  doc(db, "holidays", currentUser?.uid);
+  //   // const docSnap = await getDoc(docRef);
+  //   // setHolidayDatesList(docSnap.data().date);
+  // };
 
   useEffect(async () => {
     // let test = currentUser.uid;
     // console.log("uid: " + test);
-
-    fetchHolidayData();
-  }, [currentUser]);
+    // fetchHolidayData();
+    // getHolidayDates();
+    setHolidayDatesList(holidaysData);
+  }, [editHolidaysModal]);
 
   // let test = currentUser.uid;
   // console.log("uid: " + test);
@@ -283,6 +295,9 @@ function HolidaysModal() {
           <div className="flex flex-col">
             <div>{currentUser?.displayName}</div>
             <div>
+              {/* THIS SECTION JUST TO REFRESH THE STATE */}
+              <div className="hidden">{holidayDatesList}</div>
+              {/* THIS SECTION JUST TO REFRESH THE STATE */}
               <div className="font-semibold my-2">Booked Holidays</div>
               <div>
                 {holidayDatesList.map((day) => (

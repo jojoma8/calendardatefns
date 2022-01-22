@@ -19,6 +19,10 @@ import db, { useAuth } from "../firebase";
 import SpecialistCard from "./SpecialistCard";
 import { data } from "autoprefixer";
 import SpecialitiesCard from "./SpecialitiesCard";
+import { useSelectedDateContext } from "../contextProvider/SelectedDateContext";
+import { trial } from "../utilities/SpecialistDetailsUpdate";
+import EditClinicHoursModal from "./EditClinicHoursModal";
+import { useSignInContext } from "../contextProvider/SignInContext";
 
 function OurDoctors() {
   const currentUser = useAuth();
@@ -35,51 +39,47 @@ function OurDoctors() {
     setAllSpecialistsDetails,
   } = useEditUserDetailsContext();
 
-  // const uid = currentUser.uid;
+  const {
+    selectedDate,
+    setSelectedDate,
+    hoursList,
+    setHoursList,
+    weekDaySelected,
+    setWeekdaySelected,
+    clinicHours,
+    setClinicHours,
+  } = useSelectedDateContext();
+
+  const {
+    signInModal,
+    setSignInModal,
+    signUpModal,
+    setSignUpModal,
+    forgotPasswordModal,
+    setForgotPasswordModal,
+    currentUserID,
+    setCurrentUserID,
+    amendClinicHoursModal,
+    setAmendClinicHoursModal,
+    editClinicHoursModal,
+    setEditClinicHoursModal,
+  } = useSignInContext();
 
   const getSpecialistDetails = async () => {
     const docRef = collection(db, "specialists");
     const docSnap = await getDocs(docRef);
-
-    // docSnap.forEach((doc) => {
-    //   console.log(doc.id, " => ", doc.data());
-    // });
-
     const userData = docSnap.docs.map((d) => ({ id: d.id, ...d.data() }));
-    // console.log("this ran: " + allSpecialistsDetails);
-    // console.log("userData: " + Object.values(userData[1]));
-    // console.log("Data: " + userData);
-    // console.log("state: " + Object.keys(allSpecialistsDetails));
-    setAllSpecialistsDetails(userData);
 
-    // const ent = userData.filter((item) => {
-    //   return Object.keys(item).some((key) =>
-    //     item[key].toString().toLowerCase().includes("ent")
-    //   );
-    // });
-    // console.log("filter: " + ent[0]["field"]);
-    // setAllSpecialistsDetails(ent);
-    // console.log("ent: " + allSpecialistsDetails);
+    setAllSpecialistsDetails(userData);
+    // console.log("specilistData: " + userData);
+    // const test = trial();
+    // console.log("testData: " + test);
   };
-  // console.log("data: " + Object.values(allSpecialistsDetails));
 
   useEffect(() => {
     getSpecialistDetails();
-  }, []);
-
-  // useEffect(() => {
-  //   const collectionRef = collection(db, "specialists");
-
-  //   const q = query(collectionRef, orderBy("timestamp", "desc"));
-  //   const unsub = onSnapshot(q, (snapshot) =>
-  //     setAllSpecialistsDetails(
-  //       snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-  //     )
-  //   );
-  //   return unsub;
-  // }, []);
-  // console.log(allSpecialistsDetails);
-  // console.log("keys: " + allSpecialistsDetails);
+    // setAllSpecialistsDetails(getSpecialistDetails());
+  }, [editClinicHoursModal]);
 
   return (
     <div>
