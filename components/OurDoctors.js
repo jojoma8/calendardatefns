@@ -63,6 +63,8 @@ function OurDoctors() {
     setAmendClinicHoursModal,
     editClinicHoursModal,
     setEditClinicHoursModal,
+    appointmentBookingModal,
+    setAppointmentBookingModal,
   } = useSignInContext();
 
   const getSpecialistDetails = async () => {
@@ -94,8 +96,8 @@ function OurDoctors() {
         </div>
         <div className="pb-10">
           <button
-            className="btn py-3 text-white
-         w-full sm:w-3/6"
+            onClick={() => setAppointmentBookingModal(true)}
+            className="btn py-3 text-white w-full sm:w-3/6"
           >
             Book an Appointment
           </button>

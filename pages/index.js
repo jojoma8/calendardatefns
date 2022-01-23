@@ -14,6 +14,7 @@ import { useSignInContext } from "../contextProvider/SignInContext";
 import HolidaysModal from "../components/HolidaysModal";
 import OurDoctors from "../components/OurDoctors";
 import SpecialistDetailsModal from "../components/SpecialistDetailsModal";
+import AppointmentBookingModal from "../components/AppointmentBookingModal";
 
 export default function Home() {
   const { selectedDate } = useSelectedDateContext();
@@ -36,6 +37,8 @@ export default function Home() {
     setEditClinicHoursModal,
     editHolidaysModal,
     setEditHolidaysModal,
+    appointmentBookingModal,
+    setAppointmentBookingModal,
   } = useSignInContext();
 
   return (
@@ -53,6 +56,7 @@ export default function Home() {
       {amendClinicHoursModal && <AmendClinicHoursModal />}
       {editClinicHoursModal && <EditClinicHoursModal />}
       {editHolidaysModal && <HolidaysModal />}
+      {appointmentBookingModal && <AppointmentBookingModal />}
       <Header />
       <main>
         {/* <Calendar /> */}

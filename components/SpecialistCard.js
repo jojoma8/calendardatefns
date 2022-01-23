@@ -11,15 +11,17 @@ function SpecialistCard({ name, speciality, schedule }) {
 
       <div className="bodyText2 pb-2 text-center">{speciality}</div>
       <div className="linkText">Clinic Hours</div>
-      <div className="mt-2">
-        <ClinicHoursSummary day={"Mon"} schedule={schedule} />
-        <ClinicHoursSummary day={"Tue"} schedule={schedule} />
-        <ClinicHoursSummary day={"Wed"} schedule={schedule} />
-        <ClinicHoursSummary day={"Thu"} schedule={schedule} />
-        <ClinicHoursSummary day={"Fri"} schedule={schedule} />
-        <ClinicHoursSummary day={"Sat"} schedule={schedule} />
-        <ClinicHoursSummary day={"Sun"} schedule={schedule} />
-      </div>
+      {schedule != null && (
+        <div className="mt-2">
+          <ClinicHoursSummary day={"Mon"} schedule={schedule} />
+          <ClinicHoursSummary day={"Tue"} schedule={schedule} />
+          <ClinicHoursSummary day={"Wed"} schedule={schedule} />
+          <ClinicHoursSummary day={"Thu"} schedule={schedule} />
+          <ClinicHoursSummary day={"Fri"} schedule={schedule} />
+          <ClinicHoursSummary day={"Sat"} schedule={schedule} />
+          <ClinicHoursSummary day={"Sun"} schedule={schedule} />
+        </div>
+      )}
     </div>
   );
 }
