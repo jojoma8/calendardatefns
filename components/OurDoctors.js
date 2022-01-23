@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useEditUserDetailsContext } from "../contextProvider/EditUserDetailsContext";
 import {
   collection,
@@ -23,8 +23,12 @@ import { useSelectedDateContext } from "../contextProvider/SelectedDateContext";
 import { trial } from "../utilities/SpecialistDetailsUpdate";
 import EditClinicHoursModal from "./EditClinicHoursModal";
 import { useSignInContext } from "../contextProvider/SignInContext";
+import useCalendar from "./CalendarSelector";
+import CalendarSelector from "./CalendarSelector";
 
 function OurDoctors() {
+  const [calendar, setCalendar] = useState(new Date().toDateString());
+
   const currentUser = useAuth();
   const {
     userName,
@@ -103,6 +107,9 @@ function OurDoctors() {
           </button>
         </div>
       </div>
+
+      {/* <CalendarSelector setCalendar={setCalendar} />
+      <div>{calendar}</div> */}
       <div className="mt-10">
         <div>
           <SpecialitiesCard
@@ -118,36 +125,6 @@ function OurDoctors() {
             fieldDesc="Treats individual and family across all ages, genders, and parts of the body such as cough, colds, fever, headache and other diseases."
             fieldCode="fm"
           />
-
-          {/* <div className="m-10 border-2">
-            <div className="flex  bg-cyan-50">
-              <div
-                className="w-32 h-32 bg-sky-300 rounded-full my-10 p-16 m-10
-                    border-4 border-orange-500"
-              ></div>
-              <div className="py-5">
-                <div className="headerText pt-5 text-xl">
-                  Otorhinolaryngology - Head and Neck Surgery (ENT)
-                </div>
-                <div className="bodyText pt-5 ">
-                  Specializes in the management of medical conditions of the
-                  ears, nose and sinuses, throat, voice box; and performs
-                  procedures and/or surgeries for obstructive conditions and
-                  tumors of the head and neck including thyroid masses and
-                  cancers.
-                </div>
-                <div className="linkText pt-5">See our doctors</div>
-              </div>
-            </div>
-            <div
-              className="flex flex-wrap justify-center items-center"
-              key={data.id}
-            >
-              {allSpecialistsDetails.map((data) => (
-                <SpecialistCard name={data.name} speciality={data.speciality} />
-              ))}
-            </div>
-          </div> */}
         </div>
       </div>
     </div>

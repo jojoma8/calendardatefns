@@ -6,6 +6,7 @@ module.exports = {
   ],
   theme: {
     extend: {
+      transitionProperty: { height: "height" },
       gridTemplateRows: {
         // Simple 8 row grid
         12: "repeat(12, minmax(0, 1fr))",

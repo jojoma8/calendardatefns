@@ -3,6 +3,10 @@ import { useEditUserDetailsContext } from "../contextProvider/EditUserDetailsCon
 import { useSignInContext } from "../contextProvider/SignInContext";
 import { useAuth } from "../firebase";
 import BookingAccordion from "./BookingAccordion";
+import BookingAccordionDate from "./BookingAccordionDate";
+import BookingAccordionDoctor from "./BookingAccordionDoctor";
+import BookingAccordionIssue from "./BookingAccordionIssue";
+import BookingAccordionTime from "./BookingAccordionTime";
 
 function AppointmentBookingModal() {
   const currentUser = useAuth();
@@ -16,8 +20,16 @@ function AppointmentBookingModal() {
     setDoctor,
     doctorList,
     setDoctorList,
+    bookingDate,
+    setBookingDate,
     bookingTime,
     setBookingTime,
+    workHoursList,
+    setWorkHoursList,
+    specialistClinicHours,
+    setSpecialistClinicHours,
+    specialistAvailableHours,
+    setSpecialistAvailableHours,
     bookingData,
     setBookingData,
     bookingOptions,
@@ -34,6 +46,10 @@ function AppointmentBookingModal() {
   useEffect(() => {
     console.log("modal doctor toggle " + doctorAccordionToggle);
   }, [doctorAccordionToggle]);
+
+  //   useEffect(() => {
+  //     console.log("updatedBookingData2 " + bookingData.date);
+  //   }, [bookingData]);
 
   return (
     <div
@@ -61,20 +77,27 @@ function AppointmentBookingModal() {
           {/* <div>{data[0].issue}</div> */}
         </section>
         <section>
-          <BookingAccordion
+          <BookingAccordionIssue
             title="Issue"
             titleContent={bookingData.issue}
             list={bookingOptions.issue}
           />
           {doctorAccordionToggle && (
-            <BookingAccordion
+            <BookingAccordionDoctor
               title="Doctor"
               titleContent={bookingData.doctor}
               list={bookingOptions.doctor}
             />
           )}
+          {dateAccordionToggle && (
+            <BookingAccordionDate
+              title="Date"
+              titleContent={bookingData.date}
+              list={bookingOptions.date}
+            />
+          )}
           {timeAccordionToggle && (
-            <BookingAccordion
+            <BookingAccordionTime
               title="Time"
               titleContent={bookingData.time}
               list={bookingOptions.time.Mon}
