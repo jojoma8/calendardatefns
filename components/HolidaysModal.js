@@ -252,7 +252,7 @@ function HolidaysModal() {
   //   // setHolidayDatesList(docSnap.data().date);
   // };
 
-  useEffect(async () => {
+  useEffect(() => {
     // let test = currentUser.uid;
     // console.log("uid: " + test);
     // fetchHolidayData();

@@ -66,12 +66,12 @@ function BookingAccordion({ title, titleContent, list }) {
   //   // console.log("docList2: " + doctorList);
   // }, [issue]);
 
-  useEffect(() => {
-    // console.log("docList2 here: " + doctorList);
-    const temp = bookingOptions;
-    temp.doctor = doctorList;
-    setBookingOptions(temp);
-  }, [doctorList]);
+  // useEffect(() => {
+  //   // console.log("docList2 here: " + doctorList);
+  //   const temp = bookingOptions;
+  //   temp.doctor = doctorList;
+  //   setBookingOptions(temp);
+  // }, [doctorList]);
 
   const getDoctors = async (field) => {
     setDoctorList([]);
@@ -242,8 +242,8 @@ function BookingAccordion({ title, titleContent, list }) {
           // hoursList.map((item) => (
           // workHoursList["Fri"].map((item) => (
           workHoursList[weekDay].map((item) => (
-            <div className=" bg-gray-500 ">
-              <div className="">
+            <div className=" bg-gray-500 " key={item}>
+              <div className="" key={item}>
                 <div
                   key={item}
                   className={` max-w-fit mr-3 px-2 py-1 my-1 rounded-xl 

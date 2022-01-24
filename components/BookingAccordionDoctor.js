@@ -73,12 +73,12 @@ function BookingAccordionDoctor({ title, titleContent, list }) {
   //   // console.log("docList2: " + doctorList);
   // }, [issue]);
 
-  useEffect(() => {
-    // console.log("docList2 here: " + doctorList);
-    const temp = bookingOptions;
-    temp.doctor = doctorList;
-    setBookingOptions(temp);
-  }, [doctorList]);
+  //   useEffect(() => {
+  //     // console.log("docList2 here: " + doctorList);
+  //     const temp = bookingOptions;
+  //     temp.doctor = doctorList;
+  //     setBookingOptions(temp);
+  //   }, [doctorList]);
 
   //   const getDoctors = async (field) => {
   //     setDoctorList([]);
