@@ -38,11 +38,14 @@ function UserDetailsModal() {
   const passwordRef = useRef();
   const displayNameRef = useRef();
   const userRoleRef = useRef();
+  const userMobileRef = useRef();
   const specialistFieldRef = useRef();
   const userSpecialityRef = useRef();
   const { userDetailsModal, setUserDetailsModal } = useSignInContext();
   const currentUser = useAuth();
   const {
+    userDetails,
+    setUserDetails,
     userName,
     setUserName,
     userRole,
@@ -122,8 +125,10 @@ function UserDetailsModal() {
         displayNameRef.current.value,
         currentUser?.uid,
         userRoleRef.current.value,
-        specialistFieldRef.current.value,
-        userSpecialityRef.current.value
+        currentUser.email,
+        userMobileRef.current.value
+        // specialistFieldRef.current.value,
+        // userSpecialityRef.current.value
       );
       //   console.log(userRole);
     } catch {
@@ -138,9 +143,9 @@ function UserDetailsModal() {
     <div
       className="flex fixed pb-60 md:px-0 bg-gray-200 min-h-screen items-center 
     justify-center z-50 bg-opacity-70 w-screen"
-      onClick={() => {
-        setUserDetailsModal(false);
-      }}
+      // onClick={() => {
+      //   setUserDetailsModal(false);
+      // }}
     >
       <div
         className="bg-white max-w-lg mx-auto p-8 sm:p-12 my-10 rounded-lg shadow-2xl"
@@ -170,33 +175,53 @@ function UserDetailsModal() {
               <input
                 ref={userRoleRef}
                 className=" p-3 rounded bg-gray-100 min-w-full"
-                defaultValue={userRole}
+                // defaultValue={userRole}
+                defaultValue={userDetails.role}
               />
             </div>
             <div className="mb-5 ">
+              <div className="headerText text-lg">Mobile Number</div>
+              <input
+                ref={userMobileRef}
+                className=" p-3 rounded bg-gray-100 min-w-full"
+                // defaultValue={userRole}
+                defaultValue={userDetails.mobile}
+              />
+            </div>
+            {/* <div className="mb-5 ">
               <div className="headerText text-lg">Specialist Field</div>
               <input
                 ref={specialistFieldRef}
                 className=" p-3 rounded bg-gray-100 min-w-full"
                 defaultValue={specialistField}
               />
-            </div>
-            <div className="mb-5 ">
+            </div> */}
+            {/* <div className="mb-5 ">
               <div className="headerText text-lg">Speciality</div>
               <textarea
                 ref={userSpecialityRef}
                 className=" p-3 rounded bg-gray-100 min-w-full"
                 defaultValue={userSpeciality}
               />
+            </div> */}
+            <div className="flex justify-evenly">
+              <button
+                className="btn w-44"
+                onClick={() => {
+                  handleChangeUserDetails();
+                }}
+              >
+                Update Details
+              </button>
+              <button
+                className="btnCancel w-44 "
+                onClick={() => {
+                  setUserDetailsModal(false);
+                }}
+              >
+                Cancel
+              </button>
             </div>
-            <button
-              className="btn"
-              onClick={() => {
-                handleChangeUserDetails();
-              }}
-            >
-              Update Details
-            </button>
           </div>
         </section>
       </div>

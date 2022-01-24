@@ -374,7 +374,7 @@ function HolidaysModal() {
                 <div>Duration:</div>
                 <div>
                   <div>Whole day</div>
-                  <div>Specific time</div>
+                  {/* <div>Specific time</div> */}
                 </div>
               </div>
             </div>

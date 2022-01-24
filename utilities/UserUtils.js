@@ -52,7 +52,7 @@ export const handleEdit = async (id, title, codeSnippet, description) => {
   updateDoc(docRef, payload);
 };
 
-export const handleUserEdit = async (name, uid, role, field, speciality) => {
+export const handleUserEdit = async (name, uid, role, email, mobile) => {
   //   const auth = getAuth();
   //   const currentUser = useAuth();
   // const name = prompt("Enter color name");
@@ -63,8 +63,8 @@ export const handleUserEdit = async (name, uid, role, field, speciality) => {
   const payload = {
     name: name,
     role: role,
-    field: field,
-    speciality: speciality,
+    email: email,
+    mobile: mobile,
     timestamp: serverTimestamp(),
   };
 

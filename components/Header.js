@@ -121,6 +121,8 @@ function Header() {
   //     }
   //   };
   const {
+    userDetails,
+    setUserDetails,
     userName,
     setUserName,
     userRole,
@@ -150,6 +152,8 @@ function Header() {
     if (docSnap.exists()) {
       setUserName(docSnap.data().name);
       setUserRole(docSnap.data().role);
+      setUserDetails(docSnap.data());
+      // console.log("user details loaded: " + userDetails);
       // setSpecialistField(docSnap.data().field);
       // setUserSpeciality(docSnap.data().speciality);
     } else {
@@ -231,11 +235,11 @@ function Header() {
       {/* Center */}
       <div className="flex justify-center flex-grow">
         <div className="flex space-x-2 sm:space-x-4">
-          <Link href="/">
+          {/* <Link href="/">
             <a>
               <HeaderIcon Icon={HomeIcon} />
             </a>
-          </Link>
+          </Link> */}
 
           {/* {currentUser && (
             <div onClick={() => setNewPostModal(true)}>
