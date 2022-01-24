@@ -120,7 +120,7 @@ function Calendar() {
   // }, []);
 
   useEffect(() => {
-    async const today = getWeekdayName(new Date()).substring(0, 3);
+    const today = getWeekdayName(new Date()).substring(0, 3);
     setWeekdaySelected(() => today);
     // console.log("effect: ");
     // console.log(today);
