@@ -31,9 +31,11 @@ import {
   HourRangeGenerator,
   NextThirtyMinutes,
 } from "../utilities/TimeCalculations";
+import AccordionItem from "./AccordionItem";
 
 function SpecialistDetailsModal() {
   const [loading, setLoading] = useState(false);
+  const [specialistFieldLocal, setSpecialistFieldLocal] = useState();
   const emailRef = useRef();
   const passwordRef = useRef();
   const displayNameRef = useRef();
@@ -63,8 +65,8 @@ function SpecialistDetailsModal() {
       await handleSpecialistEdit(
         displayNameRef.current.value,
         currentUser?.uid,
-        // userRoleRef.current.value,
-        specialistFieldRef.current.value,
+        // specialistFieldRef.current.value,
+        specialistFieldLocal,
         userSpecialityRef.current.value
       );
     } catch {
@@ -92,7 +94,7 @@ function SpecialistDetailsModal() {
         <section className="mt-5">
           <div className="flex flex-col w-96">
             <div className="mb-5">
-              <div className="headerText text-lg">Specialist Name</div>
+              <div className="headerText text-lg ml-2">Specialist Name</div>
               <input
                 ref={displayNameRef}
                 className=" p-3 rounded bg-gray-100 min-w-full"
@@ -100,7 +102,7 @@ function SpecialistDetailsModal() {
               />
             </div>
             <div className="mb-5 flex">
-              <div className="headerText text-lg">Email: </div>
+              <div className="headerText text-lg ml-2">Email: </div>
               <div className="pl-2 flex items-center">{currentUser?.email}</div>
             </div>
             {/* <div className="mb-5 ">
@@ -111,30 +113,67 @@ function SpecialistDetailsModal() {
                 defaultValue={userRole}
               />
             </div> */}
-            <div className="mb-5 ">
-              <div className="headerText text-lg">Specialist Field</div>
+            {/* <div className="mb-5 ">
+              <div className="headerText text-lg ml-2">Specialist Field</div>
               <input
                 ref={specialistFieldRef}
                 className=" p-3 rounded bg-gray-100 min-w-full"
                 defaultValue={specialistField}
               />
+            </div> */}
+            <div className="mb-5">
+              <AccordionItem
+                title={"Specialist Field: "}
+                desc={specialistField}
+                setDesc={setSpecialistFieldLocal}
+                options={[
+                  "Dermatology",
+                  "ENT",
+                  "Family Medicine",
+                  "Internal Medicine",
+                  "IM-Cardiology",
+                  "IM-Endocrinology",
+                  "IM-Gastroenterology",
+                  "IM-Medical Oncology",
+                  "IM-Nephrology",
+                  "IM-Pulmonary Medicine",
+                  "IM-Rheumatology",
+                  "Adult Neurology",
+                  "Obstetrics and Gynecology",
+                  "Ophthalmology",
+                  "Pediatrics",
+                  "Adult Psychiatry",
+                  "Surgery",
+                  "Urology",
+                ]}
+              />
             </div>
             <div className="mb-5 ">
-              <div className="headerText text-lg">Speciality</div>
+              <div className="headerText text-lg ml-2">Speciality</div>
               <textarea
                 ref={userSpecialityRef}
                 className=" p-3 rounded bg-gray-100 min-w-full"
                 defaultValue={userSpeciality}
               />
             </div>
-            <button
-              className="btn"
-              onClick={() => {
-                handleChangeSpecialistDetails();
-              }}
-            >
-              Update Details
-            </button>
+            <div className="flex justify-evenly mt-5">
+              <button
+                className="btn w-44"
+                onClick={() => {
+                  handleChangeSpecialistDetails();
+                }}
+              >
+                Update Details
+              </button>
+              <button
+                className="btnCancel w-44 "
+                onClick={() => {
+                  setSpecialistDetailsModal(false);
+                }}
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         </section>
       </div>

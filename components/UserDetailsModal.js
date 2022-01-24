@@ -31,9 +31,11 @@ import {
   HourRangeGenerator,
   NextThirtyMinutes,
 } from "../utilities/TimeCalculations";
+import AccordionItem from "./AccordionItem";
 
 function UserDetailsModal() {
   const [loading, setLoading] = useState(false);
+  const [userRoleLocal, setUserRoleLocal] = useState();
   const emailRef = useRef();
   const passwordRef = useRef();
   const displayNameRef = useRef();
@@ -124,7 +126,8 @@ function UserDetailsModal() {
       await handleUserEdit(
         displayNameRef.current.value,
         currentUser?.uid,
-        userRoleRef.current.value,
+        // userRoleRef.current.value,
+        userRoleLocal,
         currentUser.email,
         userMobileRef.current.value
         // specialistFieldRef.current.value,
@@ -158,7 +161,7 @@ function UserDetailsModal() {
         <section className="mt-5">
           <div className="flex flex-col w-96">
             <div className="mb-5">
-              <div className="headerText text-lg">User Name</div>
+              <div className="headerText text-lg ml-2">User Name</div>
               <input
                 ref={displayNameRef}
                 className=" p-3 rounded bg-gray-100 min-w-full"
@@ -167,10 +170,10 @@ function UserDetailsModal() {
               />
             </div>
             <div className="mb-5 flex">
-              <div className="headerText text-lg">Email: </div>
+              <div className="headerText text-lg ml-2">Email: </div>
               <div className="pl-2 flex items-center">{currentUser?.email}</div>
             </div>
-            <div className="mb-5 ">
+            {/* <div className="mb-5 ">
               <div className="headerText text-lg">User Role</div>
               <input
                 ref={userRoleRef}
@@ -178,14 +181,22 @@ function UserDetailsModal() {
                 // defaultValue={userRole}
                 defaultValue={userDetails.role}
               />
-            </div>
+            </div> */}
             <div className="mb-5 ">
-              <div className="headerText text-lg">Mobile Number</div>
+              <div className="headerText text-lg ml-2">Mobile Number</div>
               <input
                 ref={userMobileRef}
                 className=" p-3 rounded bg-gray-100 min-w-full"
                 // defaultValue={userRole}
                 defaultValue={userDetails.mobile}
+              />
+            </div>
+            <div>
+              <AccordionItem
+                title={"User Role: "}
+                desc={userDetails.role}
+                setDesc={setUserRoleLocal}
+                options={["Customer", "Doctor", "VA"]}
               />
             </div>
             {/* <div className="mb-5 ">
@@ -204,7 +215,7 @@ function UserDetailsModal() {
                 defaultValue={userSpeciality}
               />
             </div> */}
-            <div className="flex justify-evenly">
+            <div className="flex justify-evenly mt-5">
               <button
                 className="btn w-44"
                 onClick={() => {
