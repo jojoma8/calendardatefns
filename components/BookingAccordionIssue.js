@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useEditUserDetailsContext } from "../contextProvider/EditUserDetailsContext";
 import {
   collection,
@@ -54,6 +54,13 @@ function BookingAccordionIssue({ title, titleContent, list }) {
 
   const [toggle, setToggle] = useState(false);
   const [desc, setDesc] = useState(titleContent);
+  const [height, setHeight] = useState("0px");
+  const contentSpace = useRef(null);
+
+  function toggleAccordion() {
+    setToggle(!toggle);
+    setHeight(toggle ? "0px" : `${contentSpace.current.scrollHeight}px`);
+  }
 
   const getDoctors = async (field) => {
     setDoctorList([]);
@@ -78,6 +85,8 @@ function BookingAccordionIssue({ title, titleContent, list }) {
     setDoctorAccordionToggle(true);
 
     getDoctors(item);
+    // setToggle(!toggle);
+    toggleAccordion();
   };
 
   return (
@@ -85,20 +94,28 @@ function BookingAccordionIssue({ title, titleContent, list }) {
       <div
         className="flex cursor-pointer p-2 hover:bg-orange-100
             transition-all duration-500"
-        onClick={() => setToggle(!toggle)}
+        // onClick={() => setToggle(!toggle)}
+        onClick={() => toggleAccordion()}
       >
         <div className="font-semibold text-xl">{title}:</div>
         <div className="ml-2 text-xl">{desc}</div>
       </div>
-      <div
-        className={`flex px-2 origin-center transition-all duration-500
-        ${toggle ? "scale-y-10 h-10 " : "scale-y-0 h-0 "}
+      {/* <div
+        className={`flex flex-wrap px-2 origin-center transition-all duration-500
+        ${toggle ? "scale-y-10 h-72 " : "scale-y-0 h-0 "}
              `}
+      > */}
+      <div
+        ref={contentSpace}
+        style={{ maxHeight: `${height}` }}
+        className="flex flex-wrap overflow-hidden transition-max-height 
+            duration-700 ease-in-out items-center "
       >
         {list.map((item) => (
           <div
             key={item}
-            className={`mr-3 px-2 py-1 my-1 rounded-xl bg-orange-400
+            className={`ml-2 px-2 py-1 my-1 rounded-xl bg-orange-400
+            cursor-pointer hover:bg-sky-400 transition-all duration-200
         `}
             onClick={() => updateState(item)}
           >

@@ -51,8 +51,28 @@ const EditUserDetailsProvider = ({ children }) => {
     date: "Choose Date?",
     time: "Choose Time",
   });
+  const [specialitiesList] = useState([
+    "Dermatology",
+    "ENT",
+    "Family Medicine",
+    "Internal Medicine",
+    "IM-Cardiology",
+    "IM-Endocrinology",
+    "IM-Gastroenterology",
+    "IM-Medical Oncology",
+    "IM-Nephrology",
+    "IM-Pulmonary Medicine",
+    "IM-Rheumatology",
+    "Adult Neurology",
+    "Obstetrics and Gynecology",
+    "Ophthalmology",
+    "Pediatrics",
+    "Adult Psychiatry",
+    "Surgery",
+    "Urology",
+  ]);
   const [bookingOptions, setBookingOptions] = useState({
-    issue: ["ENT", "FM", "Derma"],
+    issue: specialitiesList,
     doctor: ["DocX", "DocY", "DocJ"],
     date: "",
     time: {
@@ -60,6 +80,7 @@ const EditUserDetailsProvider = ({ children }) => {
       Tue: ["26Jan2022 10:00 AM"],
     },
   });
+
   const [doctorAccordionToggle, setDoctorAccordionToggle] = useState(false);
   const [dateAccordionToggle, setDateAccordionToggle] = useState(false);
   const [timeAccordionToggle, setTimeAccordionToggle] = useState(false);
@@ -74,6 +95,7 @@ const EditUserDetailsProvider = ({ children }) => {
         setUserRole,
         specialistField,
         setSpecialistField,
+        specialitiesList,
         userSpeciality,
         setUserSpeciality,
         allSpecialistsDetails,

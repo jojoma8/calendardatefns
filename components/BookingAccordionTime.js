@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useEditUserDetailsContext } from "../contextProvider/EditUserDetailsContext";
 import {
   collection,
@@ -66,6 +66,13 @@ function BookingAccordionTime({ title, titleContent, list }) {
   const [desc, setDesc] = useState(titleContent);
   const [selectedDate, setSelectedDate] = useState("Choose Date");
   const [selectedTime, setSelectedTime] = useState("Choose Time");
+  const [height, setHeight] = useState("0px");
+  const contentSpace = useRef(null);
+
+  function toggleAccordion() {
+    setToggle(!toggle);
+    setHeight(toggle ? "0px" : `${contentSpace.current.scrollHeight}px`);
+  }
 
   useEffect(() => {
     // console.log("workHoursList here: " + workHoursList);
@@ -112,6 +119,7 @@ function BookingAccordionTime({ title, titleContent, list }) {
       // console.log("time was changed");
       setSelectedTime(item);
       // console.log("selectedTime: " + selectedTime);
+      toggleAccordion();
     }
   };
 
@@ -128,7 +136,8 @@ function BookingAccordionTime({ title, titleContent, list }) {
       <div
         className="flex cursor-pointer p-2 hover:bg-orange-100
             transition-all duration-500"
-        onClick={() => setToggle(!toggle)}
+        // onClick={() => setToggle(!toggle)}
+        onClick={() => toggleAccordion()}
       >
         <div className="font-semibold text-xl">{title}:</div>
 
@@ -140,10 +149,16 @@ function BookingAccordionTime({ title, titleContent, list }) {
           </div>
         )}
       </div>
-      <div
+      {/* <div
         className={`flex flex-wrap px-2 origin-center transition-all duration-500
         ${toggle ? "scale-y-10 h-20  " : "scale-y-0 h-0 "}
              `}
+      > */}
+      <div
+        ref={contentSpace}
+        style={{ maxHeight: `${height}` }}
+        className="flex flex-wrap overflow-hidden transition-max-height 
+            duration-700 ease-in-out items-center "
       >
         {title === "Time" &&
           !specialistOnHolidayToggle &&
@@ -153,8 +168,8 @@ function BookingAccordionTime({ title, titleContent, list }) {
                 <div
                   key={item}
                   //   id={item.id}
-                  className={` mr-3 px-2 py-1 my-1 rounded-xl 
-              bg-orange-400
+                  className={` ml-2 px-2 py-1 my-1 rounded-xl 
+              bg-orange-400 cursor-pointer hover:bg-sky-400 transition-all duration-200
                 `}
                   onClick={() => updateState(item)}
                 >

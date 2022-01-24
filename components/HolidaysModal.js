@@ -284,7 +284,8 @@ function HolidaysModal() {
       }}
     >
       <div
-        className="bg-white max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl"
+        className="bg-white max-w-lg mx-auto p-8 sm:p-12 my-10 
+        rounded-lg shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <section>
@@ -293,7 +294,7 @@ function HolidaysModal() {
         </section>
         <section className="mt-2">
           <div className="flex flex-col">
-            <div>{currentUser?.displayName}</div>
+            <div>Specialist: {currentUser?.displayName}</div>
             <div>
               {/* THIS SECTION JUST TO REFRESH THE STATE */}
               <div className="hidden">{holidayDatesList}</div>
@@ -305,7 +306,7 @@ function HolidaysModal() {
                 ))}
               </div>
             </div>
-            <div className="flex px-2">
+            <div className="flex px-2 mt-2">
               <div>
                 <ChevronLeftIcon
                   className="h-6"

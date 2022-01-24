@@ -52,6 +52,7 @@ function SpecialistDetailsModal() {
     setUserRole,
     specialistField,
     setSpecialistField,
+    specialitiesList,
     userSpeciality,
     setUserSpeciality,
     allSpecialistsDetails,
@@ -126,26 +127,7 @@ function SpecialistDetailsModal() {
                 title={"Specialist Field: "}
                 desc={specialistField}
                 setDesc={setSpecialistFieldLocal}
-                options={[
-                  "Dermatology",
-                  "ENT",
-                  "Family Medicine",
-                  "Internal Medicine",
-                  "IM-Cardiology",
-                  "IM-Endocrinology",
-                  "IM-Gastroenterology",
-                  "IM-Medical Oncology",
-                  "IM-Nephrology",
-                  "IM-Pulmonary Medicine",
-                  "IM-Rheumatology",
-                  "Adult Neurology",
-                  "Obstetrics and Gynecology",
-                  "Ophthalmology",
-                  "Pediatrics",
-                  "Adult Psychiatry",
-                  "Surgery",
-                  "Urology",
-                ]}
+                options={specialitiesList}
               />
             </div>
             <div className="mb-5 ">

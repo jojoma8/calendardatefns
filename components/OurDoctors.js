@@ -123,7 +123,7 @@ function OurDoctors() {
           <SpecialitiesCard
             fieldName="Family Medicine"
             fieldDesc="Treats individual and family across all ages, genders, and parts of the body such as cough, colds, fever, headache and other diseases."
-            fieldCode="fm"
+            fieldCode="family medicine"
           />
         </div>
       </div>

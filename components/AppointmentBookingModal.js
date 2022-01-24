@@ -61,7 +61,7 @@ function AppointmentBookingModal() {
       }}
     >
       <div
-        className="bg-white p-8 md:p-12 my-10 w-5/6
+        className="bg-white p-8 sm:p-12 my-10 w-5/6
             md:w-8/12
             rounded-lg shadow-2xl"
         onClick={(e) => e.stopPropagation()}
@@ -105,14 +105,24 @@ function AppointmentBookingModal() {
           )}
         </section>
         <section>
-          <button
-            className="btn mt-5"
-            onClick={() => {
-              // handleChangeUserDetails();
-            }}
-          >
-            Confirm Booking
-          </button>
+          <div className="flex justify-evenly mt-5">
+            <button
+              className="btn w-44"
+              onClick={() => {
+                // handleChangeUserDetails();
+              }}
+            >
+              Confirm Booking
+            </button>
+            <button
+              className="btnCancel w-44 "
+              onClick={() => {
+                setAppointmentBookingModal(false);
+              }}
+            >
+              Cancel
+            </button>
+          </div>
         </section>
       </div>
     </div>

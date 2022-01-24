@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useEditUserDetailsContext } from "../contextProvider/EditUserDetailsContext";
 import {
   collection,
@@ -56,6 +56,13 @@ function BookingAccordionDate({ title, titleContent, list }) {
   const [desc, setDesc] = useState(titleContent);
   const [selectedDate, setSelectedDate] = useState("Choose Date");
   const [selectedTime, setSelectedTime] = useState("Choose Time");
+  const [height, setHeight] = useState("0px");
+  const contentSpace = useRef(null);
+
+  function toggleAccordion() {
+    setToggle(!toggle);
+    setHeight(toggle ? "0px" : `${contentSpace.current.scrollHeight}px`);
+  }
 
   //   const getWorkingHours = async (field) => {
   //     // console.log("querying work hours");
@@ -86,6 +93,7 @@ function BookingAccordionDate({ title, titleContent, list }) {
       // setSelectedDate(item);
       // console.log("selectedDate: " + selectedDate);
       setTimeAccordionToggle(true);
+      toggleAccordion();
     }
   };
 
@@ -94,15 +102,22 @@ function BookingAccordionDate({ title, titleContent, list }) {
       <div
         className="flex cursor-pointer p-2 hover:bg-orange-100
             transition-all duration-500"
-        onClick={() => setToggle(!toggle)}
+        // onClick={() => setToggle(!toggle)}
+        onClick={() => toggleAccordion()}
       >
         <div className="font-semibold text-xl">{title}:</div>
         <div className="ml-2 text-xl">{desc}</div>
       </div>
-      <div
+      {/* <div
         className={`flex px-2 origin-center transition-all duration-500
         ${toggle ? "scale-y-10 h-80  " : "scale-y-0 h-0 "}
              `}
+      > */}
+      <div
+        ref={contentSpace}
+        style={{ maxHeight: `${height}` }}
+        className="flex flex-wrap overflow-hidden transition-max-height 
+            duration-700 ease-in-out items-center "
       >
         <CalendarSelector
           setCalendar={setCalendar}

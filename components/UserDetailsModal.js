@@ -151,7 +151,8 @@ function UserDetailsModal() {
       // }}
     >
       <div
-        className="bg-white max-w-lg mx-auto p-8 sm:p-12 my-10 rounded-lg shadow-2xl"
+        className="bg-white max-w-lg mx-auto p-8 sm:p-12 my-10 w-5/6
+        rounded-lg shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <section>
@@ -159,7 +160,7 @@ function UserDetailsModal() {
           {/* <p className="text-gray-600 pt-2">Choose sign in method</p> */}
         </section>
         <section className="mt-5">
-          <div className="flex flex-col w-96">
+          <div className="flex flex-col ">
             <div className="mb-5">
               <div className="headerText text-lg ml-2">User Name</div>
               <input

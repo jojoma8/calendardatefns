@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useEditUserDetailsContext } from "../contextProvider/EditUserDetailsContext";
 import {
   collection,
@@ -67,6 +67,13 @@ function BookingAccordionDoctor({ title, titleContent, list }) {
   const [desc, setDesc] = useState(titleContent);
   const [selectedDate, setSelectedDate] = useState("Choose Date");
   const [selectedTime, setSelectedTime] = useState("Choose Time");
+  const [height, setHeight] = useState("0px");
+  const contentSpace = useRef(null);
+
+  function toggleAccordion() {
+    setToggle(!toggle);
+    setHeight(toggle ? "0px" : `${contentSpace.current.scrollHeight}px`);
+  }
 
   // useEffect(() => {
   //   // setDesc(titleContent);
@@ -184,6 +191,8 @@ function BookingAccordionDoctor({ title, titleContent, list }) {
       setDateAccordionToggle(true);
       //   console.log("time toggle: " + timeAccordionToggle);
       getWorkingHours(item);
+      // setToggle(!toggle);
+      toggleAccordion();
     }
   };
 
@@ -192,21 +201,29 @@ function BookingAccordionDoctor({ title, titleContent, list }) {
       <div
         className="flex cursor-pointer p-2 hover:bg-orange-100
             transition-all duration-500"
-        onClick={() => setToggle(!toggle)}
+        // onClick={() => setToggle(!toggle)}
+        onClick={() => toggleAccordion()}
       >
         <div className="font-semibold text-xl">{title}:</div>
         <div className="ml-2 text-xl">{desc}</div>
       </div>
-      <div
-        className={`flex px-2 origin-center 
+      {/* <div
+        className={`flex flex-wrap px-2 origin-center 
         ${toggle ? "scale-y-10 h-10 " : "scale-y-0 h-0 "}
             transition-all duration-500 `}
+      > */}
+      <div
+        ref={contentSpace}
+        style={{ maxHeight: `${height}` }}
+        className="flex flex-wrap overflow-hidden transition-max-height 
+            duration-700 ease-in-out items-center "
       >
         {title === "Doctor" &&
           doctorList.map((item) => (
             <div
               key={item}
-              className={`mr-3 px-2 py-1 my-1 rounded-xl bg-orange-400
+              className={`ml-2 px-2 py-1 my-1 rounded-xl bg-orange-400
+              cursor-pointer hover:bg-sky-400 transition-all duration-200
         `}
               onClick={() => updateState(item)}
             >
