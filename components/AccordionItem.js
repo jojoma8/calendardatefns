@@ -44,8 +44,10 @@ function AccordionItem({
           <div key={item} className="pl-2 pr-1 py-1 ">
             <div
               key={item}
-              className={` px-3 py-1 rounded-xl bg-orange-400 shadow-l
-                cursor-pointer hover:bg-sky-400 transition-all duration-200
+              className={` px-3 py-1 rounded-xl shadow-l
+                text-orange-500 border-2 border-orange-500
+                cursor-pointer hover:bg-orange-500 hover:text-white
+                transition-all duration-200
         `}
               onClick={() => updateState(item)}
             >

@@ -25,6 +25,7 @@ import EditClinicHoursModal from "./EditClinicHoursModal";
 import { useSignInContext } from "../contextProvider/SignInContext";
 import useCalendar from "./CalendarSelector";
 import CalendarSelector from "./CalendarSelector";
+import { ContactUs } from "./EmailForm";
 
 function OurDoctors() {
   const [calendar, setCalendar] = useState(new Date().toDateString());
@@ -69,6 +70,7 @@ function OurDoctors() {
     setEditClinicHoursModal,
     appointmentBookingModal,
     setAppointmentBookingModal,
+    specialistDetailsModal,
   } = useSignInContext();
 
   const getSpecialistDetails = async () => {
@@ -86,6 +88,11 @@ function OurDoctors() {
     getSpecialistDetails();
     // setAllSpecialistsDetails(getSpecialistDetails());
   }, [editClinicHoursModal]);
+
+  // useEffect(() => {
+  //   getSpecialistDetails();
+  //   // setAllSpecialistsDetails(getSpecialistDetails());
+  // }, [specialistDetailsModal]);
 
   return (
     <div>

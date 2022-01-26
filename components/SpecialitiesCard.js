@@ -1,4 +1,5 @@
 import { data } from "autoprefixer";
+import { useState } from "react";
 import { useEditUserDetailsContext } from "../contextProvider/EditUserDetailsContext";
 import SpecialistCard from "./SpecialistCard";
 
@@ -16,14 +17,24 @@ function SpecialitiesCard({ fieldName, fieldDesc, fieldCode }) {
     setAllSpecialistsDetails,
   } = useEditUserDetailsContext();
 
+  // const [specialistDetails, setSpecialistDetails] = useState({
+  //   id: "pending",
+  //   name: "Loading",
+  //   speciality: "pending",
+  //   schedule: { Mon: ["pending"] },
+  // });
   //   check how to run this section after state is set
+
   const ent = allSpecialistsDetails.filter((item) => {
     return Object.keys(item).some((key) =>
       item[key].toString().toLowerCase().includes(fieldCode)
     );
   });
+  // setSpecialistDetails(ent());
+
   //   console.log("ent filter: " + ent[0]["field"]);
   // setAllSpecialistsDetails(ent);
+  // console.log("allData: " + allSpecialistsDetails[0].name);
 
   return (
     <div className="flex justify-center items-center ">
@@ -47,6 +58,7 @@ function SpecialitiesCard({ fieldName, fieldDesc, fieldCode }) {
           // key={data.id + data.fieldCode}
         >
           {ent.map((data) => (
+            // {{specialistDetails.map((data) => (
             <SpecialistCard
               name={data.name}
               speciality={data.speciality}

@@ -4,7 +4,7 @@ function WeekNames() {
     if (i === 6) return "rounded-tr-lg";
   }
   return (
-    <div className="grid grid-cols-7">
+    <div className="grid grid-cols-7 w-fit">
       {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((dayName, i) => (
         <div
           key={dayName}

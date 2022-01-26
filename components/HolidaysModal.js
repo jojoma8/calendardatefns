@@ -279,9 +279,9 @@ function HolidaysModal() {
     <div
       className="flex fixed pb-60 md:px-0 bg-gray-200 min-h-screen items-center 
         justify-center z-50 bg-opacity-70 w-screen"
-      onClick={() => {
-        setEditHolidaysModal(false);
-      }}
+      // onClick={() => {
+      //   setEditHolidaysModal(false);
+      // }}
     >
       <div
         className="bg-white max-w-lg mx-auto p-8 sm:p-12 my-10 
@@ -294,19 +294,19 @@ function HolidaysModal() {
         </section>
         <section className="mt-2">
           <div className="flex flex-col">
-            <div>Specialist: {currentUser?.displayName}</div>
+            <div>{currentUser?.displayName}</div>
             <div>
               {/* THIS SECTION JUST TO REFRESH THE STATE */}
               <div className="hidden">{holidayDatesList}</div>
               {/* THIS SECTION JUST TO REFRESH THE STATE */}
-              <div className="font-semibold my-2">Booked Holidays</div>
+              <div className="font-semibold text-2xl my-2">Booked Holidays</div>
               <div>
                 {holidayDatesList.map((day) => (
                   <div key={day}>{format(new Date(day), "E dd MMM yyyy")}</div>
                 ))}
               </div>
             </div>
-            <div className="flex px-2 mt-2">
+            <div className="flex px-2 mt-5">
               <div>
                 <ChevronLeftIcon
                   className="h-6"
@@ -326,27 +326,37 @@ function HolidaysModal() {
                 />
               </div>
             </div>
-            <WeekNames />
-            <div className="grid grid-cols-7">
-              {data.map((week, wi) =>
-                week.map((day, di) => (
-                  <div
-                    key={day}
-                    //   onClick={() => setSelectedDate(day)}
-                    onClick={() => daySelector(day)}
-                    className={`h-10 w-10 flex items-center justify-center 
+            <div className="flex flex-col justify-center items-center">
+              <WeekNames />
+              <div className="grid grid-cols-7 w-fit">
+                {data.map((week, wi) =>
+                  week.map((day, di) => (
+                    <div
+                      key={day}
+                      //   onClick={() => setSelectedDate(day)}
+                      onClick={() => daySelector(day)}
+                      className={`h-10 w-10 flex items-center justify-center 
                     border border-blue-200  ${dayColor(day)}
                     ${cornerClassName(wi, di)}`}
-                  >
-                    {format(day, "dd")}
-                  </div>
-                ))
-              )}
+                    >
+                      {format(day, "dd")}
+                    </div>
+                  ))
+                )}
+              </div>
             </div>
             <div>
-              <div>
-                Selected date: {format(selectedHolidayDate, "E dd-MMMM-yyyy")}
+              <div className="mt-2 ml-9 flex flex-col ">
+                <div>
+                  Selected date: {format(selectedHolidayDate, "E dd-MMMM-yyyy")}
+                </div>
+                <div>Duration: Whole Day</div>
+                {/* <div> */}
+                {/* <div>Whole day</div> */}
+                {/* <div>Specific time</div> */}
+                {/* </div> */}
               </div>
+              <div className="flex mt-2 "></div>
               <div className="flex justify-evenly">
                 <button
                   className="bg-blue-600 hover:bg-blue-700 text-white
@@ -371,22 +381,26 @@ function HolidaysModal() {
                   Remove Date
                 </button>
               </div>
-              <div className="flex mt-5 ">
-                <div>Duration:</div>
-                <div>
-                  <div>Whole day</div>
-                  {/* <div>Specific time</div> */}
-                </div>
-              </div>
             </div>
-            <button
-              className="mt-5 btn"
-              onClick={() => {
-                createObj();
-              }}
-            >
-              Save Changes
-            </button>
+            <div className="flex justify-evenly mt-5">
+              <button
+                className=" btn w-44"
+                onClick={() => {
+                  createObj();
+                  setEditHolidaysModal(false);
+                }}
+              >
+                Save Changes
+              </button>
+              <button
+                className="btnCancel w-44 "
+                onClick={() => {
+                  setEditHolidaysModal(false);
+                }}
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         </section>
       </div>

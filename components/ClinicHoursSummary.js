@@ -35,7 +35,8 @@ function ClinicHoursSummary({ day, schedule }) {
       <div className="ml-1 mr-2">
         {/* {workHoursRange(workHoursList[0], workHoursList[0])} */}
         {/* {HourRangeGenerator(handleClinicHoursSummary(clinicHours[day]))} */}
-        {HourRangeGenerator(handleClinicHoursSummary(schedule[day]))}
+        {typeof schedule !== "undefined" &&
+          HourRangeGenerator(handleClinicHoursSummary(schedule[day]))}
       </div>
     </div>
   );

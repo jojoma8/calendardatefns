@@ -14,6 +14,7 @@ const SignInProvider = ({ children }) => {
   const [editClinicHoursModal, setEditClinicHoursModal] = useState(false);
   const [editHolidaysModal, setEditHolidaysModal] = useState(false);
   const [appointmentBookingModal, setAppointmentBookingModal] = useState(false);
+  const [contactUsModal, setContactUsModal] = useState(false);
 
   return (
     <SignInContext.Provider
@@ -38,6 +39,8 @@ const SignInProvider = ({ children }) => {
         setEditHolidaysModal,
         appointmentBookingModal,
         setAppointmentBookingModal,
+        contactUsModal,
+        setContactUsModal,
       }}
     >
       {children}

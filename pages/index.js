@@ -15,6 +15,8 @@ import HolidaysModal from "../components/HolidaysModal";
 import OurDoctors from "../components/OurDoctors";
 import SpecialistDetailsModal from "../components/SpecialistDetailsModal";
 import AppointmentBookingModal from "../components/AppointmentBookingModal";
+import { ContactUs } from "../components/EmailForm";
+import ContactUsModal from "../components/ContactUsModal";
 
 export default function Home() {
   const { selectedDate } = useSelectedDateContext();
@@ -39,6 +41,8 @@ export default function Home() {
     setEditHolidaysModal,
     appointmentBookingModal,
     setAppointmentBookingModal,
+    contactUsModal,
+    setContactUsModal,
   } = useSignInContext();
 
   return (
@@ -57,6 +61,7 @@ export default function Home() {
       {editClinicHoursModal && <EditClinicHoursModal />}
       {editHolidaysModal && <HolidaysModal />}
       {appointmentBookingModal && <AppointmentBookingModal />}
+      {contactUsModal && <ContactUsModal />}
       <Header />
       <main>
         {/* <Calendar /> */}

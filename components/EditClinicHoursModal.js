@@ -69,14 +69,18 @@ function EditClinicHoursModal() {
   // useEffect(() => {
   const hours = clinicHours;
   // console.log("hours ran: " + clinicHours);
-  updateDates(hours);
+
+  // REMOVED 26JAN 2022
+  // updateDates(hours);
 
   // console.log("weekdaySelected: " + weekDaySelected);
   const hourColor = (data) => {
     // console.log(format(new Date(data), "hh:mm a"));
-    if (clinicHours[weekDaySelected].includes(data)) {
-      // if (clinicHours[weekDaySelected].includes(data)) {
-      return "bg-orange-400";
+    if (typeof clinicHours !== "undefined") {
+      if (clinicHours[weekDaySelected].includes(data)) {
+        // if (clinicHours[weekDaySelected].includes(data)) {
+        return "bg-orange-400";
+      }
     }
   };
 
@@ -130,9 +134,9 @@ function EditClinicHoursModal() {
     <div
       className="flex fixed pb-60 md:px-0 bg-gray-200 min-h-screen items-center 
       justify-center z-50 bg-opacity-70 w-screen"
-      onClick={() => {
-        setEditClinicHoursModal(false);
-      }}
+      // onClick={() => {
+      //   setEditClinicHoursModal(false);
+      // }}
     >
       <div
         className="bg-white max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl"
@@ -168,7 +172,8 @@ function EditClinicHoursModal() {
             </div>
             {/* THIS SECTION JUST TO REFRESH THE STATE */}
             <div className="hidden">{clinicHoursList}</div>
-            <div className="hidden">{clinicHours["Sat"]}</div>
+            {/* REMOVED 26JAN 2022 */}
+            {/* <div className="hidden">{clinicHours["Sat"]}</div> */}
             {/* THIS SECTION JUST TO REFRESH THE STATE */}
             <div className="flex">
               <WeekdayButtons day={"Mon"} />
@@ -202,15 +207,25 @@ function EditClinicHoursModal() {
                 )}
               </div>
             </div>
-
-            <button
-              className="mt-5 btn"
-              onClick={() => {
-                handleClinicHoursEdit(currentUser.uid, clinicHours);
-              }}
-            >
-              Update Details
-            </button>
+            <div className="flex justify-evenly mt-5">
+              <button
+                className="btn w-44"
+                onClick={() => {
+                  handleClinicHoursEdit(currentUser.uid, clinicHours);
+                  setEditClinicHoursModal(false);
+                }}
+              >
+                Update Details
+              </button>
+              <button
+                className="btnCancel w-44 "
+                onClick={() => {
+                  setEditClinicHoursModal(false);
+                }}
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         </section>
       </div>

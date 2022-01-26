@@ -59,6 +59,19 @@ function SpecialistDetailsModal() {
     setAllSpecialistsDetails,
   } = useEditUserDetailsContext();
 
+  function updateAllSpecialistData(uid) {
+    const temp = allSpecialistsDetails;
+    // temp[currentUser?.uid].name = displayNameRef.current.value;
+    // console.log("tempAllData: " + temp[currentUser?.uid].name);
+    const key = Object.keys(temp).find(
+      (key) => temp[key].uid === currentUser?.uid
+    );
+    allSpecialistsDetails[key].name = displayNameRef.current.value;
+    allSpecialistsDetails[key].field = specialistField;
+    allSpecialistsDetails[key].speciality = userSpecialityRef.current.value;
+    // console.log("tempAllData: " + allSpecialistsDetails[key].name);
+  }
+
   async function handleChangeSpecialistDetails() {
     setLoading(true);
     try {
@@ -67,9 +80,11 @@ function SpecialistDetailsModal() {
         displayNameRef.current.value,
         currentUser?.uid,
         // specialistFieldRef.current.value,
-        specialistFieldLocal,
+        // specialistFieldLocal,
+        specialistField,
         userSpecialityRef.current.value
       );
+      updateAllSpecialistData(currentUser?.uid);
     } catch {
       alert("Error");
     }
@@ -77,13 +92,15 @@ function SpecialistDetailsModal() {
     setSpecialistDetailsModal(false);
   }
 
+  // console.log("specialist field: " + specialistField);
+
   return (
     <div
       className="flex fixed pb-60 md:px-0 bg-gray-200 min-h-screen items-center 
     justify-center z-50 bg-opacity-70 w-screen"
-      onClick={() => {
-        setSpecialistDetailsModal(false);
-      }}
+      // onClick={() => {
+      //   setSpecialistDetailsModal(false);
+      // }}
     >
       <div
         className="bg-white max-w-lg mx-auto p-8 sm:p-12 my-10 rounded-lg shadow-2xl"

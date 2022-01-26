@@ -11,6 +11,7 @@ import {
   UserIcon,
   TableIcon,
   CalendarIcon,
+  MailIcon,
 } from "@heroicons/react/solid";
 import { login, signInWithGoogle, signup, updateUserName } from "../firebase";
 import {
@@ -54,6 +55,7 @@ import {
 import { useEditUserDetailsContext } from "../contextProvider/EditUserDetailsContext";
 import GetUserDetails from "./GetUserDetails";
 import { useSelectedDateContext } from "../contextProvider/SelectedDateContext";
+import { handleClinicHoursEdit } from "../utilities/UserUtils";
 
 function Header() {
   const currentUser = useAuth();
@@ -66,6 +68,8 @@ function Header() {
     setEditClinicHoursModal,
     editHolidaysModal,
     setEditHolidaysModal,
+    contactUsModal,
+    setContactUsModal,
   } = useSignInContext();
   //   const {
   //     docID,
@@ -182,11 +186,23 @@ function Header() {
     const docSnap = await getDoc(docRef);
     // console.log("check: " + !docSnap.data().schedule === "null");
     // console.log("uid: " + currentUser?.uid);
-    // if (!docSnap.data().schedule === "null") {
-    setClinicHours(docSnap.data().schedule);
-    // } else {
-    // console.log("No such document!");
-    // }
+    if (typeof docSnap.data().schedule !== "undefined") {
+      setClinicHours(docSnap.data().schedule);
+      // console.log("undefined: " + typeof docSnap.data().schedule);
+    } else {
+      const blankClinicHours = {
+        Mon: [],
+        Tue: [],
+        Wed: [],
+        Thu: [],
+        Fri: [],
+        Sat: [],
+        Sun: [],
+      };
+      handleClinicHoursEdit(currentUser.uid, blankClinicHours);
+
+      console.log("No such document!");
+    }
     setEditClinicHoursModal(true);
   };
 
@@ -194,7 +210,13 @@ function Header() {
     // const docRef = doc(db, "holidays", currentUser?.uid);
     const docRef = doc(db, "holidays", currentUser?.uid);
     const docSnap = await getDoc(docRef);
-    setHolidaysData(docSnap.data().date);
+    if (typeof docSnap.data() !== "undefined") {
+      setHolidaysData(docSnap.data().date);
+      // console.log("this ran");
+    } else {
+      setHolidaysData([]);
+      // console.log("this did not run");
+    }
     setEditHolidaysModal(true);
   };
 
@@ -206,7 +228,8 @@ function Header() {
       {/* <h1 className="text-orange-500 font-extrabold text-2xl">NextGen</h1> */}
 
       {/* Left */}
-      <div className="hidden">{clinicHours[0]}</div>
+      {/* REMOVED 26Jan 2022 */}
+      {/* <div className="hidden">{clinicHours[0]}</div> */}
       <div className="flex items-center">
         <Image
           src="https://nxtgeneclinic.com.ph/wp-content/uploads/2021/08/NXTgen-logo-horizontal-1536x540.png"
@@ -266,6 +289,9 @@ function Header() {
           </div>
           <div onClick={() => getSpecialistDetails()}>
             {currentUser && <HeaderIcon Icon={FaNotesMedical} />}
+          </div>
+          <div onClick={() => setContactUsModal(true)}>
+            {currentUser && <HeaderIcon Icon={MailIcon} />}
           </div>
         </div>
       </div>
