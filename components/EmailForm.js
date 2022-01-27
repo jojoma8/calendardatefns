@@ -1,10 +1,12 @@
 import React, { useRef } from "react";
 import emailjs from "@emailjs/browser";
 import { useAuth } from "../firebase";
+import { useSignInContext } from "../contextProvider/SignInContext";
 
 export const ContactUs = () => {
   const currentUser = useAuth();
   const form = useRef();
+  const { contactUsModal, setContactUsModal } = useSignInContext();
 
   const sendEmail = (e) => {
     e.preventDefault();
