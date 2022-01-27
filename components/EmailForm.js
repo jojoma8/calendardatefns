@@ -54,7 +54,8 @@ export const ContactUs = () => {
           <input type="submit" value="Send" className="btn w-44 " />
           <button
             className="btnCancel w-44 "
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault();
               setContactUsModal(false);
             }}
           >
