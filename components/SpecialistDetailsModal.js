@@ -80,8 +80,8 @@ function SpecialistDetailsModal() {
         displayNameRef.current.value,
         currentUser?.uid,
         // specialistFieldRef.current.value,
-        // specialistFieldLocal,
-        specialistField,
+        specialistFieldLocal,
+        // specialistField,
         userSpecialityRef.current.value
       );
       updateAllSpecialistData(currentUser?.uid);
