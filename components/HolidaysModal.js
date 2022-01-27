@@ -210,7 +210,9 @@ function HolidaysModal() {
     setLoading(true);
     try {
       // await handleHolidayUpdate(docName, holidayDate);
-      await handleHolidayUpdate(docName, list);
+      if (loading) {
+        await handleHolidayUpdate(docName, list);
+      }
     } catch {
       alert("Error");
     }
