@@ -17,6 +17,9 @@ import SpecialistDetailsModal from "../components/SpecialistDetailsModal";
 import AppointmentBookingModal from "../components/AppointmentBookingModal";
 import { ContactUs } from "../components/EmailForm";
 import ContactUsModal from "../components/ContactUsModal";
+import PaymongoHome from "./paymongoindex";
+import Cart from "./cart";
+import Payment from "./payment";
 
 export default function Home() {
   const { selectedDate } = useSelectedDateContext();
@@ -43,6 +46,10 @@ export default function Home() {
     setAppointmentBookingModal,
     contactUsModal,
     setContactUsModal,
+    paymongoModal,
+    setPaymongoModal,
+    cartModal,
+    paymentModal,
   } = useSignInContext();
 
   return (
@@ -62,6 +69,9 @@ export default function Home() {
       {editHolidaysModal && <HolidaysModal />}
       {appointmentBookingModal && <AppointmentBookingModal />}
       {contactUsModal && <ContactUsModal />}
+      {paymongoModal && <PaymongoHome />}
+      {cartModal && <Cart />}
+      {paymentModal && <Payment />}
       <Header />
       <main>
         {/* <Calendar /> */}

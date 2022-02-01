@@ -164,3 +164,14 @@ export const updateDates = (obj) => {
   });
   // console.log(obj["Mon"][0]);
 };
+
+export const dateListToTimeList = (list) => {
+  // converts past date into today but with same time
+  const result = list.map((date) => {
+    const time = new Date(date).toTimeString();
+    const today = new Date().toDateString();
+    const newDate = new Date(today + " " + time).toUTCString();
+    return newDate;
+  });
+  return result;
+};

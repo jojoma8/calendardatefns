@@ -11,21 +11,109 @@ function SignUpModal() {
   const displayNameRef = useRef();
   const { signUpModal, setSignUpModal } = useSignInContext();
   const currentUser = useAuth();
+  const [toggle, setToggle] = useState(false);
+  const [height, setHeight] = useState("0px");
+  const contentSpace = useRef(null);
+  const [message, setMessage] = useState("Loading...");
+
+  function toggleAccordion() {
+    if (toggle) {
+      setToggle(!toggle);
+    }
+    setHeight(toggle ? "0px" : `${contentSpace.current.scrollHeight}px`);
+  }
 
   async function handleSignup() {
     setLoading(true);
+    // console.log("this ran");
     try {
-      await signup(
-        emailRef.current.value,
-        passwordRef.current.value,
-        displayNameRef.current.value
-      );
-      checkIfUserExists();
+      if (passwordRef.current.value === null) {
+        setMessage("Email blank");
+      }
+      if (passwordRef.current.value === null) {
+        setMessage("Enter password");
+      }
+      if (displayNameRef.current.value === null) {
+        setMessage("Enter user name");
+      }
+      if (passwordRef.current.value !== null) {
+        // create user in authentication library
+        await signup(
+          emailRef.current.value,
+          passwordRef.current.value,
+          displayNameRef.current.value
+        );
+      }
+      // checkIfUserExists();
+      setSignUpModal(false);
+      setMessage("Success!");
     } catch (error) {
-      alert(error);
+      // alert(error);
+
+      switch (error.code) {
+        case "auth/email-already-in-use":
+          console.log(
+            `Email address ${emailRef.current.value} already in use.`
+          );
+          setMessage("Email already registered. Trying to log you in");
+          toggleAccordion();
+          setTimeout(() => {}, 3000);
+          try {
+            // setTimeout(
+            //   async () =>
+            //     await login(emailRef.current.value, passwordRef.current.value),
+            //   3000
+            // );
+            await login(emailRef.current.value, passwordRef.current.value);
+            setTimeout(() => {
+              setMessage("You are now logged in");
+              setSignUpModal(false);
+            }, 3000);
+          } catch (error) {
+            // alert(error.message);
+            switch (error.code) {
+              case "Firebase: Error (auth/wrong-password)":
+                setMessage("Incorrect password");
+                break;
+              default:
+                setMessage(error.message);
+                break;
+            }
+          }
+          break;
+        case "auth/invalid-email":
+          console.log(`Email address ${emailRef.current.value} is invalid.`);
+          setMessage("Email invalid");
+          toggleAccordion();
+          // run login script
+
+          break;
+        case "auth/operation-not-allowed":
+          console.log(`Error during sign up.`);
+          setMessage("Error during sign up.");
+          toggleAccordion();
+          break;
+        case "auth/weak-password":
+          console.log(
+            "Password is not strong enough. Add additional characters including special characters and numbers."
+          );
+          setMessage("Password is not strong enough");
+          toggleAccordion();
+          break;
+        case "auth/internal-error":
+          console.log("Error encountered");
+          setMessage("Error encountered");
+          toggleAccordion();
+          break;
+
+        default:
+          console.log(error.message);
+          setMessage(error.code);
+          toggleAccordion();
+          break;
+      }
     }
     setLoading(false);
-    setSignUpModal(false);
   }
 
   return (
@@ -37,70 +125,56 @@ function SignUpModal() {
       }}
     >
       <div
-        className="bg-white max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl"
+        className="bg-white mx-auto p-8 md:p-12 my-10 rounded-lg 
+        shadow-2xl w-2/5"
         onClick={(e) => e.stopPropagation()}
       >
         <section>
           <h3 className="font-bold text-2xl">Sign Up</h3>
           {/* <p className="text-gray-600 pt-2">Choose sign in method</p> */}
         </section>
-        <section className="mt-10">
+        <section className=" mt-10 ">
           <div className="flex flex-col">
-            <div>
+            <div className="">
               <input
                 ref={displayNameRef}
-                className="mb-5 p-3 rounded bg-gray-100"
+                className="mb-5 p-3 rounded bg-gray-100 w-full"
                 placeholder="User Name"
               />
             </div>
             <div>
               <input
                 ref={emailRef}
-                className="mb-5 p-3 rounded bg-gray-100"
+                className="mb-5 p-3 rounded bg-gray-100 w-full"
                 placeholder="Email"
               />
             </div>
             <div>
               <input
                 ref={passwordRef}
-                className="mb-5 p-3 rounded bg-gray-100"
+                className="mb-5 p-3 rounded bg-gray-100 w-full"
                 placeholder="Password"
                 type="password"
               />
             </div>
-            {/* <div className="flex flex-col justify-end">
-              <a className="text-sm text-blue-600 hover:text-blue-800 mb-2">
-                Forgot your password?
-              </a>
-              <p className="text-sm mb-5">
-                Don't have an account yet?{" "}
-                <a className="text-blue-600 hover:text-blue-800">Sign Up</a>
-              </p>
-            </div> */}
             <button
               className="bg-blue-600 hover:bg-blue-700 text-white
               font-bold py-2 
-              rounded shadow-lg hover:shadow-xl transition duration-200"
-              // type="submit"
-              onClick={handleSignup}
+              rounded shadow-lg hover:shadow-xl transition duration-200
+              w-full"
+              onClick={() => (handleSignup(), toggleAccordion())}
+              // onClick={() => toggleAccordion()}
             >
               Sign Up
             </button>
-            {/* <div className="w-full flex items-center justify-center">
-              <span className="p-3 text-gray-400 m-2">OR</span>
-            </div> */}
-            {/* <button
-              className="bg-red-600 hover:bg-red-700 text-white
-            font-bold py-2 
-            rounded shadow-lg hover:shadow-xl transition duration-200"
-              // type="submit"
-              onClick={() => {
-                signInWithGoogle();
-                setSignUpModal(false);
-              }}
+            <div
+              ref={contentSpace}
+              className=" mt-5 ml-3 transition-max-height 
+                duration-700 ease-in-out overflow-hidden overflow-wrap "
+              style={{ maxHeight: `${height}` }}
             >
-              Login with Google
-            </button> */}
+              {message}
+            </div>
           </div>
         </section>
       </div>

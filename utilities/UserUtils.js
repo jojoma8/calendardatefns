@@ -153,6 +153,9 @@ export const handleSpecialistEdit = async (name, uid, field, speciality) => {
 };
 
 export const checkIfUserExists = async () => {
+  // const auth = await getAuth();
+  // const collectionRef = doc(db, "users", auth.currentUser?.uid);
+  // console.log("length: " + collectionRef.documents.length);
   handleStoreNewUser();
 };
 

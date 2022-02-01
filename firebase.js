@@ -10,9 +10,11 @@ import {
   signOut,
   signInWithEmailAndPassword,
   GoogleAuthProvider,
+  FacebookAuthProvider,
   signInWithPopup,
   updateProfile,
   sendPasswordResetEmail,
+  fetchSignInMethodsForEmail,
 } from "firebase/auth";
 import { useState, useEffect, useContext } from "react";
 import { getFirestore } from "firebase/firestore";
@@ -75,6 +77,7 @@ export function signInWithGoogle() {
   const provider = new GoogleAuthProvider();
   signInWithPopup(auth, provider)
     .then((result) => {
+      console.log("Google access ran");
       // This gives you a Google Access Token. You can use it to access the Google API.
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
@@ -82,7 +85,7 @@ export function signInWithGoogle() {
       const user = result.user;
       // console.log();
       // ...
-      // console.log(user);
+      console.log(user);
 
       checkIfUserExists();
     })
@@ -94,6 +97,56 @@ export function signInWithGoogle() {
       const email = error.email;
       // The AuthCredential type that was used.
       const credential = GoogleAuthProvider.credentialFromError(error);
+      console.log("error Code: " + errorCode);
+      if (errorCode === "auth/account-exists-with-different-credential") {
+        console.log("dup credential error ran");
+        const pendingCred = error.credential;
+        const email = error.email;
+        auth.fetchSignInMethodsForEmail(email).then(function (methods) {
+          // if (methods[0] === 'password') {
+          console.log("signInMethods: " + methods);
+        });
+      }
+      // ...
+    });
+}
+
+export function signInWithFacebook() {
+  console.log("Facebook access ran");
+  const auth = getAuth();
+  const provider = new FacebookAuthProvider();
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      console.log("Facebook access ran part 2");
+      // This gives you a Facebook Access Token. You can use it to access the Google API.
+      const credential = FacebookAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      // The signed-in user info.
+      const user = result.user;
+      // console.log();
+      // ...
+      console.log(user);
+
+      checkIfUserExists();
+    })
+    .catch((error) => {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // The email of the user's account used.
+      const email = error.email;
+      // The AuthCredential type that was used.
+      const credential = FacebookAuthProvider.credentialFromError(error);
+      console.log("error email: " + email);
+      if (errorCode === "auth/account-exists-with-different-credential") {
+        console.log("dup credential error ran");
+        const pendingCred = error.credential;
+        const email = error.email;
+        fetchSignInMethodsForEmail(email).then(function (methods) {
+          // if (methods[0] === 'password') {
+          console.log("signInMethods: " + methods);
+        });
+      }
       // ...
     });
 }

@@ -12,13 +12,13 @@ import {
   TableIcon,
   CalendarIcon,
   MailIcon,
+  ShoppingCartIcon,
 } from "@heroicons/react/solid";
 import { login, signInWithGoogle, signup, updateUserName } from "../firebase";
 import {
   FlagIcon,
   PlayIcon,
   SearchIcon,
-  ShoppingCartIcon,
   DocumentAddIcon,
   BookOpenIcon,
 } from "@heroicons/react/outline";
@@ -70,6 +70,7 @@ function Header() {
     setEditHolidaysModal,
     contactUsModal,
     setContactUsModal,
+    setPaymongoModal,
   } = useSignInContext();
   //   const {
   //     docID,
@@ -184,11 +185,12 @@ function Header() {
   const getClinicHours = async () => {
     const docRef = doc(db, "specialists", currentUser?.uid);
     const docSnap = await getDoc(docRef);
-    // console.log("check: " + !docSnap.data().schedule === "null");
-    // console.log("uid: " + currentUser?.uid);
-    if (typeof docSnap.data().schedule !== "undefined") {
-      setClinicHours(docSnap.data().schedule);
-      // console.log("undefined: " + typeof docSnap.data().schedule);
+    console.log("check: " + typeof docSnap.data()?.schedule);
+
+    if (typeof docSnap.data()?.schedule !== "undefined") {
+      // if (docSnap.data()?.schedule !== "undefined") {
+      console.log("this ran huh");
+      // setClinicHours(docSnap.data().schedule);
     } else {
       const blankClinicHours = {
         Mon: [],
@@ -199,6 +201,7 @@ function Header() {
         Sat: [],
         Sun: [],
       };
+      setClinicHours(blankClinicHours);
       handleClinicHoursEdit(currentUser.uid, blankClinicHours);
 
       console.log("No such document!");
@@ -292,6 +295,9 @@ function Header() {
           </div>
           <div onClick={() => setContactUsModal(true)}>
             {currentUser && <HeaderIcon Icon={MailIcon} />}
+          </div>
+          <div onClick={() => setPaymongoModal(true)}>
+            {currentUser && <HeaderIcon Icon={ShoppingCartIcon} />}
           </div>
         </div>
       </div>

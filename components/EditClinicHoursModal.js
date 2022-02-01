@@ -11,6 +11,7 @@ import {
   ConvertToDate,
   ConvertToTime,
   convertToToday,
+  dateListToTimeList,
   GenerateHoursList,
   HourListReader,
   HourRangeGenerator,
@@ -24,7 +25,7 @@ import { handleClinicHoursEdit } from "../utilities/UserUtils";
 import ClinicHoursSummary from "./ClinicHoursSummary";
 
 function EditClinicHoursModal() {
-  const { format, set } = require("date-fns");
+  const { format, set, isSameMinute } = require("date-fns");
 
   const {
     signInModal,
@@ -73,20 +74,101 @@ function EditClinicHoursModal() {
   // REMOVED 26JAN 2022
   // updateDates(hours);
 
+  // console.log(
+  //   "clinicHours: " +
+  //     new Date(clinicHours[weekDaySelected][0]).toLocaleTimeString("en-US", {
+  //       hour: "numeric",
+  //       minute: "numeric",
+  //     })
+  // );
+
+  // const dateListToTimeListLocal = (data) => {
+  //   // console.log("test: " + data);
+  //   const test = data.map((date) => {
+  //     return new Date(date).toLocaleTimeString("en-US", {
+  //       hour: "numeric",
+  //       minute: "numeric",
+  //     });
+  //   });
+  //   return test;
+  //   // console.log("test2: " + test);
+  // };
+
+  // console.log(
+  //   "clinicHoursList " +
+  //     clinicHours[weekDaySelected].map((date) => {
+  //       return new Date(date).toLocaleTimeString("en-US", {
+  //         hour: "numeric",
+  //         minute: "numeric",
+  //       });
+  //     })
+  // );
+
+  // const time = new Date(clinicHours[weekDaySelected][0]).toTimeString();
+  // const today = new Date().toDateString();
+  // const newDate = new Date(today + " " + time);
+
+  // console.log(
+  //   "clinicHoursList " + dateListToTimeList(clinicHours[weekDaySelected])
+  // );
+
   // console.log("weekdaySelected: " + weekDaySelected);
   const hourColor = (data) => {
     // console.log(format(new Date(data), "hh:mm a"));
-    if (typeof clinicHours !== "undefined") {
-      if (clinicHours[weekDaySelected].includes(data)) {
+    const tempList = dateListToTimeList(clinicHours[weekDaySelected]);
+
+    // if (typeof clinicHours !== "undefined") {
+    //   if (clinicHours[weekDaySelected].includes(data)) {
+    //     // if (clinicHours[weekDaySelected].includes(data)) {
+    //     return "bg-orange-400";
+    //   }
+    // }
+    // console.log("test: " + new Date(dateListToTimeList([data])));
+    // console.log("list: " + new Date(tempList[0]));
+    // console.log(
+    //   "compare: " + new Date(dateListToTimeList([data])) ===
+    //     new Date(tempList[0])
+    // );
+    // console.log("9:30 AM".toString() === "9:30 AM".toString());
+    // console.log(["9:30 AM"].toString().includes("9:30 AM".toString()));
+    // console.log(
+    //   "compare this: " + new String("9:30 AM") === new String("9:30 AM")
+    // );
+    // console.log(
+    //   "compare: " +
+    //     isSameMinute(
+    //       new Date(tempList[0]),
+    //       new Date(dateListToTimeList([data]))
+    //     )
+    // );
+
+    if (tempList) {
+      if (tempList.toString().includes(dateListToTimeList([data]).toString())) {
         // if (clinicHours[weekDaySelected].includes(data)) {
         return "bg-orange-400";
       }
     }
   };
 
+  // function handleUpdateClinicHoursList(data) {
+  //   // console.log("handle function ran " + data);
+  //   if (!clinicHours[weekDaySelected].includes(data)) {
+  //     console.log("add was ran");
+  //     addHourToList(data);
+  //   } else {
+  //     removeHourToList(data);
+  //   }
+  // }
+
   function handleUpdateClinicHoursList(data) {
     // console.log("handle function ran " + data);
-    if (!clinicHours[weekDaySelected].includes(data)) {
+    const tempList = dateListToTimeList(
+      clinicHours[weekDaySelected]
+    ).toString();
+
+    const tempData = dateListToTimeList([data]).toString();
+
+    if (!tempList.includes(tempData)) {
       console.log("add was ran");
       addHourToList(data);
     } else {
@@ -105,12 +187,35 @@ function EditClinicHoursModal() {
     console.log("clinicHoursList Thu:" + clinicHoursList);
   };
 
+  // const removeHourToList = (date, day) => {
+  //   console.log("remove was ran");
+  //   setClinicHours((prev) => {
+  //     const data = clinicHours;
+  //     const filteredList = clinicHours[weekDaySelected].filter(
+  //       (item) => item !== date
+  //     );
+  //     const newData = prev;
+  //     // newState[weekDaySelected] = filteredList;
+  //     newData[weekDaySelected] = filteredList;
+  //     return { ...newData };
+  //   });
+  //   // console.log("modified obj:" + data[weekDaySelected]);
+  // };
+
   const removeHourToList = (date, day) => {
     console.log("remove was ran");
+
+    const newList = clinicHours[weekDaySelected].map((date) => {
+      return dateListToTimeList([date]).toString();
+    });
+
+    console.log("newList: " + newList);
+
     setClinicHours((prev) => {
       const data = clinicHours;
-      const filteredList = clinicHours[weekDaySelected].filter(
-        (item) => item !== date
+      // const filteredList = clinicHours[weekDaySelected].filter(
+      const filteredList = newList.filter(
+        (item) => item !== dateListToTimeList([date]).toString()
       );
       const newData = prev;
       // newState[weekDaySelected] = filteredList;

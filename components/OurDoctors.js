@@ -94,6 +94,13 @@ function OurDoctors() {
   //   // setAllSpecialistsDetails(getSpecialistDetails());
   // }, [specialistDetailsModal]);
 
+  // console.log(
+  //   `Basic ${Buffer.from(process.env.REACT_APP_PAYMONGO_PUBLIC_KEY).toString(
+  //     "base64"
+  //   )}`
+  // );
+  // console.log("test: " + process.env.REACT_APP_PAYMONGO_SECRET_KEY);
+
   return (
     <div>
       <div className="bg-cyan-50 px-20">

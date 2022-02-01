@@ -2,6 +2,7 @@ import EditUserDetailsProvider from "../contextProvider/EditUserDetailsContext";
 import SelectedDateProvider from "../contextProvider/SelectedDateContext";
 import SignInProvider from "../contextProvider/SignInContext";
 import "../styles/globals.css";
+import Footer from "../components/Footer";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -9,6 +10,7 @@ function MyApp({ Component, pageProps }) {
       <SelectedDateProvider>
         <EditUserDetailsProvider>
           <Component {...pageProps} />
+          <Footer />
         </EditUserDetailsProvider>
       </SelectedDateProvider>
     </SignInProvider>

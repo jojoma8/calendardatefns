@@ -1,6 +1,7 @@
 import { useSignInContext } from "../contextProvider/SignInContext";
 import { useAuth } from "../firebase";
 import { ContactUs } from "./EmailForm";
+import { msg } from "./SendGrid";
 
 function ContactUsModal() {
   const currentUser = useAuth();
@@ -37,6 +38,9 @@ function ContactUsModal() {
               Send
             </button> */}
           </div>
+          {/* <button className="btn" onClick={() => msg}>
+            SendGrid
+          </button> */}
         </section>
       </div>
     </div>
