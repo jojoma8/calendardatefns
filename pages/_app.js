@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }) {
       <SelectedDateProvider>
         <EditUserDetailsProvider>
           <Component {...pageProps} />
-          <Footer />
+          {/* <Footer /> */}
         </EditUserDetailsProvider>
       </SelectedDateProvider>
     </SignInProvider>

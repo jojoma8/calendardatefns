@@ -120,6 +120,45 @@ export function GenerateHoursList(start = new Date()) {
   };
 }
 
+export function GenerateHourlyList(start = new Date()) {
+  const {
+    startOfHour,
+    addMinutes,
+    startOfDay,
+    endOfDay,
+    addHours,
+  } = require("date-fns");
+  let hours = [];
+  let date = start;
+
+  function lastHourOfRange(range) {
+    return range[range.length - 1][23];
+  }
+
+  function takeHours(start = new Date()) {
+    let date = startOfHour(startOfDay(start));
+    return function () {
+      const hours = [...Array(24)].map((_, i) => addHours(date, i * 1));
+      return hours;
+    };
+  }
+
+  return function () {
+    const hoursGen = takeHours(startOfDay(date));
+    const endOfDayHour = addMinutes(startOfHour(endOfDay(start)), 0);
+    hours.push(hoursGen());
+    while (lastHourOfRange(hours) < endOfDayHour) {
+      hours.push(hoursGen());
+    }
+
+    const range = hours;
+    hours = [];
+    date = addMinutes(lastHourOfRange(range), 60);
+    console.log("hours ran");
+    return range;
+  };
+}
+
 // export const hourColor = (data) => {
 //   const {
 //     selectedDate,

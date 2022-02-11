@@ -71,7 +71,7 @@ function UserAuthentication() {
           // onClick={signInWithGoogle}
           onClick={() => {
             setSignInModal(true);
-            console.log(`hello`);
+            // console.log(`hello`);
             // handleStoreNewUser();
           }}
         >

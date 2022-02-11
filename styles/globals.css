@@ -36,4 +36,14 @@
   .linkText {
     @apply text-sky-400 font-semibold;
   }
+  .container {
+    overflow-y: auto;
+
+    /* hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .container::-webkit-scrollbar {
+    display: none;
+  }
 }

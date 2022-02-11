@@ -71,6 +71,17 @@ export const handleUserEdit = async (name, uid, role, email, mobile) => {
   updateDoc(docRef, payload);
 };
 
+export const handleUserRoleEdit = async (uid, role) => {
+  // console.log("this ran 2");
+  const docRef = doc(db, "users", uid);
+  const payload = {
+    role: role,
+    userRoleModified: serverTimestamp(),
+  };
+
+  updateDoc(docRef, payload);
+};
+
 export const handleHolidayUpdate = async (yyyy_uid, date) => {
   const docRef = doc(db, "holidays", yyyy_uid);
 
@@ -87,7 +98,7 @@ export const handleHolidayUpdate = async (yyyy_uid, date) => {
 };
 
 export const handleClinicHoursEdit = async (uid, schedule) => {
-  const docRef = doc(db, "specialists", uid);
+  const docRef = doc(db, "users", uid);
   const payload = {
     schedule: schedule,
   };
@@ -118,6 +129,8 @@ export const handleStoreNewUser = async () => {
   const payload = {
     name: auth.currentUser?.displayName,
     uid: auth.currentUser?.uid,
+    email: auth.currentUser?.email,
+    userCreated: serverTimestamp(),
   };
   //   try {
   //     updateDoc(collectionRef, payload);

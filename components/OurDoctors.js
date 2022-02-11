@@ -102,8 +102,8 @@ function OurDoctors() {
   // console.log("test: " + process.env.REACT_APP_PAYMONGO_SECRET_KEY);
 
   return (
-    <div>
-      <div className="bg-cyan-50 px-20">
+    <div className="">
+      <div className="bg-cyan-50 px-20 ">
         <div className="headerText text-4xl pt-20">Our Doctors</div>
         <div className="bodyText  pt-10 pb-20">
           NXTgen E-Clinic offers access to expert specialists via a secured

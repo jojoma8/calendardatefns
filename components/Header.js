@@ -28,7 +28,7 @@ import { GiPalmTree } from "react-icons/gi";
 import HeaderIcon from "./HeaderIcon";
 import { useAuth } from "../firebase";
 import UserAuthentication from "./UserAuthentication";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 
 // import {
 //   EditPostContext,
@@ -71,7 +71,13 @@ function Header() {
     contactUsModal,
     setContactUsModal,
     setPaymongoModal,
+    serRolesModal,
+    setUserRolesModal,
+    calendarOverviewModal,
+    setCalendarOverviewModal,
   } = useSignInContext();
+
+  const [scheduleLoaded, setScheduleLoaded] = useState(false);
   //   const {
   //     docID,
   //     setDocID,
@@ -183,7 +189,7 @@ function Header() {
   };
 
   const getClinicHours = async () => {
-    const docRef = doc(db, "specialists", currentUser?.uid);
+    const docRef = doc(db, "users", currentUser?.uid);
     const docSnap = await getDoc(docRef);
     console.log("check: " + typeof docSnap.data()?.schedule);
 
@@ -209,6 +215,26 @@ function Header() {
     setEditClinicHoursModal(true);
   };
 
+  const getClinicHours2 = async () => {
+    // only load firestore data once
+    if (!scheduleLoaded) {
+      const docRef = doc(db, "users", currentUser?.uid);
+      getDoc(docRef).then((docSnap) => {
+        if (docSnap.exists()) {
+          if (docSnap.data().schedule === undefined) {
+            handleClinicHoursEdit(currentUser.uid, clinicHours);
+          } else {
+            setClinicHours(docSnap.data().schedule);
+          }
+          setScheduleLoaded(true);
+        } else {
+          console.log("No such document! " + docSnap.data().role);
+        }
+      });
+    }
+    setEditClinicHoursModal(true);
+  };
+
   const getHolidayDates = async () => {
     // const docRef = doc(db, "holidays", currentUser?.uid);
     const docRef = doc(db, "holidays", currentUser?.uid);
@@ -225,8 +251,9 @@ function Header() {
 
   return (
     <div
-      className="sticky top-0 z-40 bg-white flex items-center  px-5 py-2
-      lf:px-5 shadow-md overflow-hidden font-bold "
+      className={` top-0 z-40 bg-white flex items-center  px-5 py-2
+      lf:px-5 shadow-md overflow-hidden font-bold 
+      ${calendarOverviewModal ? "sticky" : "sticky"}`}
     >
       {/* <h1 className="text-orange-500 font-extrabold text-2xl">NextGen</h1> */}
 
@@ -284,7 +311,7 @@ function Header() {
               <HeaderIcon Icon={UserIcon} />
             </div>
           )}
-          <div onClick={() => getClinicHours()}>
+          <div onClick={() => getClinicHours2()}>
             {currentUser && <HeaderIcon Icon={TableIcon} />}
           </div>
           <div onClick={() => getHolidayDates()}>
@@ -298,6 +325,15 @@ function Header() {
           </div>
           <div onClick={() => setPaymongoModal(true)}>
             {currentUser && <HeaderIcon Icon={ShoppingCartIcon} />}
+          </div>
+          <div onClick={() => setCalendarOverviewModal(true)}>
+            {currentUser && <HeaderIcon Icon={CalendarIcon} />}
+          </div>
+          <div onClick={() => setUserRolesModal(true)}>
+            {/* only admin can view */}
+            {currentUser?.email === "jojomangubat@gmail.com" && (
+              <HeaderIcon Icon={UserGroupIcon} />
+            )}
           </div>
         </div>
       </div>

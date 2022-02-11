@@ -18,6 +18,8 @@ const SignInProvider = ({ children }) => {
   const [paymongoModal, setPaymongoModal] = useState(false);
   const [cartModal, setCartModal] = useState(false);
   const [paymentModal, setPaymentModal] = useState(false);
+  const [userRolesModal, setUserRolesModal] = useState(false);
+  const [calendarOverviewModal, setCalendarOverviewModal] = useState(true);
 
   return (
     <SignInContext.Provider
@@ -50,6 +52,10 @@ const SignInProvider = ({ children }) => {
         setCartModal,
         paymentModal,
         setPaymentModal,
+        userRolesModal,
+        setUserRolesModal,
+        calendarOverviewModal,
+        setCalendarOverviewModal,
       }}
     >
       {children}
