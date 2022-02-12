@@ -16,14 +16,14 @@ function WorkGrid({ weekDay = "Sun", doctorDetails, hoursData }) {
   };
 
   return (
-    <div>
+    <div className="grow">
       {hoursData.map((week, wi) =>
         week.map((day, di) => (
           <div
             key={day}
             cursor="pointer"
-            className={`h-4 w-20 flex flex-col  
-                 text-xs border-t border-l border-r border-gray-200 
+            className={`h-4 flex flex-col  
+                 text-xs border-t border-l  border-gray-200 
                 ${hourColor(weekDay, day.toUTCString())}
                     `}
           >

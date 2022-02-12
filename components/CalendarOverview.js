@@ -194,7 +194,7 @@ function CalendarOverview() {
           {/* <p className="text-gray-600 pt-2">Choose sign in method</p> */}
         </section>
         {/* <div>{doctorsList}</div> */}
-        <section>
+        <section className="m-2">
           <AccordionItem
             title={"Doctor: "}
             // desc={searchResults?.role}
@@ -207,81 +207,98 @@ function CalendarOverview() {
             // name={searchResults?.name}
           />
         </section>
-        <section
-          className="flex flex-row text-lg my-2 mr-3 items-center 
-          justify-around"
-        >
-          <WeekHeader day={"Time"} date={weekData} />
-          <WeekHeader day={"Sun"} date={weekData} />
-          <WeekHeader day={"Mon"} date={weekData} />
-          <WeekHeader day={"Tue"} date={weekData} />
-          <WeekHeader day={"Wed"} date={weekData} />
-          <WeekHeader day={"Thu"} date={weekData} />
-          <WeekHeader day={"Fri"} date={weekData} />
-          <WeekHeader day={"Sat"} date={weekData} />
-          {/* <WeekHeader day={"Right"} date={weekData} /> */}
-        </section>
-        <section
-          className="flex flex-row justify-between 
-          overflow-hidden 
-          overflow-y-scroll
+        <div className="overflow-hidden overflow-y-scroll">
+          <section
+            className="flex flex-row  items-center 
+          top-0 z-50 overflow-hidden sticky bg-white
           "
-          // className="flex  container"
-          // className="flex  container"
-          id="calendar"
-        >
-          <div>
-            {hoursData2.map((week, wi) =>
-              week.map((day, di) => (
-                <div
-                  key={day}
-                  cursor="pointer"
-                  className={`h-8   flex flex-col justify-items-stretch 
-                items-end text-xs  border-t border-gray-200
+          >
+            <div className="">
+              <div
+                className={`h-8 flex flex-col  
+                items-center text-xs w-10
+                    `}
+              >
+                Time
+              </div>
+            </div>
+            <div className="grow grid grid-flow-col auto-cols-fr">
+              {/* <WeekHeader day={"Time"} date={weekData} /> */}
+              <WeekHeader day={"Sun"} date={weekData} />
+              <WeekHeader day={"Mon"} date={weekData} />
+              <WeekHeader day={"Tue"} date={weekData} />
+              <WeekHeader day={"Wed"} date={weekData} />
+              <WeekHeader day={"Thu"} date={weekData} />
+              <WeekHeader day={"Fri"} date={weekData} />
+              <WeekHeader day={"Sat"} date={weekData} />
+              {/* <WeekHeader day={"Right"} date={weekData} /> */}
+            </div>
+          </section>
+
+          <section
+            className="flex flex-row items-center justify-around 
+          
+          
+          "
+            // className="flex  container"
+            // className="flex  container"
+            id="calendar"
+          >
+            <div className="">
+              {hoursData2.map((week, wi) =>
+                week.map((day, di) => (
+                  <div
+                    key={day}
+                    cursor="pointer"
+                    className={`h-8 flex flex-col justify-items-stretch 
+                items-center text-xs  border-t border-gray-200 w-10
                 
                     `}
-                >
-                  {format(day, "h a")}
-                </div>
-              ))
-            )}
-          </div>
-          <WorkGrid
-            weekDay={"Sun"}
-            doctorDetails={doctorDetails}
-            hoursData={hoursData}
-          />
-          <WorkGrid
-            weekDay={"Mon"}
-            doctorDetails={doctorDetails}
-            hoursData={hoursData}
-          />
-          <WorkGrid
-            weekDay={"Tue"}
-            doctorDetails={doctorDetails}
-            hoursData={hoursData}
-          />
-          <WorkGrid
-            weekDay={"Wed"}
-            doctorDetails={doctorDetails}
-            hoursData={hoursData}
-          />
-          <WorkGrid
-            weekDay={"Thu"}
-            doctorDetails={doctorDetails}
-            hoursData={hoursData}
-          />
-          <WorkGrid
-            weekDay={"Fri"}
-            doctorDetails={doctorDetails}
-            hoursData={hoursData}
-          />
-          <WorkGrid
-            weekDay={"Sat"}
-            doctorDetails={doctorDetails}
-            hoursData={hoursData}
-          />
-        </section>
+                  >
+                    {format(day, "h a")}
+                  </div>
+                ))
+              )}
+            </div>
+            <div className="flex grow">
+              <WorkGrid
+                weekDay={"Sun"}
+                doctorDetails={doctorDetails}
+                hoursData={hoursData}
+              />
+              <WorkGrid
+                weekDay={"Mon"}
+                doctorDetails={doctorDetails}
+                hoursData={hoursData}
+              />
+              <WorkGrid
+                weekDay={"Tue"}
+                doctorDetails={doctorDetails}
+                hoursData={hoursData}
+              />
+              <WorkGrid
+                weekDay={"Wed"}
+                doctorDetails={doctorDetails}
+                hoursData={hoursData}
+              />
+              <WorkGrid
+                weekDay={"Thu"}
+                doctorDetails={doctorDetails}
+                hoursData={hoursData}
+              />
+              <WorkGrid
+                weekDay={"Fri"}
+                doctorDetails={doctorDetails}
+                hoursData={hoursData}
+              />
+              <WorkGrid
+                weekDay={"Sat"}
+                doctorDetails={doctorDetails}
+                hoursData={hoursData}
+              />
+            </div>
+          </section>
+        </div>
         <section className="mt-2 ">
           <div className="flex flex-col">
             {/* <div>{currentUser?.displayName}</div> */}
