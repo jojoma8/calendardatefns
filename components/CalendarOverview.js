@@ -8,6 +8,22 @@ import {
 } from "../utilities/TimeCalculations";
 import WeekHeader from "./calendarOverview/WeekHeader";
 import { motion, AnimatePresence } from "framer-motion";
+import AccordionItem from "./AccordionItem";
+import {
+  collection,
+  addDoc,
+  updateDoc,
+  doc,
+  deleteDoc,
+  query,
+  where,
+  getDocs,
+  serverTimestamp,
+  setDoc,
+  getDoc,
+  onSnapshot,
+} from "firebase/firestore";
+import db from "../firebase";
 
 function CalendarOverview() {
   const {
@@ -28,11 +44,31 @@ function CalendarOverview() {
   const hoursData = hourGenerator();
   const hourGenerator2 = GenerateHourlyList();
   const hoursData2 = hourGenerator2();
+  const [doctorsList, setDoctorsList] = useState([]);
+  const [doctorsUIDList, setDoctorsUIDList] = useState([]);
+  const [selectedDoctor, setSelectedDoctor] = useState([]);
   // console.log("data2: " + hoursData2);
 
   useEffect(() => {
     const element = document.getElementById("calendar");
     element.scrollTop = element.scrollTop = element.scrollHeight * 0.38;
+  }, []);
+
+  const handleLoadDoctors = async () => {
+    const docRef = doc(db, "doctors", "doctors");
+    const docSnap = await getDoc(docRef);
+
+    // setDoctorsList(Object.values(docSnap.data().doctors.map((a) => a.name)));
+    const doctorNames = docSnap.data().doctors.map((a) => a.name);
+    // console.log("docList: " + docSnap.data().doctors.map((a) => a.name));
+    // console.log("finalArray " + typeof finalArray.map((obj) => [obj]));
+    // console.log("array " + typeof temp);
+    setDoctorsList(doctorNames.map((obj) => [obj]));
+  };
+
+  // get doctors list
+  useEffect(() => {
+    handleLoadDoctors();
   }, []);
 
   function takeWeek(start = new Date()) {
@@ -47,6 +83,25 @@ function CalendarOverview() {
   const weekGenerator = takeWeek(selectedDate);
   const weekData = weekGenerator();
   // console.log("week: " + weekData[1].getDate());
+
+  useEffect(() => {
+    getWorkHoursData();
+  }, []);
+
+  const getDoctorSchedule = async () => {
+    const docRef = doc(db, "users", "docFM");
+  };
+
+  const getWorkHoursData = async () => {
+    const docRef = doc(db, "workHours", "2022-01");
+    getDoc(docRef).then((docSnap) => {
+      if (docSnap.exists()) {
+        console.log("exists");
+      } else {
+        console.log("does not exist");
+      }
+    });
+  };
 
   return (
     // <AnimatePresence
@@ -94,7 +149,20 @@ function CalendarOverview() {
           <h3 className="font-bold text-2xl">Weekly Overview</h3>
           {/* <p className="text-gray-600 pt-2">Choose sign in method</p> */}
         </section>
-
+        {/* <div>{doctorsList}</div> */}
+        <section>
+          <AccordionItem
+            title={"Doctor: "}
+            // desc={searchResults?.role}
+            setDesc={setSelectedDoctor}
+            // setDoctorList={setDoctorsList}
+            // options={["one", "two"]}
+            options={doctorsList}
+            // uid={searchResults?.uid}
+            // doctorList={doctorsList}
+            // name={searchResults?.name}
+          />
+        </section>
         <section
           className="flex flex-row text-lg my-2 ml-8 mr-5 items-center 
           justify-around"

@@ -2,7 +2,7 @@ import { useSignInContext } from "../contextProvider/SignInContext";
 import { useAuth } from "../firebase";
 import { SearchIcon } from "@heroicons/react/outline";
 import HeaderIcon from "./HeaderIcon";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   collection,
   addDoc,
@@ -19,7 +19,11 @@ import {
 } from "firebase/firestore";
 import db from "../firebase";
 import AccordionItem from "./AccordionItem";
-import { handleUserRoleEdit } from "../utilities/UserUtils";
+import {
+  handleAddDoctorToList,
+  handleUserRoleEdit,
+} from "../utilities/UserUtils";
+import AccordionItemDoctorList from "./AccordionItemDoctorList";
 
 function UserRolesModal() {
   const currentUser = useAuth();
@@ -29,6 +33,7 @@ function UserRolesModal() {
   );
   const [searchResults, setSearchResults] = useState({});
   const [userRole, setUserRole] = useState("");
+  const [doctorsList, setDoctorsList] = useState([]);
 
   const searchRef = useRef();
 
@@ -38,7 +43,8 @@ function UserRolesModal() {
     if (term.length > 0) {
       const q = query(collection(db, "users"), where("email", "==", term));
       const querySnapshot = await getDocs(q);
-      console.log("userRole: " + searchResults?.role);
+      // console.log("userRole: " + searchResults?.role);
+      // console.log("doctorName: " + searchResults?.name);
 
       if (querySnapshot.empty) {
         setSearchResults({ remarks: "User not found" });
@@ -55,12 +61,32 @@ function UserRolesModal() {
   };
 
   const handleSaveChanges = () => {
-    console.log("this ran");
+    // console.log("this ran");
     if (searchResults.uid) {
       handleUserRoleEdit(searchResults.uid, userRole);
+      handleAddDoctorToList(doctorsList);
+      // console.log("updated list " + doctorsList.length);
     }
-    setUserRolesModal(false);
+    // setUserRolesModal(false);
   };
+
+  const handleLoadDoctors = async () => {
+    const docRef = doc(db, "doctors", "doctors");
+    const docSnap = await getDoc(docRef);
+
+    setDoctorsList(docSnap.data().doctors);
+    console.log("docList: " + docSnap.data().doctors);
+  };
+
+  // const handleAddDoctor = () => {
+  //   setDoctorsList((list) => [...list, searchResults.uid]);
+  //   // console.log("docList: " + doctorsList);
+  //   handleAddDoctorToList(doctorsList);
+  // };
+
+  useEffect(() => {
+    handleLoadDoctors();
+  }, []);
 
   return (
     <div
@@ -110,14 +136,19 @@ function UserRolesModal() {
               )}
 
               {searchResults?.name && (
-                <AccordionItem
+                <AccordionItemDoctorList
                   title={"User Role: "}
                   desc={searchResults?.role}
                   setDesc={setUserRole}
+                  setDoctorList={setDoctorsList}
                   options={["Doctor", "VA", "No Role"]}
+                  uid={searchResults?.uid}
+                  doctorList={doctorsList}
+                  name={searchResults?.name}
                 />
               )}
             </div>
+            {/* <div>{doctorsList.length}</div> */}
             <div className="flex justify-evenly mt-10">
               <button
                 className="btn w-44"

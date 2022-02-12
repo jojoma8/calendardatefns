@@ -19,7 +19,7 @@ const SignInProvider = ({ children }) => {
   const [cartModal, setCartModal] = useState(false);
   const [paymentModal, setPaymentModal] = useState(false);
   const [userRolesModal, setUserRolesModal] = useState(false);
-  const [calendarOverviewModal, setCalendarOverviewModal] = useState(true);
+  const [calendarOverviewModal, setCalendarOverviewModal] = useState(false);
 
   return (
     <SignInContext.Provider

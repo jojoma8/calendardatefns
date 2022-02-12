@@ -154,7 +154,7 @@ export function GenerateHourlyList(start = new Date()) {
     const range = hours;
     hours = [];
     date = addMinutes(lastHourOfRange(range), 60);
-    console.log("hours ran");
+    // console.log("hours ran");
     return range;
   };
 }

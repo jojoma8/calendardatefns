@@ -1,14 +1,14 @@
 import React, { useRef, useState } from "react";
 
-function AccordionItem({
+function AccordionItemDoctorList({
   title = "Title",
   desc = "Selected",
   setDesc,
-  // setDoctorList,
+  setDoctorList,
   options = ["a", "b", "c"],
-  // uid = "",
-  // doctorList = "",
-  // name = "",
+  uid = "",
+  doctorList = "",
+  name = "",
 }) {
   const [toggle, setToggle] = useState(false);
   const [descLocal, setDescLocal] = useState(desc);
@@ -24,23 +24,23 @@ function AccordionItem({
     setDescLocal(item);
     toggleAccordion();
     setDesc(item);
-    // if (item == "Doctor") {
-    //   if (!JSON.stringify(doctorList.map(Object.values)).includes(uid)) {
-    //     // console.log("add doctor to list " + uid);
-    //     setDoctorList((list) => [...list, { uid: uid, name: name }]);
-    //   }
-    //   // console.log("doctor already in list");
-    // }
-    // if (item != "Doctor") {
-    //   if (JSON.stringify(doctorList.map(Object.values)).includes(uid)) {
-    //     // console.log("remove doctor " + uid);
-    //     const myArray = doctorList.filter(function (obj) {
-    //       return obj.uid !== uid;
-    //     });
-    //     // console.log("newList " + myArray);
-    //     setDoctorList(myArray);
-    //   }
-    // }
+    if (item == "Doctor") {
+      if (!JSON.stringify(doctorList.map(Object.values)).includes(uid)) {
+        // console.log("add doctor to list " + uid);
+        setDoctorList((list) => [...list, { uid: uid, name: name }]);
+      }
+      // console.log("doctor already in list");
+    }
+    if (item != "Doctor") {
+      if (JSON.stringify(doctorList.map(Object.values)).includes(uid)) {
+        // console.log("remove doctor " + uid);
+        const myArray = doctorList.filter(function (obj) {
+          return obj.uid !== uid;
+        });
+        // console.log("newList " + myArray);
+        setDoctorList(myArray);
+      }
+    }
   };
   //   console.log("height: " + contentSpace.current.scrollHeight);
 
@@ -80,4 +80,4 @@ function AccordionItem({
   );
 }
 
-export default AccordionItem;
+export default AccordionItemDoctorList;

@@ -114,37 +114,10 @@ function EditClinicHoursModal() {
 
   // console.log("weekdaySelected: " + weekDaySelected);
   const hourColor = (data) => {
-    // console.log(format(new Date(data), "hh:mm a"));
     const tempList = dateListToTimeList(clinicHours[weekDaySelected]);
-
-    // if (typeof clinicHours !== "undefined") {
-    //   if (clinicHours[weekDaySelected].includes(data)) {
-    //     // if (clinicHours[weekDaySelected].includes(data)) {
-    //     return "bg-orange-400";
-    //   }
-    // }
-    // console.log("test: " + new Date(dateListToTimeList([data])));
-    // console.log("list: " + new Date(tempList[0]));
-    // console.log(
-    //   "compare: " + new Date(dateListToTimeList([data])) ===
-    //     new Date(tempList[0])
-    // );
-    // console.log("9:30 AM".toString() === "9:30 AM".toString());
-    // console.log(["9:30 AM"].toString().includes("9:30 AM".toString()));
-    // console.log(
-    //   "compare this: " + new String("9:30 AM") === new String("9:30 AM")
-    // );
-    // console.log(
-    //   "compare: " +
-    //     isSameMinute(
-    //       new Date(tempList[0]),
-    //       new Date(dateListToTimeList([data]))
-    //     )
-    // );
 
     if (tempList) {
       if (tempList.toString().includes(dateListToTimeList([data]).toString())) {
-        // if (clinicHours[weekDaySelected].includes(data)) {
         return "bg-orange-400";
       }
     }

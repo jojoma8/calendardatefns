@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 
-function AccordionItem({
+function AccordionItemWeeklyOverview({
   title = "Title",
   desc = "Selected",
   setDesc,
@@ -80,4 +80,4 @@ function AccordionItem({
   );
 }
 
-export default AccordionItem;
+export default AccordionItemWeeklyOverview;

@@ -82,11 +82,51 @@ export const handleUserRoleEdit = async (uid, role) => {
   updateDoc(docRef, payload);
 };
 
-export const handleHolidayUpdate = async (yyyy_uid, date) => {
-  const docRef = doc(db, "holidays", yyyy_uid);
+export async function handleAddDoctorToList(doctors) {
+  // console.log("add Doctors Ran " + doctors.length);
+  const docRef = doc(db, "doctors", "doctors");
+  // const docSnap = await getDoc(docRef);
+
+  // setDoctorsList(docSnap.data().doctors);
+  // console.log("doctorData: " + docSnap.data().doctors[0].uid);
+  // const existingDoctors = docSnap.data().doctors;
+
+  // const newDoctor = { uid: uid, name: name };
+  // const list = existingDoctors;
+  // const newListDoctors = list.push(newDoctor);
 
   const payload = {
-    date: date,
+    doctors,
+  };
+
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    updateDoc(docRef, payload);
+  } else {
+    setDoc(docRef, payload);
+  }
+}
+
+// export const handleHolidayUpdate = async (doc_id, date) => {
+//   const docRef = doc(db, "holidays", doc_id);
+
+//   const payload = {
+//     date: date,
+//   };
+
+//   const docSnap = await getDoc(docRef);
+//   if (docSnap.exists()) {
+//     updateDoc(docRef, payload);
+//   } else {
+//     setDoc(docRef, payload);
+//   }
+// };
+
+export const handleHolidayUpdate = async (doc_id, date) => {
+  const docRef = doc(db, "users", doc_id);
+
+  const payload = {
+    holidays: date,
   };
 
   const docSnap = await getDoc(docRef);
