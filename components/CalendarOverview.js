@@ -27,6 +27,7 @@ import {
 import db from "../firebase";
 import WorkGrid from "./calendarOverview/WorkGrid";
 import { withCoalescedInvoke } from "next/dist/lib/coalesced-function";
+import AccordionItemWeeklyOverview from "./AccordionItemWeeklyOverview";
 
 function CalendarOverview() {
   const {
@@ -50,6 +51,8 @@ function CalendarOverview() {
   const [doctorsList, setDoctorsList] = useState([]);
   const [doctorsUIDList, setDoctorsUIDList] = useState([]);
   const [selectedDoctor, setSelectedDoctor] = useState([]);
+  const [selectedDoctorIndex, setSelectedDoctorIndex] = useState([]);
+  const [selectedDoctorList, setSelectedDoctorList] = useState([]);
   const [doctorDetails, setDoctorDetails] = useState({});
   // console.log("data2: " + hoursData2);
 
@@ -147,6 +150,27 @@ function CalendarOverview() {
     } catch (e) {}
   };
 
+  useEffect(() => {
+    test();
+  }, [selectedDoctor]);
+
+  const test = () => {
+    try {
+      const index = doctorDetails
+        .map((item) => item.name)
+        .indexOf(selectedDoctor.toString());
+      if (index >= 0) {
+        setSelectedDoctorIndex(index);
+        console.log("changed index");
+      }
+      if (index < 0) {
+        setSelectedDoctorIndex("");
+        console.log("set index to null");
+      }
+      console.log("index: " + index);
+    } catch (e) {}
+  };
+
   return (
     // <AnimatePresence
     //   initial={true}
@@ -195,7 +219,7 @@ function CalendarOverview() {
         </section>
         {/* <div>{doctorsList}</div> */}
         <section className="m-2">
-          <AccordionItem
+          <AccordionItemWeeklyOverview
             title={"Doctor: "}
             // desc={searchResults?.role}
             setDesc={setSelectedDoctor}
@@ -265,36 +289,43 @@ function CalendarOverview() {
                 weekDay={"Sun"}
                 doctorDetails={doctorDetails}
                 hoursData={hoursData}
+                index={selectedDoctorIndex}
               />
               <WorkGrid
                 weekDay={"Mon"}
                 doctorDetails={doctorDetails}
                 hoursData={hoursData}
+                index={selectedDoctorIndex}
               />
               <WorkGrid
                 weekDay={"Tue"}
                 doctorDetails={doctorDetails}
                 hoursData={hoursData}
+                index={selectedDoctorIndex}
               />
               <WorkGrid
                 weekDay={"Wed"}
                 doctorDetails={doctorDetails}
                 hoursData={hoursData}
+                index={selectedDoctorIndex}
               />
               <WorkGrid
                 weekDay={"Thu"}
                 doctorDetails={doctorDetails}
                 hoursData={hoursData}
+                index={selectedDoctorIndex}
               />
               <WorkGrid
                 weekDay={"Fri"}
                 doctorDetails={doctorDetails}
                 hoursData={hoursData}
+                index={selectedDoctorIndex}
               />
               <WorkGrid
                 weekDay={"Sat"}
                 doctorDetails={doctorDetails}
                 hoursData={hoursData}
+                index={selectedDoctorIndex}
               />
             </div>
           </section>
