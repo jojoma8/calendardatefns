@@ -112,12 +112,12 @@ export function signInWithGoogle() {
 }
 
 export function signInWithFacebook() {
-  console.log("Facebook access ran");
+  // console.log("Facebook access ran");
   const auth = getAuth();
   const provider = new FacebookAuthProvider();
   signInWithPopup(auth, provider)
     .then((result) => {
-      console.log("Facebook access ran part 2");
+      // console.log("Facebook access ran part 2");
       // This gives you a Facebook Access Token. You can use it to access the Google API.
       const credential = FacebookAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
@@ -125,7 +125,7 @@ export function signInWithFacebook() {
       const user = result.user;
       // console.log();
       // ...
-      console.log(user);
+      // console.log(user);
 
       checkIfUserExists();
     })

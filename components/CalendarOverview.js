@@ -279,7 +279,7 @@ function CalendarOverview() {
                 items-center text-xs w-10
                     `}
               >
-                Time
+                {/* Time */}
               </div>
             </div>
             <div className="grow grid grid-flow-col auto-cols-fr">

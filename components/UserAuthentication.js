@@ -2,6 +2,7 @@ import { signup, useAuth, logout, login, signInWithGoogle } from "../firebase";
 import { useContext, useRef, useState } from "react";
 import { useSignInContext } from "../contextProvider/SignInContext";
 import { handleStoreNewUser } from "../utilities/UserUtils";
+import { useEditUserDetailsContext } from "../contextProvider/EditUserDetailsContext";
 
 function UserAuthentication() {
   const [loading, setLoading] = useState(false);
@@ -9,6 +10,19 @@ function UserAuthentication() {
   const passwordRef = useRef();
   const currentUser = useAuth();
   const { signInModal, setSignInModal } = useSignInContext();
+
+  const {
+    userDetails,
+    setUserDetails,
+    userName,
+    setUserName,
+    userRole,
+    setUserRole,
+    specialistField,
+    setSpecialistField,
+    userSpeciality,
+    setUserSpeciality,
+  } = useEditUserDetailsContext();
 
   async function handleSignup() {
     setLoading(true);
@@ -39,6 +53,9 @@ function UserAuthentication() {
       alert("Error");
     }
     setLoading(false);
+    setUserRole("");
+    setUserName("");
+    setUserDetails("");
   }
 
   return (

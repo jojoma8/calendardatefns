@@ -13,6 +13,7 @@ import {
   CalendarIcon,
   MailIcon,
   ShoppingCartIcon,
+  PhotographIcon,
 } from "@heroicons/react/solid";
 import { login, signInWithGoogle, signup, updateUserName } from "../firebase";
 import {
@@ -158,21 +159,28 @@ function Header() {
   } = useSelectedDateContext();
 
   const getUserDetails = async (userName) => {
-    const docRef = doc(db, "users", currentUser?.uid);
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      setUserName(docSnap.data().name);
-      setUserRole(docSnap.data().role);
-      setUserDetails(docSnap.data());
-      // console.log("user details loaded: " + userDetails);
-      // setSpecialistField(docSnap.data().field);
-      // setUserSpeciality(docSnap.data().speciality);
-    } else {
-      console.log("No such document!");
-    }
-    // GetUserDetails(currentUser?.uid);
-    setUserDetailsModal(true);
+    try {
+      const docRef = doc(db, "users", currentUser?.uid);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        setUserName(docSnap.data().name);
+        setUserRole(docSnap.data().role);
+        setUserDetails(docSnap.data());
+        // console.log("user details loaded: " + userDetails);
+        // setSpecialistField(docSnap.data().field);
+        // setUserSpeciality(docSnap.data().speciality);
+      } else {
+        console.log("No such document!");
+      }
+      // GetUserDetails(currentUser?.uid);
+      // setUserDetailsModal(true);
+    } catch (e) {}
   };
+
+  useEffect(() => {
+    getUserDetails();
+    console.log("userUpdated " + userRole);
+  }, [currentUser]);
 
   const getSpecialistDetails = async () => {
     const docRef = doc(db, "specialists", currentUser?.uid);
@@ -288,38 +296,30 @@ function Header() {
       {/* Center */}
       <div className="flex justify-center flex-grow">
         <div className="flex space-x-2 sm:space-x-4">
-          {/* <Link href="/">
-            <a>
-              <HeaderIcon Icon={HomeIcon} />
-            </a>
-          </Link> */}
-
-          {/* {currentUser && (
-            <div onClick={() => setNewPostModal(true)}>
-              <HeaderIcon Icon={DocumentAddIcon} />
-            </div>
-          )} */}
-          {/* <Link href="/python_blog">
-            <a>
-              <HeaderIcon Icon={BookOpenIcon} />
-            </a>
-          </Link> */}
-
           {currentUser && (
-            // <div onClick={() => setUserDetailsModal(true)}>
-            <div onClick={() => getUserDetails()}>
+            <div onClick={() => setUserDetailsModal(true)}>
+              {/* <div onClick={() => getUserDetails()}> */}
               <HeaderIcon Icon={UserIcon} />
             </div>
           )}
-          <div onClick={() => getClinicHours2()}>
-            {currentUser && <HeaderIcon Icon={TableIcon} />}
-          </div>
-          <div onClick={() => getHolidayDates()}>
-            {currentUser && <HeaderIcon Icon={GiPalmTree} width={7} />}
-          </div>
-          <div onClick={() => getSpecialistDetails()}>
-            {currentUser && <HeaderIcon Icon={FaNotesMedical} />}
-          </div>
+          {/* {userRole === "Doctor" && ( */}
+          {currentUser && (
+            <div onClick={() => getClinicHours2()}>
+              {<HeaderIcon Icon={TableIcon} />}
+            </div>
+          )}
+          {/* {userRole === "Doctor" && ( */}
+          {currentUser && (
+            <div onClick={() => getHolidayDates()}>
+              {<HeaderIcon Icon={PhotographIcon} />}
+            </div>
+          )}
+          {/* {userRole === "Doctor" && ( */}
+          {currentUser && (
+            <div onClick={() => getSpecialistDetails()}>
+              {<HeaderIcon Icon={FaNotesMedical} />}
+            </div>
+          )}
           <div onClick={() => setContactUsModal(true)}>
             {currentUser && <HeaderIcon Icon={MailIcon} />}
           </div>
@@ -330,10 +330,17 @@ function Header() {
             {currentUser && <HeaderIcon Icon={CalendarIcon} />}
           </div>
           <div onClick={() => setUserRolesModal(true)}>
-            {/* only admin can view */}
-            {currentUser?.email === "jojomangubat@gmail.com" && (
+            {/* only admin can view - Main Admin*/}
+            {currentUser?.email === process.env.REACT_APP_ADMIN_EMAIL && (
               <HeaderIcon Icon={UserGroupIcon} />
             )}
+          </div>
+          <div onClick={() => setUserRolesModal(true)}>
+            {/* only admin can view - additional admin*/}
+            {userRole === "admin" &&
+              currentUser?.email != process.env.REACT_APP_ADMIN_EMAIL && (
+                <HeaderIcon Icon={UserGroupIcon} />
+              )}
           </div>
         </div>
       </div>

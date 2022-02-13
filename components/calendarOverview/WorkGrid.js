@@ -22,10 +22,10 @@ function WorkGrid({
         if (list) {
           if (list.toString().includes(dateListToTimeList([data]).toString())) {
             if (index === "0") {
-              return "bg-orange-200 border-solid border-2 border-indigo-500 border-dashed";
+              return "bg-orange-200 ";
             }
             if (index === "1") {
-              return "bg-blue-200 border-solid border-2 border-indigo-500 border-dashed";
+              return "bg-blue-200";
             }
           }
         }

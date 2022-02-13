@@ -13,6 +13,7 @@ module.exports = {
     REACT_APP_PAYMONGO_SECRET_KEY: process.env.REACT_APP_PAYMONGO_SECRET_KEY,
     REACT_APP_SENDGRID_API_KEY: process.env.REACT_APP_SENDGRID_API_KEY,
     REACT_APP_THESMSWORKS_API_KEY: process.env.REACT_APP_THESMSWORKS_API_KEY,
+    REACT_APP_ADMIN_EMAIL: process.env.REACT_APP_ADMIN_EMAIL,
   },
   images: {
     domains: ["nxtgeneclinic.com.ph"],
