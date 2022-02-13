@@ -55,6 +55,7 @@ function CalendarOverview() {
   const [selectedDoctorIndexList, setSelectedDoctorIndexList] = useState([]);
   const [selectedDoctorList, setSelectedDoctorList] = useState([]);
   const [doctorDetails, setDoctorDetails] = useState({});
+  const [filteredDoctorDetails, setFilteredDoctorDetails] = useState([]);
   const [listSelectedDoctor, setListSelectedDoctor] = useState([]);
   // console.log("data2: " + hoursData2);
 
@@ -108,9 +109,9 @@ function CalendarOverview() {
     const results = [];
 
     if (querySnapshot.empty) {
-      console.log("no doctors found");
+      // console.log("no doctors found");
     } else {
-      console.log("doctors found");
+      // console.log("doctors found");
       // setDoctorDetails(querySnapshot.docs());
 
       querySnapshot.forEach((doc) => {
@@ -123,7 +124,7 @@ function CalendarOverview() {
         }
       });
     }
-    // console.log("results " + results[0].schedule["Sun"]);
+    // console.log("results " + results);
     setDoctorDetails(results);
   };
 
@@ -131,9 +132,9 @@ function CalendarOverview() {
     const docRef = doc(db, "workHours", "2022-01");
     getDoc(docRef).then((docSnap) => {
       if (docSnap.exists()) {
-        console.log("exists");
+        // console.log("exists");
       } else {
-        console.log("does not exist");
+        // console.log("does not exist");
       }
     });
   };
@@ -169,6 +170,7 @@ function CalendarOverview() {
         setSelectedDoctorIndex("");
         // console.log("set index to null");
       }
+      // console.log("doctorDetails " + doctorDetails[index]);
       // console.log("index: " + index);
     } catch (e) {}
   };
@@ -177,29 +179,32 @@ function CalendarOverview() {
     // console.log("doctorList: " + listSelectedDoctor);
     // console.log("length: " + listSelectedDoctor.length);
     doctorListToIndexList();
-  }, [listSelectedDoctor]);
+    // }, [listSelectedDoctor]);
+  }, [filteredDoctorDetails]);
 
   const doctorListToIndexList = () => {
     try {
-      const index = doctorDetails
+      const index = filteredDoctorDetails
         .map((item) => item.name)
         .indexOf(selectedDoctor.toString());
       if (index >= 0) {
         if (selectedDoctorIndexList.includes(index.toString())) {
-          // console.log("remove index");
+          console.log("remove index " + index);
 
           setSelectedDoctorIndexList(
             selectedDoctorIndexList.filter((x) => x != index)
           );
         } else {
-          // console.log("added to index list " + index.toString());
+          console.log("added to index list " + index.toString());
           // console.log("type: " + typeof index);
           setSelectedDoctorIndexList((x) => [...x, index.toString()]);
         }
       }
-      if (index < 0) {
-        // console.log("doctor not found");
-      }
+      // if (index < 0) {
+      //   console.log(
+      //     "doctor not found " + JSON.stringify(filteredDoctorDetails)
+      //   );
+      // }
     } catch (e) {
       console.log("error " + e);
     }
@@ -263,10 +268,14 @@ function CalendarOverview() {
             // uid={searchResults?.uid}
             // doctorList={doctorsList}
             // name={searchResults?.name}
+            doctorDetails={doctorDetails}
             listSelectedDoctor={listSelectedDoctor}
             setListSelectedDoctor={setListSelectedDoctor}
+            filteredDoctorDetails={filteredDoctorDetails}
+            setFilteredDoctorDetails={setFilteredDoctorDetails}
           />
         </section>
+        {/* <div>{JSON.stringify(filteredDoctorDetails)}</div> */}
         <div className="overflow-hidden overflow-y-scroll">
           <section
             className="flex flex-row  items-center 
@@ -323,52 +332,59 @@ function CalendarOverview() {
             <div className="flex grow">
               <WorkGrid
                 weekDay={"Sun"}
-                doctorDetails={doctorDetails}
+                // doctorDetails={doctorDetails}
                 hoursData={hoursData}
                 index={selectedDoctorIndex}
-                selectedDoctorIndexList={selectedDoctorIndexList}
+                // selectedDoctorIndexList={selectedDoctorIndexList}
+                filteredDoctorDetails={filteredDoctorDetails}
               />
               <WorkGrid
                 weekDay={"Mon"}
-                doctorDetails={doctorDetails}
+                // doctorDetails={doctorDetails}
                 hoursData={hoursData}
                 index={selectedDoctorIndex}
-                selectedDoctorIndexList={selectedDoctorIndexList}
+                // selectedDoctorIndexList={selectedDoctorIndexList}
+                filteredDoctorDetails={filteredDoctorDetails}
               />
               <WorkGrid
                 weekDay={"Tue"}
-                doctorDetails={doctorDetails}
+                // doctorDetails={doctorDetails}
                 hoursData={hoursData}
                 index={selectedDoctorIndex}
-                selectedDoctorIndexList={selectedDoctorIndexList}
+                // selectedDoctorIndexList={selectedDoctorIndexList}
+                filteredDoctorDetails={filteredDoctorDetails}
               />
               <WorkGrid
                 weekDay={"Wed"}
-                doctorDetails={doctorDetails}
+                // doctorDetails={doctorDetails}
                 hoursData={hoursData}
                 index={selectedDoctorIndex}
-                selectedDoctorIndexList={selectedDoctorIndexList}
+                // selectedDoctorIndexList={selectedDoctorIndexList}
+                filteredDoctorDetails={filteredDoctorDetails}
               />
               <WorkGrid
                 weekDay={"Thu"}
-                doctorDetails={doctorDetails}
+                // doctorDetails={doctorDetails}
                 hoursData={hoursData}
                 index={selectedDoctorIndex}
-                selectedDoctorIndexList={selectedDoctorIndexList}
+                // selectedDoctorIndexList={selectedDoctorIndexList}
+                filteredDoctorDetails={filteredDoctorDetails}
               />
               <WorkGrid
                 weekDay={"Fri"}
-                doctorDetails={doctorDetails}
+                // doctorDetails={doctorDetails}
                 hoursData={hoursData}
                 index={selectedDoctorIndex}
-                selectedDoctorIndexList={selectedDoctorIndexList}
+                // selectedDoctorIndexList={selectedDoctorIndexList}
+                filteredDoctorDetails={filteredDoctorDetails}
               />
               <WorkGrid
                 weekDay={"Sat"}
-                doctorDetails={doctorDetails}
+                // doctorDetails={doctorDetails}
                 hoursData={hoursData}
                 index={selectedDoctorIndex}
-                selectedDoctorIndexList={selectedDoctorIndexList}
+                // selectedDoctorIndexList={selectedDoctorIndexList}
+                filteredDoctorDetails={filteredDoctorDetails}
               />
             </div>
           </section>

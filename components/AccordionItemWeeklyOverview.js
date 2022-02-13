@@ -1,3 +1,4 @@
+import { Firestore } from "@firebase/firestore";
 import React, { useRef, useState } from "react";
 
 function AccordionItemWeeklyOverview({
@@ -9,8 +10,11 @@ function AccordionItemWeeklyOverview({
   // uid = "",
   // doctorList = "",
   // name = "",
+  doctorDetails,
   listSelectedDoctor,
   setListSelectedDoctor,
+  filteredDoctorDetails,
+  setFilteredDoctorDetails,
 }) {
   const [toggle, setToggle] = useState(false);
   const [descLocal, setDescLocal] = useState(desc);
@@ -28,13 +32,59 @@ function AccordionItemWeeklyOverview({
     toggleAccordion();
     setDesc(item);
 
+    // create list of names of slected doctors
     if (listSelectedDoctor.includes(item)) {
-      //   console.log("already in list");
+      // console.log("already in list");
       setListSelectedDoctor(listSelectedDoctor.filter((x) => x != item));
     } else {
-      //   console.log("not in list");
+      // console.log("not in list");
       setListSelectedDoctor((oldArray) => [...oldArray, item]);
     }
+
+    // create list of doctor details (object list)
+    try {
+      // search for index position of doctor's details in object list
+      const index = doctorDetails.map((x) => x.name).indexOf(item.toString());
+      // check
+      // if (filteredDoctorDetails[0]) {
+      //   console.log(
+      //     "filtered Doctor Details List start " +
+      //       JSON.stringify(filteredDoctorDetails[0].name)
+      //   );
+      // }
+      // First check if doctor name is in doctorDetails
+      if (index >= 0) {
+        // console.log("add doctor to object list");
+        // Then check if specific doctor's details is in filtered obj list
+        const isFound = filteredDoctorDetails.some((element) => {
+          if (element.name === doctorDetails[index].name.toString()) {
+            return true;
+          }
+        });
+        // console.log("foundDoctor? " + isFound);
+        // if doctor's details not in object list, then add
+        if (!isFound) {
+          setFilteredDoctorDetails((oldArray) => [
+            ...oldArray,
+            doctorDetails[index],
+          ]);
+        }
+        // if doctor's details already in object list, then remove
+        if (isFound) {
+          const filtered = filteredDoctorDetails.filter(
+            (d) => d.name !== doctorDetails[index].name
+          );
+          // console.log("searching for " + doctorDetails[index].name);
+          setFilteredDoctorDetails(filtered);
+          // console.log("fileteredList here " + filtered[0].name);
+        }
+        // console.log("filteredDoctorDetails List end :" + filteredDoctorDetails);
+      }
+      // if (index < 0) {
+      //   console.log("doctor not found in object list");
+      // }
+      // console.log("index here: " + index);
+    } catch (e) {}
   };
 
   //   console.log("len " + selectedDoctorIndexList.length);
@@ -46,9 +96,22 @@ function AccordionItemWeeklyOverview({
             transition-all duration-500"
         onClick={() => toggleAccordion()}
       >
-        <div className="headerText font-semibold text-lg">{title}</div>
+        <div className="headerText font-semibold text-lg flex items-center justify-center">
+          {title}
+        </div>
         {/* <div className="ml-2 text-xl">{descLocal}</div> */}
-        <div className="ml-2 text-xl">{listSelectedDoctor.toString()}</div>
+        <div className="ml-2 text-base flex">
+          {listSelectedDoctor[0] && (
+            <div className="bg-orange-200 px-3 py-1 rounded-xl shadow-l">
+              {listSelectedDoctor[0]}
+            </div>
+          )}
+          {listSelectedDoctor[1] && (
+            <div className="bg-blue-200 px-3 py-1 rounded-xl shadow-l">
+              {listSelectedDoctor[1]}
+            </div>
+          )}
+        </div>
       </div>
       <div
         ref={contentSpace}

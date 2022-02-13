@@ -16,42 +16,44 @@ function WeekHeader({ day, date }) {
           <div className="pb-1 text-xs ">{day}</div>
         )}
         {day === "Sun" && (
-          <div className={`${dayColor(date[0])}  py-1 rounded-full `}>
+          <div className={`${dayColor(date[0])}  py-1 px-2 rounded-full `}>
             {date[0].getDate()}
           </div>
         )}
         {day === "Mon" && (
-          <div className={`${dayColor(date[0])}  py-1 rounded-full `}>
+          <div className={`${dayColor(date[1])}  py-1 px-2 rounded-full `}>
             {date[1].getDate()}
           </div>
         )}
         {day === "Tue" && (
-          <div className={`${dayColor(date[0])}  py-1 rounded-full `}>
+          <div className={`${dayColor(date[2])}  py-1 px-2 rounded-full `}>
             {date[2].getDate()}
           </div>
         )}
         {day === "Wed" && (
-          <div className={`${dayColor(date[0])}  py-1 rounded-full `}>
+          <div className={`${dayColor(date[3])}  py-1 px-2 rounded-full `}>
             {date[3].getDate()}
           </div>
         )}
         {day === "Thu" && (
-          <div className={`${dayColor(date[0])}  py-1 rounded-full `}>
+          <div className={`${dayColor(date[4])}  py-1 px-2 rounded-full `}>
             {date[4].getDate()}
           </div>
         )}
         {day === "Fri" && (
-          <div className={`${dayColor(date[0])}  py-1 rounded-full `}>
+          <div className={`${dayColor(date[5])}  py-1 px-2 rounded-full `}>
             {date[5].getDate()}
           </div>
         )}
         {day === "Sat" && (
-          <div className={`${dayColor(date[0])}  py-1 rounded-full `}>
+          <div className={`${dayColor(date[6])}  py-1 px-2 rounded-full `}>
             {date[6].getDate()}
           </div>
         )}
         {day === "Left" && (
-          <div className={`${dayColor(date[0])} py-1 rounded-full hidden `}>
+          <div
+            className={`${dayColor(date[0])} py-1 px-2 rounded-full hidden `}
+          >
             {date[6].getDate()}
           </div>
         )}

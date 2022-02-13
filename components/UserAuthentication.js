@@ -97,7 +97,7 @@ function UserAuthentication() {
       )}
       {currentUser && (
         <button
-          className="btn "
+          className="btn whitespace-nowrap"
           disabled={loading || !currentUser}
           onClick={handleLogout}
         >
