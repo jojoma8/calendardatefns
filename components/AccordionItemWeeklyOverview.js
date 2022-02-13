@@ -9,9 +9,12 @@ function AccordionItemWeeklyOverview({
   // uid = "",
   // doctorList = "",
   // name = "",
+  listSelectedDoctor,
+  setListSelectedDoctor,
 }) {
   const [toggle, setToggle] = useState(false);
   const [descLocal, setDescLocal] = useState(desc);
+
   const [height, setHeight] = useState("0px");
   const contentSpace = useRef(null);
 
@@ -24,25 +27,17 @@ function AccordionItemWeeklyOverview({
     setDescLocal(item);
     toggleAccordion();
     setDesc(item);
-    // if (item == "Doctor") {
-    //   if (!JSON.stringify(doctorList.map(Object.values)).includes(uid)) {
-    //     // console.log("add doctor to list " + uid);
-    //     setDoctorList((list) => [...list, { uid: uid, name: name }]);
-    //   }
-    //   // console.log("doctor already in list");
-    // }
-    // if (item != "Doctor") {
-    //   if (JSON.stringify(doctorList.map(Object.values)).includes(uid)) {
-    //     // console.log("remove doctor " + uid);
-    //     const myArray = doctorList.filter(function (obj) {
-    //       return obj.uid !== uid;
-    //     });
-    //     // console.log("newList " + myArray);
-    //     setDoctorList(myArray);
-    //   }
-    // }
+
+    if (listSelectedDoctor.includes(item)) {
+      //   console.log("already in list");
+      setListSelectedDoctor(listSelectedDoctor.filter((x) => x != item));
+    } else {
+      //   console.log("not in list");
+      setListSelectedDoctor((oldArray) => [...oldArray, item]);
+    }
   };
-  //   console.log("height: " + contentSpace.current.scrollHeight);
+
+  //   console.log("len " + selectedDoctorIndexList.length);
 
   return (
     <div className={` border flex flex-col`}>
@@ -52,7 +47,8 @@ function AccordionItemWeeklyOverview({
         onClick={() => toggleAccordion()}
       >
         <div className="headerText font-semibold text-lg">{title}</div>
-        <div className="ml-2 text-xl">{descLocal}</div>
+        {/* <div className="ml-2 text-xl">{descLocal}</div> */}
+        <div className="ml-2 text-xl">{listSelectedDoctor.toString()}</div>
       </div>
       <div
         ref={contentSpace}
@@ -68,7 +64,7 @@ function AccordionItemWeeklyOverview({
                 text-orange-500 border-2 border-orange-500
                 cursor-pointer hover:bg-orange-500 hover:text-white
                 transition-all duration-200
-        `}
+                `}
               onClick={() => updateState(item)}
             >
               {item}
