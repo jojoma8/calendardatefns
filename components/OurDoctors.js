@@ -103,13 +103,13 @@ function OurDoctors() {
 
   return (
     <div className="">
-      <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+      {/* <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
       <df-messenger
         intent="WELCOME"
-        chat-title="FirstAgent"
+        chat-title="Jose"
         agent-id="8b6ec601-bc36-409d-87fb-4d8e02d5cd93"
         language-code="en"
-      ></df-messenger>
+      ></df-messenger> */}
       <div className="bg-cyan-50 px-20 ">
         <div className="headerText text-4xl pt-20">Our Doctors</div>
         <div className="bodyText  pt-10 pb-20">
