@@ -69,6 +69,27 @@ export default function Home() {
     }
   }, [calendarOverviewModal]);
 
+  {
+    /* <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+      <df-messenger
+        intent="WELCOME"
+        chat-title="Jose"
+        agent-id="8b6ec601-bc36-409d-87fb-4d8e02d5cd93"
+        language-code="en"
+      ></df-messenger> */
+  }
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src =
+      "https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1";
+    script.async = true;
+    document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
   return (
     <div>
       <Head>
@@ -102,6 +123,12 @@ export default function Home() {
         <main className={`${calendarOverviewModal ? "" : ""} `}>
           {/* <Calendar /> */}
           <OurDoctors />
+          <df-messenger
+            intent="WELCOME"
+            chat-title="Jose"
+            agent-id="8b6ec601-bc36-409d-87fb-4d8e02d5cd93"
+            language-code="en"
+          ></df-messenger>
         </main>
       </div>
     </div>
