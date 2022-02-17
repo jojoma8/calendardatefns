@@ -111,10 +111,10 @@ export function signInWithGoogle() {
     });
 }
 
-export function signInWithFacebook() {
+export async function signInWithFacebook() {
   // console.log("Facebook access ran");
   const auth = getAuth();
-  const provider = new FacebookAuthProvider();
+  const provider = await new FacebookAuthProvider();
   signInWithPopup(auth, provider)
     .then((result) => {
       // console.log("Facebook access ran part 2");
