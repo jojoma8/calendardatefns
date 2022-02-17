@@ -329,18 +329,22 @@ function Header() {
           <div onClick={() => setCalendarOverviewModal(true)}>
             {currentUser && <HeaderIcon Icon={CalendarIcon} />}
           </div>
-          <div onClick={() => setUserRolesModal(true)}>
-            {/* only admin can view - Main Admin*/}
-            {/* {currentUser?.email === process.env.REACT_APP_ADMIN_EMAIL && (
-              <HeaderIcon Icon={UserGroupIcon} />
-            )} */}
-          </div>
-          <div onClick={() => setUserRolesModal(true)}>
-            {/* onlyadmin can view - additional admin*/}
-            {/* {currentUser && userRole === "admin" && (
-              <HeaderIcon Icon={UserGroupIcon} />
-            )} */}
-          </div>
+          {currentUser && (
+            <div onClick={() => setUserRolesModal(true)}>
+              {/* only admin can view - Main Admin*/}
+              {currentUser?.email === process.env.REACT_APP_ADMIN_EMAIL && (
+                <HeaderIcon Icon={UserGroupIcon} />
+              )}
+            </div>
+          )}
+          {currentUser && (
+            <div onClick={() => setUserRolesModal(true)}>
+              {/* onlyadmin can view - additional admin*/}
+              {currentUser && userRole === "admin" && (
+                <HeaderIcon Icon={UserGroupIcon} />
+              )}
+            </div>
+          )}
         </div>
       </div>
       {/* Right */}
