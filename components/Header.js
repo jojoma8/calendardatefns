@@ -337,9 +337,9 @@ function Header() {
           </div>
           <div onClick={() => setUserRolesModal(true)}>
             {/* only admin can view - additional admin*/}
-            {currentUser && userRole === "admin" && (
+            {/* {currentUser && userRole === "admin" && (
               <HeaderIcon Icon={UserGroupIcon} />
-            )}
+            )} */}
           </div>
         </div>
       </div>
