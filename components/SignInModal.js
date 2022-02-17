@@ -127,7 +127,7 @@ function SignInModal() {
             <div className="w-full flex items-center justify-center">
               <span className="p-3 text-gray-400 m-2">OR</span>
             </div>
-            {/* <button
+            <button
               className="bg-red-600 hover:bg-red-700 text-white
             font-bold py-2 
             rounded shadow-lg hover:shadow-xl transition duration-200"
@@ -137,7 +137,7 @@ function SignInModal() {
               }}
             >
               Login with Google
-            </button> */}
+            </button>
             <button
               className="mt-5 bg-blue-600 hover:bg-blue-700 text-white
             font-bold py-2 
