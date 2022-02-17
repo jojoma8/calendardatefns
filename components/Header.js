@@ -331,9 +331,9 @@ function Header() {
           </div>
           <div onClick={() => setUserRolesModal(true)}>
             {/* only admin can view - Main Admin*/}
-            {currentUser?.email === process.env.REACT_APP_ADMIN_EMAIL && (
+            {/* {currentUser?.email === process.env.REACT_APP_ADMIN_EMAIL && (
               <HeaderIcon Icon={UserGroupIcon} />
-            )}
+            )} */}
           </div>
           <div onClick={() => setUserRolesModal(true)}>
             {/* onlyadmin can view - additional admin*/}
