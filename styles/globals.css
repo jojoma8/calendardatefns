@@ -8,7 +8,7 @@
       text-gray-50 cursor-pointer hover:bg-gray-300;
   }
   .btn {
-    @apply bg-orange-500 text-white p-2 rounded-full px-4 
+    @apply bg-orange-450 text-white p-2 rounded-full px-4 
     hover:bg-sky-400 transition-all active:scale-95 shadow-lg 
     hover:shadow-xl;
   }
@@ -25,16 +25,16 @@
       p-2 rounded-xl cursor-pointer;
   }
   .headerText {
-    @apply text-blue-900 font-semibold;
+    @apply text-blue-910 font-semibold font-sans;
   }
   .bodyText {
-    @apply text-gray-400 text-sm;
+    @apply text-gray-410 text-sm font-sans;
   }
   .bodyText2 {
     @apply text-orange-400 text-sm;
   }
   .linkText {
-    @apply text-sky-400 font-semibold;
+    @apply text-blue-550 text-sm;
   }
   .container {
     overflow-y: auto;
@@ -45,5 +45,11 @@
   }
   .container::-webkit-scrollbar {
     display: none;
+  }
+  .cls-1 {
+    @apply fill-orange-550;
+  }
+  .cls-2 {
+    @apply fill-blue-550;
   }
 }

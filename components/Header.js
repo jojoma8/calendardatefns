@@ -260,7 +260,7 @@ function Header() {
   return (
     <div
       className={` top-0 z-40 bg-white flex items-center  px-5 py-2
-      lf:px-5 shadow-md overflow-hidden font-bold 
+      lg:px-5 shadow-md overflow-hidden font-bold max-w-7xl mx-auto
       ${calendarOverviewModal ? "sticky" : "sticky"}`}
     >
       {/* <h1 className="text-orange-500 font-extrabold text-2xl">NextGen</h1> */}
@@ -269,13 +269,16 @@ function Header() {
       {/* REMOVED 26Jan 2022 */}
       {/* <div className="hidden">{clinicHours[0]}</div> */}
       <div className="flex items-center">
-        <Image
-          src="https://nxtgeneclinic.com.ph/wp-content/uploads/2021/08/NXTgen-logo-horizontal-1536x540.png"
-          width={150}
-          height={60}
-          layout="fixed"
-          alt="logo"
-        />
+        <Link href="/">
+          <Image
+            className="cursor-pointer"
+            src="https://nxtgeneclinic.com.ph/wp-content/uploads/2021/08/NXTgen-logo-horizontal-1536x540.png"
+            width={150}
+            height={60}
+            layout="fixed"
+            alt="logo"
+          />
+        </Link>
         {/* {currentUser && (
           <div className="flex ml-0 items-center rounded-full bg-gray-100 p-2">
             <SearchIcon className="h-6 text-gray-600" />

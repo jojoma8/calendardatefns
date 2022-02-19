@@ -27,6 +27,9 @@ import useCalendar from "./CalendarSelector";
 import CalendarSelector from "./CalendarSelector";
 import { ContactUs } from "./EmailForm";
 
+import ourDoctorsBG from "../assets/NXTgen-Page-Cover-Our-Doctors.jpg";
+import Image from "next/image";
+
 function OurDoctors() {
   const [calendar, setCalendar] = useState(new Date().toDateString());
 
@@ -102,29 +105,45 @@ function OurDoctors() {
   // console.log("test: " + process.env.REACT_APP_PAYMONGO_SECRET_KEY);
 
   return (
-    <div className="">
-      <div className="bg-cyan-50 px-20 ">
-        <div className="headerText text-4xl pt-20">Our Doctors</div>
-        <div className="bodyText  pt-10 pb-20">
-          NXTgen E-Clinic offers access to expert specialists via a secured
-          video consultation platform. Scroll down to see our doctors’ profiles,
-          specialty and schedule. Consultation fees already include
-          e-prescription and lab requests, if deemed necessary. Fees vary per
-          doctor but start as low as PHP 670.
+    <div className=" max-w-7xl mx-auto 8">
+      <div
+        className="relative bg-blue-10 -z-20 lg:pt-20 xl:pt-32
+          "
+      >
+        <div className="absolute -z-10 bottom-0 translate-y-2">
+          <Image src={ourDoctorsBG} alt={`NXTgen e-clinic image`} />
         </div>
-        <div className="pb-10">
-          <button
-            onClick={() => setAppointmentBookingModal(true)}
-            className="btn py-3 text-white w-full sm:w-3/6"
+
+        <div
+          className="md:px-28 lg:px-40 px-10 md:w-4/5 w-full 
+            pt-20 lg:pt-0"
+        >
+          <div className="headerText md:text-5xl text-4xl ">Our Doctors</div>
+          <div
+            className="bodyText pt-10 pb-20 font-sans text-base
+              max-w-md"
           >
-            Book an Appointment
-          </button>
+            NXTgen E-Clinic offers access to expert specialists via a secured
+            video consultation platform. Scroll down to see our doctors’
+            profiles, specialty and schedule. Consultation fees already include
+            e-prescription and lab requests, if deemed necessary. Fees vary per
+            doctor but start as low as PHP 670.
+          </div>
+          <div className="pb-10 lg:pt-20">
+            <button
+              onClick={() => setAppointmentBookingModal(true)}
+              className="btn py-3 text-white w-full 
+                  sm:w-3/6 md:w-7/12 lg:w-6/12"
+            >
+              Book an Appointment
+            </button>
+          </div>
         </div>
       </div>
 
       {/* <CalendarSelector setCalendar={setCalendar} />
       <div>{calendar}</div> */}
-      <div className="mt-10">
+      <div className="mt-5">
         <div>
           <SpecialitiesCard
             fieldName="Otorhinolaryngology - Head and Neck Surgery (ENT)"
