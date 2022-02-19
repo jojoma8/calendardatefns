@@ -19,13 +19,6 @@ function SpecialitiesCard({ fieldName, fieldDesc, fieldCode }) {
     setAllSpecialistsDetails,
   } = useEditUserDetailsContext();
   const [toggle, setToggle] = useState(false);
-  // const [specialistDetails, setSpecialistDetails] = useState({
-  //   id: "pending",
-  //   name: "Loading",
-  //   speciality: "pending",
-  //   schedule: { Mon: ["pending"] },
-  // });
-  //   check how to run this section after state is set
 
   const ent = allSpecialistsDetails.filter((item) => {
     return Object.keys(item).some((key) =>
@@ -40,9 +33,9 @@ function SpecialitiesCard({ fieldName, fieldDesc, fieldCode }) {
 
   const carretDirection = () => {
     if (toggle) {
-      return "rotate-90";
-    } else {
       return "-rotate-90";
+    } else {
+      return "rotate-90";
     }
   };
 

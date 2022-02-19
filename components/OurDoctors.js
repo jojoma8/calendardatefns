@@ -146,6 +146,11 @@ function OurDoctors() {
       <div className="mt-5">
         <div>
           <SpecialitiesCard
+            fieldName="Dermatology"
+            fieldDesc="Treats conditions of hair, skin, and nails such as acne or pimples, rashes, itchy skin, flaky skin, dandruff, and irregular moles and skin discoloration."
+            fieldCode="derma"
+          />
+          <SpecialitiesCard
             fieldName="Otorhinolaryngology - Head and Neck Surgery (ENT)"
             fieldDesc="Specializes in the management of medical conditions of the ears,
             nose and sinuses, throat, voice box; and performs procedures
