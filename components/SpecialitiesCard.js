@@ -40,10 +40,14 @@ function SpecialitiesCard({ fieldName, fieldDesc, fieldCode }) {
   };
 
   return (
-    <div className="flex justify-center items-center ">
+    <a
+      className="flex justify-center items-center relative 
+      scroll-mt-10"
+      id={`${fieldName}`}
+    >
       <div
         className="flex-grow
-        border-2 max-w-7xl mx-5 mt-10 "
+        border-2 max-w-5xl mx-5 mt-10 "
       >
         <div
           className="flex cursor-pointer "
@@ -100,7 +104,7 @@ function SpecialitiesCard({ fieldName, fieldDesc, fieldCode }) {
           )}
         </AnimatePresence>
       </div>
-    </div>
+    </a>
   );
 }
 

@@ -25,6 +25,7 @@ import CalendarOverview from "../components/CalendarOverview";
 import { useEffect } from "react";
 
 import { motion, AnimatePresence } from "framer-motion";
+import Footer from "../components/footer/Footer";
 
 export default function Home() {
   const { selectedDate } = useSelectedDateContext();
@@ -130,6 +131,7 @@ export default function Home() {
             language-code="en"
           ></df-messenger>
         </main>
+        <Footer />
       </div>
     </div>
   );
