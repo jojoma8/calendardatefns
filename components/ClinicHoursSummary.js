@@ -28,11 +28,18 @@ function ClinicHoursSummary({ day, schedule }) {
 
   return (
     <div
-      className="flex border border-solid border-stone-400 
-    text-sm font-semibold"
+      className="flex   border-stone-400 
+    text-sm p-1 border-b"
     >
-      <div className="ml-2 w-10">{day}</div>
-      <div className="ml-1 mr-2">
+      <div className="flex items-center">
+        <div
+          className="ml-1 w-10 text-gray-410 text-transform uppercase 
+      "
+        >
+          {day}
+        </div>
+      </div>
+      <div className="ml-1 mr-1 text-gray-410 border-stone-400 border-l pl-2">
         {/* {workHoursRange(workHoursList[0], workHoursList[0])} */}
         {/* {HourRangeGenerator(handleClinicHoursSummary(clinicHours[day]))} */}
         {typeof schedule !== "undefined" &&
