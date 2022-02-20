@@ -120,7 +120,6 @@ export default function Home() {
         {calendarOverviewModal && <CalendarOverview />}
       </AnimatePresence>
       <div className="">
-        <Header />
         <main className={`${calendarOverviewModal ? "" : ""} `}>
           {/* <Calendar /> */}
           <OurDoctors />
@@ -131,7 +130,6 @@ export default function Home() {
             language-code="en"
           ></df-messenger>
         </main>
-        <Footer />
       </div>
     </div>
   );

@@ -54,8 +54,8 @@ const Footer = () => {
             </div>
             {/* menu */}
             <div className="flex flex-col items-center justify-items-center">
-              <FooterLinks name={"Home"} />
-              <FooterLinks name={"About"} />
+              <FooterLinks name={"Home"} href={"/"} />
+              <FooterLinks name={"About"} href={"/about"} />
               <FooterLinks name={"Our Doctors"} />
               <FooterLinks name={"FAQ"} />
               <FooterLinks name={"Terms of Use"} />
@@ -68,11 +68,12 @@ const Footer = () => {
             <div className="headerText mb-5 mt-5">Specializations</div>
             {/* specializations list */}
             <div className="flex flex-col items-center justify-items-center">
-              <FooterLinks name={"Dermatology"} />
+              <FooterLinks name={"Dermatology"} href={"#Dermatology"} />
               <FooterLinks
                 name={"Otorhinolaryngology - Head and Neck Surgery (ENT)"}
+                href={"#Otorhinolaryngology - Head and Neck Surgery (ENT)"}
               />
-              <FooterLinks name={"Family Medicine"} />
+              <FooterLinks name={"Family Medicine"} href={"#Family Medicine"} />
             </div>
           </div>
         </div>

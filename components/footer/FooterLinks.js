@@ -1,8 +1,8 @@
 import React from "react";
 
-function FooterLinks({ name }) {
+function FooterLinks({ name, href }) {
   return (
-    <a className="bodyText pb-4 cursor-pointer" href={`#${name}`}>
+    <a className="bodyText pb-4 cursor-pointer" href={`${href}`}>
       {name}
     </a>
   );

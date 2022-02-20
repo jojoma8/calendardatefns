@@ -269,16 +269,18 @@ function Header() {
       {/* REMOVED 26Jan 2022 */}
       {/* <div className="hidden">{clinicHours[0]}</div> */}
       <div className="flex items-center">
-        {/* <Link href="/"> */}
-        <Image
-          className="cursor-pointer"
-          src="https://nxtgeneclinic.com.ph/wp-content/uploads/2021/08/NXTgen-logo-horizontal-1536x540.png"
-          width={150}
-          height={60}
-          layout="fixed"
-          alt="logo"
-        />
-        {/* </Link> */}
+        <Link href="/">
+          <a>
+            <Image
+              className="cursor-pointer"
+              src="https://nxtgeneclinic.com.ph/wp-content/uploads/2021/08/NXTgen-logo-horizontal-1536x540.png"
+              width={150}
+              height={60}
+              layout="fixed"
+              alt="logo"
+            />
+          </a>
+        </Link>
         {/* {currentUser && (
           <div className="flex ml-0 items-center rounded-full bg-gray-100 p-2">
             <SearchIcon className="h-6 text-gray-600" />

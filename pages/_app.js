@@ -1,3 +1,4 @@
+import Layout from "../components/Layout";
 import EditUserDetailsProvider from "../contextProvider/EditUserDetailsContext";
 import SelectedDateProvider from "../contextProvider/SelectedDateContext";
 import SignInProvider from "../contextProvider/SignInContext";
@@ -8,7 +9,9 @@ function MyApp({ Component, pageProps }) {
     <SignInProvider>
       <SelectedDateProvider>
         <EditUserDetailsProvider>
-          <Component {...pageProps} />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
         </EditUserDetailsProvider>
       </SelectedDateProvider>
     </SignInProvider>
