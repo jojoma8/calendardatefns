@@ -33,9 +33,17 @@ function SpecialitiesCard({ fieldName, fieldDesc, fieldCode }) {
 
   const carretDirection = () => {
     if (toggle) {
-      return "-rotate-90";
+      return "-rotate-90 text-orange-550";
     } else {
-      return "rotate-90";
+      return "rotate-90 text-blue-550";
+    }
+  };
+
+  const specialistCardColor = () => {
+    if (toggle) {
+      return "bg-blue-10";
+    } else {
+      return "";
     }
   };
 
@@ -50,10 +58,10 @@ function SpecialitiesCard({ fieldName, fieldDesc, fieldCode }) {
         border-2 max-w-5xl mx-5 mt-10 "
       >
         <div
-          className="flex cursor-pointer "
+          className={`flex cursor-pointer ${specialistCardColor()} `}
           onClick={() => setToggle(!toggle)}
         >
-          <div className=" p-5 m-5">
+          <div className=" p-5 m-5 flex items-center ">
             <SVGIcon field={fieldName} />
           </div>
           <div className="py-5 pr-10 flex-grow">
@@ -64,7 +72,7 @@ function SpecialitiesCard({ fieldName, fieldDesc, fieldCode }) {
           <div className="flex items-center">
             <div
               className={`mr-5 ${carretDirection()} 
-              transition-all duration-700`}
+              transition-all duration-700 `}
             >
               <SVGIcon field={"play"} />
             </div>
