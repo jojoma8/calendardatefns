@@ -18,6 +18,21 @@ import {
 import { MdCoronavirus } from "react-icons/md";
 
 export default function about() {
+  const cardVariants = {
+    offscreen: {
+      y: 300,
+    },
+    onscreen: {
+      y: 0,
+      rotate: 0,
+      transition: {
+        type: "spring",
+        bounce: 0.4,
+        duration: 0.8,
+      },
+    },
+  };
+
   return (
     <div>
       <div className="absolute -z-10 ">
@@ -42,20 +57,23 @@ export default function about() {
       <div className="flex flex-col items-center justify-center mt-48">
         {/* our story */}
         <div className="headerText text-4xl">Our Story</div>
-        <div className="wrapper  max-w-4xl mx-auto p-5">
+        <div className="wrapper  max-w-5xl mx-auto m-5  relative">
           <div
-            className="center-line absolute bg-orange-450 h-5/6 w-1 left-1/2
-            translate-x-1/2 "
+            className="center-line absolute bg-orange-450 h-full w-1 
+             left-1/2 -translate-x-1/2"
           ></div>
 
-          <div className="row row-span-1 flex justify-start">
-            <section
-              className="bg-white rounded-3xl p-5 w-5/12 relative
-              shadow-xl"
-            >
+          <motion.div
+            initial="offscreen"
+            whileInView="onscreen"
+            viewport={{ once: true, amount: 0.5 }}
+            className="row row-span-1 flex justify-center 
+             relative "
+          >
+            <div className="absolute ">
               <div
-                className="absolute bg-orange-450 -right-20 translate-x-4
-                -translate-y-2
+                className="absolute bg-orange-450  
+                left-1/2 -translate-x-1/2 top-14
                 h-10 w-10 rounded-full flex items-center justify-center"
               >
                 <MdCoronavirus
@@ -63,33 +81,47 @@ export default function about() {
                     h-8 w-8 rounded-full text-center"
                 />
               </div>
+            </div>
+            <motion.section
+              variants={cardVariants}
+              className="bg-white rounded-3xl p-5 w-5/12 relative
+              drop-shadow-2xl m-5 right-1/4  "
+            >
               <div
                 className="arrow absolute bg-white h-5 w-5 -right-2
-                -rotate-45 "
+                -rotate-45 translate-y-6"
               ></div>
-              <div className="details flex flex-col">
-                <span>March 2020</span>
-                <span className="title headerText">Pandemic Started</span>
+              <div>
+                <div className="details flex flex-col">
+                  <span>March 2020</span>
+                  <span className="title headerText">Pandemic Started</span>
+                </div>
+                <div className="bodyText">
+                  <li className="ml-5  -indent-6 pl-5">
+                    During the start of the pandemic, one of our founders and
+                    medical director, Dr. Daryl Del Mundo had problems
+                    connecting with her patients during the lockdowns
+                  </li>
+                  <li className="ml-5  -indent-6 pl-5">
+                    She created her own page FB page to reach patients and
+                    explored using telemedicine platforms to offer online
+                    consultations
+                  </li>
+                </div>
               </div>
-              <div className="bodyText">
-                <li className="ml-5  -indent-6 pl-5">
-                  During the start of the pandemic, one of our founders and
-                  medical director, Dr. Daryl Del Mundo had problems connecting
-                  with her patients during the lockdowns
-                </li>
-                <li className="ml-5  -indent-6 pl-5">
-                  She created her own page FB page to reach patients and
-                  explored using telemedicine platforms to offer online
-                  consultations
-                </li>
-              </div>
-            </section>
-          </div>
-          <div className="row row-span-2 flex justify-end">
-            <section className="bg-white rounded-3xl p-5 w-5/12 shadow-xl">
+            </motion.section>
+          </motion.div>
+          <motion.div
+            initial="offscreen"
+            whileInView="onscreen"
+            viewport={{ once: true, amount: 0.5 }}
+            className="relative row row-span-2 flex justify-center 
+              "
+          >
+            <div className="absolute ">
               <div
-                className="absolute bg-orange-450 left-1/2 -translate-x-4
-                translate-y-4
+                className="absolute bg-orange-450  
+                left-1/2 -translate-x-1/2 top-14
                 h-10 w-10 rounded-full flex items-center justify-center"
               >
                 <FaLightbulb
@@ -97,6 +129,16 @@ export default function about() {
                     h-6 w-6 rounded-full text-center"
                 />
               </div>
+            </div>
+            <motion.section
+              variants={cardVariants}
+              className="bg-white rounded-3xl p-5 w-5/12 drop-shadow-2xl 
+                m-5 left-1/4 relative"
+            >
+              <div
+                className="arrow absolute bg-white h-5 w-5 
+                -rotate-45 -left-2 translate-y-6  "
+              ></div>
               <div className="details flex flex-col">
                 <span>April 2020</span>
                 <span className="title headerText">Concept Development</span>
@@ -126,8 +168,8 @@ export default function about() {
                   up with NXTGen E-Clinic
                 </li>
               </div>
-            </section>
-          </div>
+            </motion.section>
+          </motion.div>
         </div>
         {/* our team */}
         <div>Our Team</div>
