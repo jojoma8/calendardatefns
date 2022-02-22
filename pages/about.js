@@ -41,7 +41,7 @@ export default function about() {
       <div
         id="test"
         className="md:px-28 lg:px-40 px-10 md:w-4/5 w-full 
-            pt-20 lg:pt-0"
+            pt-20 "
       >
         <div className="headerText md:text-5xl text-4xl ">About</div>
         <div className="pb-10 pt-20">
@@ -54,26 +54,33 @@ export default function about() {
           </button>
         </div>
       </div>
-      <div className="flex flex-col items-center justify-center mt-48">
+      <div
+        className="flex flex-col items-center justify-center mt-48
+        "
+      >
         {/* our story */}
         <div className="headerText text-4xl">Our Story</div>
         <div className="wrapper  max-w-5xl mx-auto m-5  relative">
           <div
             className="center-line absolute bg-orange-450 h-full w-1 
-             left-1/2 -translate-x-1/2"
+            ml-10
+             sm:left-1/2 sm:-translate-x-1/2 sm:ml-0"
           ></div>
 
+          {/* Pandemic Started Card */}
           <motion.div
             initial="offscreen"
             whileInView="onscreen"
             viewport={{ once: true, amount: 0.5 }}
-            className="row row-span-1 flex justify-center 
+            className="row row-span-1 flex 
+            sm:justify-center 
              relative "
           >
             <div className="absolute ">
               <div
                 className="absolute bg-orange-450  
-                left-1/2 -translate-x-1/2 top-14
+                ml-5
+                sm:left-1/2 sm:-translate-x-1/2 top-14 sm:ml-0
                 h-10 w-10 rounded-full flex items-center justify-center"
               >
                 <MdCoronavirus
@@ -84,12 +91,16 @@ export default function about() {
             </div>
             <motion.section
               variants={cardVariants}
-              className="bg-white rounded-3xl p-5 w-5/12 relative
-              drop-shadow-2xl m-5 right-1/4  "
+              className="bg-white rounded-3xl p-5  relative
+              drop-shadow-2xl 
+              m-5 ml-20
+              sm:right-1/4 sm:w-5/12 sm:ml-0"
             >
               <div
-                className="arrow absolute bg-white h-5 w-5 -right-2
-                -rotate-45 translate-y-6"
+                className="arrow absolute  h-5 w-5 
+                -translate-x-7
+                sm:-right-2 translate-y-6 sm:-translate-x-0
+                -rotate-45 bg-white"
               ></div>
               <div>
                 <div className="details flex flex-col">
@@ -111,17 +122,21 @@ export default function about() {
               </div>
             </motion.section>
           </motion.div>
+
+          {/* Concept Development Card */}
           <motion.div
             initial="offscreen"
             whileInView="onscreen"
             viewport={{ once: true, amount: 0.5 }}
-            className="relative row row-span-2 flex justify-center 
+            className="relative row row-span-2 flex 
+            sm:justify-center 
               "
           >
             <div className="absolute ">
               <div
-                className="absolute bg-orange-450  
-                left-1/2 -translate-x-1/2 top-14
+                className="absolute bg-orange-450 
+                ml-5
+                sm:left-1/2 sm:-translate-x-1/2 top-14 sm:ml-0
                 h-10 w-10 rounded-full flex items-center justify-center"
               >
                 <FaLightbulb
@@ -132,8 +147,10 @@ export default function about() {
             </div>
             <motion.section
               variants={cardVariants}
-              className="bg-white rounded-3xl p-5 w-5/12 drop-shadow-2xl 
-                m-5 left-1/4 relative"
+              className="bg-white rounded-3xl p-5  relative 
+              drop-shadow-2xl
+              m-5 ml-20
+              sm:left-1/4 sm:w-5/12 "
             >
               <div
                 className="arrow absolute bg-white h-5 w-5 
