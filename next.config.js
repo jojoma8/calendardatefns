@@ -16,6 +16,6 @@ module.exports = {
     REACT_APP_ADMIN_EMAIL: process.env.REACT_APP_ADMIN_EMAIL,
   },
   images: {
-    domains: ["nxtgeneclinic.com.ph"],
+    domains: ["nxtgeneclinic.com.ph", "firebasestorage.googleapis.com"],
   },
 };

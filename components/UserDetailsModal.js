@@ -1,6 +1,7 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { useSignInContext } from "../contextProvider/SignInContext";
-import db from "../firebase";
+import db, { storage } from "../firebase";
+// import { ref } from "@firebase.storage";
 import {
   login,
   signInWithGoogle,
@@ -32,6 +33,13 @@ import {
   NextThirtyMinutes,
 } from "../utilities/TimeCalculations";
 import AccordionItem from "./AccordionItem";
+import {
+  getDownloadURL,
+  getStorage,
+  ref,
+  uploadBytesResumable,
+} from "@firebase/storage";
+import Image from "next/image";
 
 function UserDetailsModal() {
   const [loading, setLoading] = useState(false);
@@ -82,6 +90,8 @@ function UserDetailsModal() {
     startOfMinute,
     getDay,
   } = require("date-fns");
+  const [progress, setProgress] = useState(0);
+  const [url, setUrl] = useState("");
   //   useEffect(async () => {
   //     const getUserDetails = async (userName) => {
   //       // const auth = await getAuth();
@@ -142,6 +152,43 @@ function UserDetailsModal() {
     // console.log(currentUser.displayName);
   }
 
+  const formHandler = (e) => {
+    e.preventDefault();
+    const file = e.target[0].files[0];
+    uploadFiles(file);
+  };
+
+  const uploadFiles = (file) => {
+    if (!file) return;
+    const storageRef = ref(storage, `/files/${file.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const prog = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+
+        setProgress(prog);
+      },
+      (err) => console.log(err),
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((url) => console.log(url));
+      }
+    );
+  };
+
+  useEffect(() => {
+    const func = async () => {
+      const storage = getStorage();
+      const reference = ref(storage, "/files/Chesca-Quinio.jpg");
+      await getDownloadURL(refernece).then((x) => {
+        setUrl(x);
+      });
+    };
+  });
+
   return (
     <div
       className="flex fixed pb-60 md:px-0 bg-gray-200 min-h-screen items-center 
@@ -200,22 +247,25 @@ function UserDetailsModal() {
                 options={["Customer", "Doctor", "VA"]}
               />
             </div>
-            {/* <div className="mb-5 ">
-              <div className="headerText text-lg">Specialist Field</div>
-              <input
-                ref={specialistFieldRef}
-                className=" p-3 rounded bg-gray-100 min-w-full"
-                defaultValue={specialistField}
-              />
-            </div> */}
-            {/* <div className="mb-5 ">
-              <div className="headerText text-lg">Speciality</div>
-              <textarea
-                ref={userSpecialityRef}
-                className=" p-3 rounded bg-gray-100 min-w-full"
-                defaultValue={userSpeciality}
-              />
-            </div> */}
+
+            <div>
+              <div>
+                <form onSubmit={formHandler}>
+                  <input type="file" className="input" />
+                  <button type="submit">Upload</button>
+                </form>
+                {!url && (
+                  <Image
+                    width={60}
+                    height={60}
+                    src={
+                      "https://firebasestorage.googleapis.com/v0/b/calendardatefns.appspot.com/o/files%2FChesca-Quinio.jpg?alt=media&token=004c2fa7-79e5-4705-86ad-ec86dc3c1029"
+                    }
+                  />
+                )}
+              </div>
+              <div>Uploaded {progress} % </div>
+            </div>
             <div className="flex justify-evenly mt-5">
               <button
                 className="btn w-44"
