@@ -29,6 +29,8 @@ import { ContactUs } from "./EmailForm";
 
 import ourDoctorsBG from "../assets/NXTgen-Page-Cover-Our-Doctors.jpg";
 import Image from "next/image";
+import Slider from "./slider/Slider";
+import SliderBtn from "./slider/SliderBtn";
 
 function OurDoctors() {
   const [calendar, setCalendar] = useState(new Date().toDateString());
@@ -105,7 +107,7 @@ function OurDoctors() {
   // console.log("test: " + process.env.REACT_APP_PAYMONGO_SECRET_KEY);
 
   return (
-    <div className=" max-w-7xl mx-auto 8">
+    <div className=" max-w-7xl mx-auto ">
       <div
         className="relative bg-blue-10 -z-20 lg:pt-20 xl:pt-32
           "
@@ -163,6 +165,14 @@ function OurDoctors() {
             fieldDesc="Treats individual and family across all ages, genders, and parts of the body such as cough, colds, fever, headache and other diseases."
             fieldCode="family medicine"
           />
+        </div>
+        <div className="">
+          <div className="flex flex-col items-center justify-center">
+            <div className="headerText text-4xl pt-20 font-semibold">
+              What Our Patients Say
+            </div>
+          </div>
+          <Slider />
         </div>
       </div>
     </div>
