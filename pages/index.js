@@ -79,6 +79,7 @@ export default function Home() {
   disableScroll(calendarOverviewModal);
   disableScroll(editClinicHoursModal);
   disableScroll(userRolesModal);
+  disableScroll(appointmentBookingModal);
 
   useEffect(() => {
     const script = document.createElement("script");

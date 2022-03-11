@@ -10,6 +10,7 @@ import BookingAccordionTime from "./BookingAccordionTime";
 import { motion, AnimatePresence } from "framer-motion";
 
 function AppointmentBookingModal() {
+  const [tabSelected, setTabSelected] = useState(1);
   const currentUser = useAuth();
   const { appointmentBookingModal, setAppointmentBookingModal } =
     useSignInContext();
@@ -52,6 +53,17 @@ function AppointmentBookingModal() {
   //     console.log("updatedBookingData2 " + bookingData.date);
   //   }, [bookingData]);
 
+  const tabColor = (number) => {
+    if (number === tabSelected) {
+      return "text-orange-550 border-b-2 border-orange-550";
+    }
+  };
+  const hiddenTab = (number) => {
+    if (number !== tabSelected) {
+      return "hidden";
+    }
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -63,12 +75,12 @@ function AppointmentBookingModal() {
         // damping: 25,
         // stiffness: 500,
       }}
-      className="flex fixed pb-60 md:px-0 bg-gray-200 min-h-screen 
-            items-center 
-            justify-center z-50 bg-opacity-70 w-screen"
-      onClick={() => {
-        setAppointmentBookingModal(false);
-      }}
+      className="flex fixed md:px-0 bg-gray-200 top-0 
+            items-center justify-center z-50 bg-opacity-70 w-full 
+            h-screen"
+      // onClick={() => {
+      //   setAppointmentBookingModal(false);
+      // }}
     >
       <motion.div
         initial={{ opacity: 0, y: -50 }}
@@ -80,52 +92,96 @@ function AppointmentBookingModal() {
           // damping: 25,
           // stiffness: 500,
         }}
-        className="bg-white p-8 sm:p-12 my-10 w-5/6
-            md:w-8/12
-            rounded-lg shadow-2xl"
+        className="flex flex-col w-11/12
+          bg-white sm:max-w-xl md:max-w-2xl p-8 md:p-12 
+            rounded-lg shadow-2xl sm:h-5/6 h-5/6"
         onClick={(e) => e.stopPropagation()}
       >
-        <section>
-          <h3 className="headerText text-3xl">Book an Appointment</h3>
+        <section className="flex">
+          <h3 className="headerText text-3xl sm:w-screen">
+            Book an Appointment
+          </h3>
         </section>
-        <div className="">
-          <section className="mt-2">
-            <div className="flex mt-5">
-              <div className="font-semibold text-xl">Patient Name:</div>
-              <div className="ml-2 text-xl">{currentUser?.displayName}</div>
+        <div className="flex mt-4 items-center cursor-pointer w-full">
+          <div
+            className={`${tabColor(
+              1
+            )} flex-grow p-2 flex items-center justify-center
+              text-center`}
+            onClick={() => setTabSelected(1)}
+          >
+            <div className="flex flex-col ">
+              <div>Step 1:</div>
+              <div className="flex ">Patient Details</div>
             </div>
-            {/* <div>{data[0].issue}</div> */}
-          </section>
-          <section>
-            <BookingAccordionIssue
-              title="Issue"
-              titleContent={bookingData.issue}
-              list={bookingOptions.issue}
-            />
-            {doctorAccordionToggle && (
-              <BookingAccordionDoctor
-                title="Doctor"
-                titleContent={bookingData.doctor}
-                list={bookingOptions.doctor}
-              />
-            )}
-            {dateAccordionToggle && (
-              <BookingAccordionDate
-                title="Date"
-                titleContent={bookingData.date}
-                list={bookingOptions.date}
-              />
-            )}
-            {timeAccordionToggle && (
-              <BookingAccordionTime
-                title="Time"
-                titleContent={bookingData.time}
-                list={bookingOptions.time.Mon}
-              />
-            )}
-          </section>
+          </div>
+          <div
+            className={`${tabColor(
+              2
+            )} flex-grow p-2 flex items-center justify-center
+              text-center`}
+            onClick={() => setTabSelected(2)}
+          >
+            <div className="flex flex-col ">
+              <div>Step 2:</div>
+              <div>Appointment Details</div>
+            </div>
+          </div>
+          <div
+            className={`${tabColor(
+              3
+            )} flex-grow p-2 flex items-center justify-center
+              text-center`}
+            onClick={() => setTabSelected(3)}
+          >
+            <div className="flex flex-col ">
+              <div>Step 3:</div>
+              <div>Payment</div>
+            </div>
+          </div>
         </div>
-        <section>
+        <div className="flex-grow overflow-hidden overflow-y-scroll">
+          <div className={`${hiddenTab(1)} flex flex-col `}>
+            <section className="mt-2">
+              <div className="flex mt-5">
+                <div className="font-semibold text-xl">Patient Name:</div>
+                <div className="ml-2 text-xl">{currentUser?.displayName}</div>
+              </div>
+              {/* <div>{data[0].issue}</div> */}
+            </section>
+          </div>
+          <div className={`${hiddenTab(2)} flex flex-col `}>
+            <section className="">
+              <BookingAccordionIssue
+                title="Issue"
+                titleContent={bookingData.issue}
+                list={bookingOptions.issue}
+              />
+              {doctorAccordionToggle && (
+                <BookingAccordionDoctor
+                  title="Doctor"
+                  titleContent={bookingData.doctor}
+                  list={bookingOptions.doctor}
+                />
+              )}
+              {dateAccordionToggle && (
+                <BookingAccordionDate
+                  title="Date"
+                  titleContent={bookingData.date}
+                  list={bookingOptions.date}
+                />
+              )}
+              {timeAccordionToggle && (
+                <BookingAccordionTime
+                  title="Time"
+                  titleContent={bookingData.time}
+                  list={bookingOptions.time.Mon}
+                />
+              )}
+            </section>
+          </div>
+        </div>
+        <div className="flex flex-col ">
           <div className="flex justify-evenly mt-5">
             <button
               className="btn w-44"
@@ -144,7 +200,7 @@ function AppointmentBookingModal() {
               Cancel
             </button>
           </div>
-        </section>
+        </div>
       </motion.div>
     </motion.div>
   );
