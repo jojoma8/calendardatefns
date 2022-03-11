@@ -227,13 +227,10 @@ function CalendarOverview() {
         // damping: 25,
         // stiffness: 500,
       }}
-      className="flex fixed md:px-0 bg-gray-200 
+      className="flex fixed md:px-0 bg-gray-200 top-0
       items-center justify-center z-50 bg-opacity-70 w-full 
        h-screen 
        "
-      onClick={() => {
-        setCalendarOverviewModal(false);
-      }}
     >
       <motion.div
         initial={{ opacity: 0, y: -50 }}
@@ -245,19 +242,17 @@ function CalendarOverview() {
           // damping: 25,
           // stiffness: 500,
         }}
-        className="bg-white max-w-4xl 
-          p-8 md:p-12 my-10 
-            rounded-lg shadow-2xl  w-5/6   h-5/6 
-            flex flex-col items-stretch justify-start
+        className="bg-white max-w-4xl p-8 md:p-12
+          rounded-lg shadow-2xl  w-5/6  h-5/6
+          flex flex-col 
             "
         onClick={(e) => e.stopPropagation()}
       >
-        <section className="flex flex-col items-center">
-          <h3 className="font-bold text-2xl">Weekly Overview</h3>
-          {/* <p className="text-gray-600 pt-2">Choose sign in method</p> */}
+        <section>
+          <h3 className="headerText text-3xl">Weekly Overview</h3>
         </section>
-        {/* <div>{selectedDoctorIndexList}</div> */}
-        <section className="m-2">
+
+        <section className="my-5">
           <AccordionItemWeeklyOverview
             title={"Doctor: "}
             // desc={searchResults?.role}
@@ -276,10 +271,10 @@ function CalendarOverview() {
           />
         </section>
         {/* <div>{JSON.stringify(filteredDoctorDetails)}</div> */}
-        <div className="overflow-hidden overflow-y-scroll">
+        <div className="overflow-hidden overflow-y-scroll ">
           <section
             className="flex flex-row  items-center 
-          top-0 z-50 overflow-hidden sticky bg-white
+          top-0 z-50  sticky bg-white
           "
           >
             <div className="">
@@ -306,8 +301,6 @@ function CalendarOverview() {
 
           <section
             className="flex flex-row items-center justify-around 
-          
-          
           "
             // className="flex  container"
             // className="flex  container"
@@ -320,8 +313,8 @@ function CalendarOverview() {
                     key={day}
                     cursor="pointer"
                     className={`h-8 flex flex-col justify-items-stretch 
-                items-center text-xs  border-t border-gray-200 w-10
-                
+                      items-center text-xs  border-t 
+                      border-gray-200 w-10
                     `}
                   >
                     {format(day, "h a")}
@@ -390,18 +383,14 @@ function CalendarOverview() {
           </section>
         </div>
         <section className="mt-2 ">
-          <div className="flex flex-col">
-            {/* <div>{currentUser?.displayName}</div> */}
-
+          <div className="flex justify-evenly mt-5">
             <button
-              className="bg-blue-600 hover:bg-blue-700 text-white
-                font-bold py-2 rounded shadow-lg hover:shadow-xl 
-                transition duration-200 mt-2"
+              className="btnCancel w-44 "
               onClick={() => {
-                // handleChangeUserDetails();
+                setCalendarOverviewModal(false);
               }}
             >
-              Calendar Overview
+              Close
             </button>
           </div>
         </section>

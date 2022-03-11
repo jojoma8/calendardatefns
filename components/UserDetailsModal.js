@@ -239,14 +239,14 @@ function UserDetailsModal() {
                 defaultValue={userDetails.mobile}
               />
             </div>
-            <div>
+            {/* <div>
               <AccordionItem
                 title={"User Role: "}
                 desc={userDetails.role}
                 setDesc={setUserRoleLocal}
                 options={["Customer", "Doctor", "VA"]}
               />
-            </div>
+            </div> */}
 
             <div>
               <div>
@@ -254,7 +254,7 @@ function UserDetailsModal() {
                   <input type="file" className="input" />
                   <button type="submit">Upload</button>
                 </form>
-                {!url && (
+                {/* {!url && (
                   <Image
                     width={60}
                     height={60}
@@ -262,7 +262,7 @@ function UserDetailsModal() {
                       "https://firebasestorage.googleapis.com/v0/b/calendardatefns.appspot.com/o/files%2FChesca-Quinio.jpg?alt=media&token=004c2fa7-79e5-4705-86ad-ec86dc3c1029"
                     }
                   />
-                )}
+                )} */}
               </div>
               <div>Uploaded {progress} % </div>
             </div>

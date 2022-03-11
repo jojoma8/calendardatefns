@@ -23,6 +23,7 @@ import { useSignInContext } from "../contextProvider/SignInContext";
 import { useSelectedDateContext } from "../contextProvider/SelectedDateContext";
 import { handleClinicHoursEdit } from "../utilities/UserUtils";
 import ClinicHoursSummary from "./ClinicHoursSummary";
+import { motion, AnimatePresence } from "framer-motion";
 
 function EditClinicHoursModal() {
   const { format, set, isSameMinute } = require("date-fns");
@@ -209,105 +210,123 @@ function EditClinicHoursModal() {
   }
 
   return (
-    <div
-      className="flex fixed pb-60 md:px-0 bg-gray-200 min-h-screen items-center 
-      justify-center z-50 bg-opacity-70 w-screen"
-      // onClick={() => {
-      //   setEditClinicHoursModal(false);
-      // }}
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0, transition: { duration: 0.2 } }}
+      transition={{
+        duration: 0.5,
+        type: "spring",
+        // damping: 25,
+        // stiffness: 500,
+      }}
+      className="flex fixed  md:px-0 bg-gray-200 top-0
+        items-center justify-center z-50 bg-opacity-70 w-full
+        h-screen"
     >
-      <div
-        className="bg-white max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl"
+      <motion.div
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ y: -50, opacity: 0, transition: { duration: 0.2 } }}
+        transition={{
+          duration: 0.5,
+          type: "spring",
+          // damping: 25,
+          // stiffness: 500,
+        }}
+        className="bg-white max-w-lg p-8 md:p-12 
+          rounded-lg shadow-2xl h-5/6
+          flex flex-col "
         onClick={(e) => e.stopPropagation()}
       >
         <section>
           <h3 className="headerText text-3xl">Edit Clinic Hours</h3>
           {/* <p className="text-gray-600 pt-2">Choose sign in method</p> */}
         </section>
-        <section className="mt-5">
-          <div className="flex flex-col">
-            <div>
-              <input
-                className=" p-3 rounded bg-gray-100"
-                // placeholder="User Name"
-                defaultValue={currentUser?.displayName}
-              />
+        <section className="my-2">
+          {/* <div className="flex flex-col"> */}
+          <div>
+            <div className="font-semibold text-xl">
+              {currentUser?.displayName}
             </div>
+          </div>
 
-            <div>
-              <div className="text-lg font-bold m-5">Clinic Hours</div>
-              <div className="m-5">
-                <div className="">
-                  <ClinicHoursSummary day={"Mon"} schedule={clinicHours} />
-                  <ClinicHoursSummary day={"Tue"} schedule={clinicHours} />
-                  <ClinicHoursSummary day={"Wed"} schedule={clinicHours} />
-                  <ClinicHoursSummary day={"Thu"} schedule={clinicHours} />
-                  <ClinicHoursSummary day={"Fri"} schedule={clinicHours} />
-                  <ClinicHoursSummary day={"Sat"} schedule={clinicHours} />
-                  <ClinicHoursSummary day={"Sun"} schedule={clinicHours} />
-                </div>
+          <div>
+            <div className="text-md font-semibold my-2">Clinic Hours</div>
+            <div className="mt-2">
+              <div className="">
+                <ClinicHoursSummary day={"Mon"} schedule={clinicHours} />
+                <ClinicHoursSummary day={"Tue"} schedule={clinicHours} />
+                <ClinicHoursSummary day={"Wed"} schedule={clinicHours} />
+                <ClinicHoursSummary day={"Thu"} schedule={clinicHours} />
+                <ClinicHoursSummary day={"Fri"} schedule={clinicHours} />
+                <ClinicHoursSummary day={"Sat"} schedule={clinicHours} />
+                <ClinicHoursSummary day={"Sun"} schedule={clinicHours} />
               </div>
-            </div>
-            {/* THIS SECTION JUST TO REFRESH THE STATE */}
-            <div className="hidden">{clinicHoursList}</div>
-            {/* REMOVED 26JAN 2022 */}
-            {/* <div className="hidden">{clinicHours["Sat"]}</div> */}
-            {/* THIS SECTION JUST TO REFRESH THE STATE */}
-            <div className="flex">
-              <WeekdayButtons day={"Mon"} />
-              <WeekdayButtons day={"Tue"} />
-              <WeekdayButtons day={"Wed"} />
-              <WeekdayButtons day={"Thu"} />
-              <WeekdayButtons day={"Fri"} />
-              <WeekdayButtons day={"Sat"} />
-              <WeekdayButtons day={"Sun"} />
-            </div>
-            <div>
-              <div className="grid grid-flow-col grid-rows-12">
-                {hoursData.map((week, wi) =>
-                  week.map((day, di) => (
-                    <div
-                      key={day}
-                      cursor="pointer"
-                      onClick={() => {
-                        handleUpdateClinicHoursList(day.toUTCString());
-
-                        // console.log(day.toUTCString());
-                      }}
-                      className={`h-10 w-25 m-0.5 flex items-center justify-center
-                    border border-blue-200 
-                         ${hourColor(day.toUTCString())}
-                      `}
-                    >
-                      {format(day, "hh:mm a")}
-                    </div>
-                  ))
-                )}
-              </div>
-            </div>
-            <div className="flex justify-evenly mt-5">
-              <button
-                className="btn w-44"
-                onClick={() => {
-                  handleClinicHoursEdit(currentUser.uid, clinicHours);
-                  setEditClinicHoursModal(false);
-                }}
-              >
-                Update Details
-              </button>
-              <button
-                className="btnCancel w-44 "
-                onClick={() => {
-                  setEditClinicHoursModal(false);
-                }}
-              >
-                Cancel
-              </button>
             </div>
           </div>
         </section>
-      </div>
-    </div>
+        {/* THIS SECTION JUST TO REFRESH THE STATE */}
+        {/* <div className="hidden">{clinicHoursList}</div> */}
+        {/* REMOVED 26JAN 2022 */}
+        {/* <div className="hidden">{clinicHours["Sat"]}</div> */}
+        {/* THIS SECTION JUST TO REFRESH THE STATE */}
+        {/* <div className="overflow-hidden overflow-y-scroll"> */}
+        <div className="flex flex-row items-center">
+          <WeekdayButtons day={"Mon"} />
+          <WeekdayButtons day={"Tue"} />
+          <WeekdayButtons day={"Wed"} />
+          <WeekdayButtons day={"Thu"} />
+          <WeekdayButtons day={"Fri"} />
+          <WeekdayButtons day={"Sat"} />
+          <WeekdayButtons day={"Sun"} />
+        </div>
+        <div className="overflow-hidden overflow-y-scroll">
+          <div className="grid grid-flow-col grid-rows-12 ">
+            {hoursData.map((week, wi) =>
+              week.map((day, di) => (
+                <div
+                  key={day}
+                  cursor="pointer"
+                  onClick={() => {
+                    handleUpdateClinicHoursList(day.toUTCString());
+
+                    // console.log(day.toUTCString());
+                  }}
+                  className={`h-10 w-25 m-0.5 flex items-center justify-center
+                    border border-blue-200 
+                         ${hourColor(day.toUTCString())}
+                      `}
+                >
+                  {format(day, "hh:mm a")}
+                </div>
+              ))
+            )}
+          </div>
+        </div>
+        {/* </div> */}
+        <div className="flex justify-evenly mt-5">
+          <button
+            className="btn w-44"
+            onClick={() => {
+              handleClinicHoursEdit(currentUser.uid, clinicHours);
+              setEditClinicHoursModal(false);
+            }}
+          >
+            Update Details
+          </button>
+          <button
+            className="btnCancel w-44 "
+            onClick={() => {
+              setEditClinicHoursModal(false);
+            }}
+          >
+            Cancel
+          </button>
+        </div>
+        {/* </div> */}
+      </motion.div>
+    </motion.div>
   );
 }
 

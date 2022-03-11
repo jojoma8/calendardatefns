@@ -197,7 +197,7 @@ export const handleSpecialistEdit = async (name, uid, field, speciality) => {
   };
 
   const docSnap = await getDoc(docRef);
-  console.log("test: " + uid);
+  // console.log("test: " + uid);
   if (docSnap.exists()) {
     updateDoc(docRef, payload);
   } else {

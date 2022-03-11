@@ -260,9 +260,12 @@ function Header() {
   return (
     <div
       className={` top-0 z-40 bg-white flex items-center  px-5 py-2
-      lg:px-5 shadow-md overflow-hidden font-bold max-w-7xl mx-auto
-      ${calendarOverviewModal ? "sticky" : "sticky"}`}
+        lg:px-5 shadow-md overflow-hidden font-bold max-w-7xl 
+        mx-auto
+      `}
     >
+      {/* ${calendarOverviewModal ? "sticky" : "sticky"}
+       ${editClinicHoursModal ? "sticky" : "sticky"} */}
       {/* <h1 className="text-orange-500 font-extrabold text-2xl">NextGen</h1> */}
 
       {/* Left */}
@@ -281,21 +284,6 @@ function Header() {
             />
           </a>
         </Link>
-        {/* {currentUser && (
-          <div className="flex ml-0 items-center rounded-full bg-gray-100 p-2">
-            <SearchIcon className="h-6 text-gray-600" />
-            <input
-              className="hidden md:inline-flex flex ml-2 items-center bg-transparent 
-              outline-none placeholder-gray-500 flex-shrink"
-              type="text"
-              placeholder="search pyNotes"
-              onChange={(event) => {
-                // setSearchTerm(event.target.value);
-                handleSearchChange(event.target.value);
-              }}
-            />
-          </div>
-        )} */}
       </div>
 
       {/* Center */}
