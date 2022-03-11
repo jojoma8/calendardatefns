@@ -102,12 +102,15 @@ function AppointmentBookingModal() {
             Book an Appointment
           </h3>
         </section>
-        <div className="flex mt-4 items-center cursor-pointer w-full">
+        <div
+          className="flex flex-row 
+          mt-4 items-center cursor-pointer w-full"
+        >
           <div
             className={`${tabColor(
               1
             )} flex-grow p-2 flex items-center justify-center
-              text-center`}
+              text-center basis-1/3`}
             onClick={() => setTabSelected(1)}
           >
             <div className="flex flex-col ">
@@ -119,7 +122,7 @@ function AppointmentBookingModal() {
             className={`${tabColor(
               2
             )} flex-grow p-2 flex items-center justify-center
-              text-center`}
+              text-center basis-1/3`}
             onClick={() => setTabSelected(2)}
           >
             <div className="flex flex-col ">
@@ -131,7 +134,7 @@ function AppointmentBookingModal() {
             className={`${tabColor(
               3
             )} flex-grow p-2 flex items-center justify-center
-              text-center`}
+              text-center basis-1/3`}
             onClick={() => setTabSelected(3)}
           >
             <div className="flex flex-col ">
@@ -140,7 +143,10 @@ function AppointmentBookingModal() {
             </div>
           </div>
         </div>
-        <div className="flex-grow overflow-hidden overflow-y-scroll">
+        <div
+          className="flex-grow overflow-hidden 
+          overflow-y-auto"
+        >
           <div className={`${hiddenTab(1)} flex flex-col `}>
             <section className="mt-2">
               <div className="flex mt-5">
