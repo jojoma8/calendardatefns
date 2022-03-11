@@ -109,7 +109,7 @@ function OurDoctors() {
   return (
     <div className=" max-w-7xl mx-auto ">
       <div
-        className="relative bg-blue-10 -z-20 lg:pt-20 xl:pt-32
+        className="relative bg-blue-10 z-10 lg:pt-20 xl:pt-32
           "
       >
         <div className="absolute -z-10 bottom-0 translate-y-2">
@@ -131,15 +131,18 @@ function OurDoctors() {
             e-prescription and lab requests, if deemed necessary. Fees vary per
             doctor but start as low as PHP 670.
           </div>
-          <div className="pb-10 lg:pt-20">
-            <button
-              onClick={() => setAppointmentBookingModal(true)}
-              className="btn py-3 text-white w-full 
-                  sm:w-3/6 md:w-7/12 lg:w-6/12"
-            >
-              Book an Appointment
-            </button>
-          </div>
+          {/* <div className="pb-10 lg:pt-20"> */}
+          <button
+            className="btn py-3 text-white w-full 
+                  sm:w-3/6 md:w-7/12 lg:w-6/12 
+                  mb-10 lg:mt-20"
+            onClick={() => {
+              setAppointmentBookingModal(true);
+            }}
+          >
+            Book an Appointment
+          </button>
+          {/* </div> */}
         </div>
       </div>
 

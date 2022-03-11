@@ -260,7 +260,7 @@ function Header() {
   return (
     <div
       className={` top-0 z-40 bg-white flex items-center  px-5 py-2
-        lg:px-5 shadow-md overflow-hidden font-bold max-w-7xl 
+        lg:px-5 shadow-md overflow-hidden font-bold max-w-7xl sticky
         mx-auto
       `}
     >
