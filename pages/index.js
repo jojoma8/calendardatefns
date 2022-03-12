@@ -27,6 +27,16 @@ import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Footer from "../components/footer/Footer";
 
+function useDisableScroll(item) {
+  useEffect(() => {
+    if (item) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [item]);
+}
+
 export default function Home() {
   const { selectedDate } = useSelectedDateContext();
   const {
@@ -63,23 +73,15 @@ export default function Home() {
   } = useSignInContext();
 
   // disable scroll when modal is open
-  function disableScroll(item) {
-    useEffect(() => {
-      if (item) {
-        document.body.style.overflow = "hidden";
-      } else {
-        document.body.style.overflow = "";
-      }
-    }, [item]);
-  }
-  disableScroll(userDetailsModal);
-  disableScroll(editHolidaysModal);
-  disableScroll(specialistDetailsModal);
-  disableScroll(contactUsModal);
-  disableScroll(calendarOverviewModal);
-  disableScroll(editClinicHoursModal);
-  disableScroll(userRolesModal);
-  disableScroll(appointmentBookingModal);
+
+  useDisableScroll(userDetailsModal);
+  // disableScroll(editHolidaysModal);
+  // disableScroll(specialistDetailsModal);
+  // disableScroll(contactUsModal);
+  // disableScroll(calendarOverviewModal);
+  // disableScroll(editClinicHoursModal);
+  // disableScroll(userRolesModal);
+  // disableScroll(appointmentBookingModal);
 
   useEffect(() => {
     const script = document.createElement("script");
