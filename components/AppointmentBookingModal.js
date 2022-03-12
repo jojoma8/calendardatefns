@@ -189,14 +189,14 @@ function AppointmentBookingModal() {
         </div>
         <div className="flex flex-col ">
           <div className="flex justify-evenly mt-5">
-            <button
+            {/* <button
               className="btn w-44"
               onClick={() => {
                 // handleChangeUserDetails();
               }}
             >
               Confirm Booking
-            </button>
+            </button> */}
             <button
               className="btnCancel w-44 "
               onClick={() => {

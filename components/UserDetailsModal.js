@@ -189,6 +189,17 @@ function UserDetailsModal() {
     };
   });
 
+  useEffect(() => {
+    function handleEscapeKey(event) {
+      if (event.key === "Escape") {
+        setUserDetailsModal(false);
+        // console.log("esc");
+      }
+    }
+    document.addEventListener("keydown", handleEscapeKey);
+    return () => document.removeEventListener("keydown", handleEscapeKey);
+  }, []);
+
   return (
     <div
       className="flex fixed pb-60 md:px-0 bg-gray-200 min-h-screen items-center 
