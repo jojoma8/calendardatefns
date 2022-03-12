@@ -75,13 +75,13 @@ export default function Home() {
   // disable scroll when modal is open
 
   useDisableScroll(userDetailsModal);
-  // disableScroll(editHolidaysModal);
-  // disableScroll(specialistDetailsModal);
-  // disableScroll(contactUsModal);
-  // disableScroll(calendarOverviewModal);
-  // disableScroll(editClinicHoursModal);
-  // disableScroll(userRolesModal);
-  // disableScroll(appointmentBookingModal);
+  useDisableScroll(editHolidaysModal);
+  useDisableScroll(specialistDetailsModal);
+  useDisableScroll(contactUsModal);
+  useDisableScroll(calendarOverviewModal);
+  useDisableScroll(editClinicHoursModal);
+  useDisableScroll(userRolesModal);
+  useDisableScroll(appointmentBookingModal);
 
   useEffect(() => {
     const script = document.createElement("script");
