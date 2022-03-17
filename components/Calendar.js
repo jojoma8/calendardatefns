@@ -386,7 +386,7 @@ function Calendar() {
               disabled={loading || !currentUser}
               onClick={() => handleSaveClinicHoursChanges()}
             >
-              Save Changes
+              Save Changes..
             </button>
           </div>
           <div>Mon</div>
