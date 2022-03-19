@@ -35,8 +35,8 @@ export const ContactUs = () => {
       if (!field.name) return;
       formData[field.name] = field.value;
     });
-    // fetch("/api/mail", {
-    fetch("/api/sms", {
+    fetch("/api/mail", {
+      // fetch("/api/sms", {
       method: "post",
       body: JSON.stringify(formData),
     });
