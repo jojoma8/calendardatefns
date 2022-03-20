@@ -58,6 +58,7 @@ export const ContactUs = () => {
       .then(
         (result) => {
           console.log(result.text);
+          console.log("email sent");
         },
         (error) => {
           console.log(error.text);
