@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import emailjs from "@emailjs/browser";
 import { useAuth } from "../firebase";
 import { useSignInContext } from "../contextProvider/SignInContext";
+// import emailjs from "@emailjs/browser";
 
 export const ContactUs = () => {
   const currentUser = useAuth();
@@ -30,17 +31,38 @@ export const ContactUs = () => {
 
   async function handleOnSubmit(e) {
     e.preventDefault();
-    const formData = {};
-    Array.from(e.currentTarget.elements).forEach((field) => {
-      if (!field.name) return;
-      formData[field.name] = field.value;
-    });
-    fetch("/api/mail", {
-      // fetch("/api/sms", {
-      method: "post",
-      body: JSON.stringify(formData),
-    });
-    console.log(formData);
+
+    // temporarily disabled
+    // const formData = {};
+    // Array.from(e.currentTarget.elements).forEach((field) => {
+    //   if (!field.name) return;
+    //   formData[field.name] = field.value;
+    // });
+    // fetch("/api/mail", {
+    //   // fetch("/api/sms", {
+    //   method: "post",
+    //   body: JSON.stringify(formData),
+    // });
+    // console.log(formData);
+
+    const data = new FormData(e.target);
+    const form = Object.fromEntries(data.entries());
+    console.log(form);
+    emailjs
+      .send(
+        "service_w1g7uoe",
+        "template_c6t7lfj",
+        form,
+        "user_ptFNd2SoErGmvqdW0b6kI"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
   }
 
   return (

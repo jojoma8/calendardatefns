@@ -14,6 +14,7 @@ module.exports = {
     REACT_APP_SENDGRID_API_KEY: process.env.REACT_APP_SENDGRID_API_KEY,
     REACT_APP_THESMSWORKS_API_KEY: process.env.REACT_APP_THESMSWORKS_API_KEY,
     REACT_APP_ADMIN_EMAIL: process.env.REACT_APP_ADMIN_EMAIL,
+    REACT_APP_EMAILJS_SERVICE_ID: process.env.REACT_APP_EMAILJS_SERVICE_ID,
   },
   images: {
     domains: ["nxtgeneclinic.com.ph", "firebasestorage.googleapis.com"],
